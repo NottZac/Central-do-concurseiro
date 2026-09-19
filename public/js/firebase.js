@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-import { getDatabase, ref, push, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js";
+import { getDatabase, ref, get, set, remove, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC6ZQ1Lnym8-1pI9RqAcWjBo3rLMOrZlVc",
@@ -11,7 +11,19 @@ const firebaseConfig = {
   appId: "1:333803225597:web:598a8ba4a7690f9ede9994",
 };
 
-const db = getDatabase(initializeApp(firebaseConfig));
+export const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+/** Concursos, matérias e capas publicados pelo modo admin. */
+export async function lerCatalogo() {
+  const [concursos, apostilas, capas] = await Promise.all(
+    ["concursos", "apostilas", "capas"].map(async (no) => (await get(ref(db, no))).val())
+  );
+  return { concursos, apostilas, capas };
+}
+
+export const gravar = (caminho, valor) => set(ref(db, caminho), valor);
+export const apagar = (caminho) => remove(ref(db, caminho));
 
 /** Registra o pedido em "pedidos" e devolve o id gerado. */
 export async function salvarPedido(pedido) {

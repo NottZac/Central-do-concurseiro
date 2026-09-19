@@ -6,19 +6,35 @@ Site de vendas de apostilas para concursos. HTML, CSS e JavaScript puros, hosped
 
 ```
 public/            site (é a pasta publicada)
-  index.html
+  index.html       páginas: início (/) e concurso (/c/<id>), detalhe da apostila e modais
   css/style.css
-  js/config.js     Pix, WhatsApp, planos e preços  <- edite aqui
-  js/firebase.js   conexão com o Realtime Database (carrega só quando o cliente confirma o pedido)
-  js/main.js       interações e animações
-database.rules.json  regras do banco (clientes só conseguem criar pedidos)
-firebase.json      configuração do Hosting
+  js/config.js     Pix, WhatsApp, preços padrão e catálogo inicial (SEDUC-AM)
+  js/catalogo.js   catálogo = config.js + o que o admin salvou no banco
+  js/main.js       rotas, vitrine, kit, compra e animações
+  js/admin.js      modo admin (só carrega quando abre)
+  js/modal.js      abrir/fechar modais
+  js/firebase.js   conexão com o Realtime Database
+  assets/capas/    capas das apostilas: <id>.webp (portugues, matematica, ...)
+database.rules.json  regras do banco (leitura pública do catálogo, escrita só do admin, clientes só criam pedidos)
+firebase.json      Hosting (com rewrite de /c/**) e banco
 ```
+
+## Modo admin
+
+Toque 5 vezes rápido na logo (topo ou rodapé). Entre com a conta Google autorizada e edite:
+
+- concursos: nome, cargo, descrição, edital, preços, situação e o link do grupo de WhatsApp de cada um;
+- matérias: título, emoji, capa (envio de imagem), sumário, o que acompanha no kit, à venda ou só acompanhante.
+
+O que o admin salva fica no banco (`concursos`, `apostilas`, `capas`) e se sobrepõe ao catálogo inicial do `config.js`.
+
+Configuração única no Firebase Console: Authentication > Método de login > Google > Ativar. Os e-mails autorizados a escrever ficam em `database.rules.json` (procure `auth.token.email`) e valem depois de `firebase deploy --only database`.
 
 ## Antes de publicar
 
-1. Confira `public/js/config.js`: chave Pix, favorecido, WhatsApp e preços dos planos.
-2. O banco é o Realtime Database do projeto (`central-do-concurso-default-rtdb`). As regras deste projeto substituem as que estão lá hoje.
+1. Confira `public/js/config.js`: chave Pix, favorecido, WhatsApp e preços.
+2. Coloque as capas em `public/assets/capas/` com o id da matéria (`portugues.webp`, `matematica.webp`...). Matéria sem capa mostra uma capa provisória.
+3. O banco é o Realtime Database do projeto (`central-do-concurso-default-rtdb`). As regras deste projeto substituem as que estão lá hoje.
 
 ## Testar localmente
 

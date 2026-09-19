@@ -11,6 +11,7 @@ const focaveis = (painel) =>
   );
 
 const esconder = (modal) => {
+  modal.inert = true;
   modal.classList.remove("is-open");
   modal.setAttribute("aria-hidden", "true");
 };
@@ -25,6 +26,7 @@ export const abrirModal = (modal) => {
     document.body.classList.add("is-locked");
   }
   aberto = modal;
+  modal.inert = false;
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden", "false");
   painelDe(modal).focus({ preventScroll: true });

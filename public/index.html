@@ -39,8 +39,8 @@
         <div class="container hero__inner">
           <div class="hero__content">
             <span class="tag" data-reveal>Apostilas em PDF por concurso</span>
-            <h1 data-reveal style="--d: 80ms">Apostilas para você passar no seu concurso</h1>
-            <p data-reveal style="--d: 160ms">Escolha o concurso, veja as disciplinas e o sumário de cada apostila e receba o PDF depois de pagar via Pix.</p>
+            <h1 id="home-titulo" data-reveal style="--d: 80ms"></h1>
+            <p id="home-texto" data-reveal style="--d: 160ms"></p>
             <div class="hero__actions" data-reveal style="--d: 240ms">
               <a class="btn" href="#concursos">VER CONCURSOS</a>
               <a class="btn btn--ghost" href="#como-funciona">Como funciona</a>
@@ -87,37 +87,35 @@
         </div>
       </section>
 
-      <section class="catalog" id="catalogo">
+      <section class="kit" id="kit">
         <div class="container">
-          <h2 class="section-title" data-reveal>Escolha a matéria do seu cargo</h2>
-          <p class="section-sub" id="catalogo-sub" data-reveal></p>
-          <div class="catalog__grid" id="catalogo-grid"></div>
+          <h2 class="section-title" data-reveal>Monte o kit da sua matéria</h2>
+          <p class="section-sub" data-reveal>Escolha a matéria do seu cargo e veja as apostilas do kit. Toque em uma capa para ver o sumário.</p>
+          <div class="chips" id="materia" role="radiogroup" aria-label="Sua matéria" data-reveal></div>
+
+          <div class="kit__panel" data-reveal>
+            <div class="kit__covers" id="kit-capas"></div>
+            <div class="kit__buy">
+              <span class="badge">Melhor custo-benefício</span>
+              <h3 id="kit-nome"></h3>
+              <div class="kit__price">
+                <s id="kit-de"></s>
+                <span id="kit-preco"></span>
+                <small>pagamento único via Pix</small>
+              </div>
+              <p class="kit__economia" id="kit-economia"></p>
+              <ul class="kit__lista" id="kit-lista"></ul>
+              <button class="btn btn--lg btn--block" type="button" data-comprar="kit">QUERO O KIT COMPLETO</button>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="kit" id="kit">
+      <section class="catalog" id="avulsas">
         <div class="container">
-          <div class="kit__panel" data-reveal>
-            <div class="kit__intro">
-              <span class="tag tag--dark">Kit completo</span>
-              <h2>Monte o kit da sua matéria</h2>
-              <p>Sua apostila específica vem junto com as que acompanham o kit. Toque em uma capa para ver o sumário.</p>
-              <label class="select">
-                <span>Sua matéria</span>
-                <select id="materia"></select>
-              </label>
-            </div>
-
-            <div class="kit__covers" id="kit-capas"></div>
-
-            <div class="kit__buy">
-              <div class="kit__price"><span id="kit-preco"></span><small>pagamento único via Pix</small></div>
-              <p class="kit__resumo" id="kit-resumo"></p>
-              <p class="kit__bonus">Bônus: apostila de mapas mentais para revisar rápido.</p>
-              <button class="btn btn--block" type="button" data-comprar="kit">QUERO O KIT COMPLETO</button>
-              <button class="link link--light" type="button" data-comprar="avulsa"><span id="kit-avulsa"></span></button>
-            </div>
-          </div>
+          <h2 class="section-title section-title--sm" data-reveal>Prefere uma apostila avulsa?</h2>
+          <p class="section-sub" id="avulsas-sub" data-reveal></p>
+          <div class="catalog__grid" id="avulsas-grid"></div>
         </div>
       </section>
 
@@ -169,36 +167,7 @@
     <section class="faq" id="duvidas">
       <div class="container">
         <h2 class="section-title" data-reveal>Perguntas Frequentes (FAQ)</h2>
-        <div class="faq__list" data-reveal>
-          <div class="acc acc--faq">
-            <button class="acc__btn" type="button" aria-expanded="false" aria-controls="faq-0"><span class="acc__icon" aria-hidden="true"></span>Qual a diferença entre a apostila avulsa e o kit?</button>
-            <div class="acc__panel" id="faq-0"><div class="acc__inner"><p>A avulsa é a apostila da matéria que você escolher. O kit traz a apostila específica do seu cargo junto com as que acompanham o kit do concurso (como Conhecimentos Pedagógicos e Legislação) e ainda uma apostila de mapas mentais, por um valor menor.</p></div></div>
-          </div>
-          <div class="acc acc--faq">
-            <button class="acc__btn" type="button" aria-expanded="false" aria-controls="faq-1"><span class="acc__icon" aria-hidden="true"></span>Como vejo o que vem em cada apostila?</button>
-            <div class="acc__panel" id="faq-1"><div class="acc__inner"><p>Na página de cada concurso, toque na capa da apostila para abrir o sumário com os conteúdos.</p></div></div>
-          </div>
-          <div class="acc acc--faq">
-            <button class="acc__btn" type="button" aria-expanded="false" aria-controls="faq-2"><span class="acc__icon" aria-hidden="true"></span>Como entro no grupo do meu concurso?</button>
-            <div class="acc__panel" id="faq-2"><div class="acc__inner"><p>Cada concurso tem um grupo de WhatsApp com materiais gratuitos e novidades. O botão de entrada fica na página do concurso.</p></div></div>
-          </div>
-          <div class="acc acc--faq">
-            <button class="acc__btn" type="button" aria-expanded="false" aria-controls="faq-3"><span class="acc__icon" aria-hidden="true"></span>Como recebo a apostila?</button>
-            <div class="acc__panel" id="faq-3"><div class="acc__inner"><p>Depois que o pagamento for confirmado, enviamos o PDF pelo WhatsApp ou pelo e-mail que você informar.</p></div></div>
-          </div>
-          <div class="acc acc--faq">
-            <button class="acc__btn" type="button" aria-expanded="false" aria-controls="faq-4"><span class="acc__icon" aria-hidden="true"></span>Quanto tempo leva para liberar?</button>
-            <div class="acc__panel" id="faq-4"><div class="acc__inner"><p>Assim que conferirmos o comprovante. Por isso é importante enviá-lo logo após o pagamento.</p></div></div>
-          </div>
-          <div class="acc acc--faq">
-            <button class="acc__btn" type="button" aria-expanded="false" aria-controls="faq-5"><span class="acc__icon" aria-hidden="true"></span>Posso estudar pelo celular ou imprimir?</button>
-            <div class="acc__panel" id="faq-5"><div class="acc__inner"><p>Pode. A apostila é um PDF, então funciona no celular, no tablet e no computador, e você pode imprimir se preferir.</p></div></div>
-          </div>
-          <div class="acc acc--faq">
-            <button class="acc__btn" type="button" aria-expanded="false" aria-controls="faq-6"><span class="acc__icon" aria-hidden="true"></span>O pagamento é seguro?</button>
-            <div class="acc__panel" id="faq-6"><div class="acc__inner"><p>O Pix vai direto para a chave exibida no site. Antes de confirmar no app do banco, confira se o nome do favorecido é o mesmo que aparece na tela de pagamento.</p></div></div>
-          </div>
-        </div>
+        <div class="faq__list" id="faq-lista" data-reveal></div>
       </div>
     </section>
   </main>
@@ -213,11 +182,11 @@
         <a data-whatsapp="Olá! Preciso de ajuda com uma apostila da Central do Concurseiro." href="#" target="_blank" rel="noopener">Atendimento no WhatsApp</a>
       </nav>
       <p>Copyright © 2026 | Central do Concurseiro | Todos os Direitos Reservados.</p>
-      <p class="footer__note">Material independente de estudo. A Central do Concurseiro não possui vínculo com órgãos públicos nem com bancas organizadoras.</p>
+      <p class="footer__note" id="rodape-nota"></p>
     </div>
   </footer>
 
-  <div class="modal" id="checkout" role="dialog" aria-modal="true" aria-labelledby="checkout-title" aria-hidden="true">
+  <div class="modal" id="checkout" role="dialog" inert aria-modal="true" aria-labelledby="checkout-title" aria-hidden="true">
     <div class="modal__backdrop" data-close></div>
     <div class="modal__panel" tabindex="-1">
       <button class="modal__close" type="button" aria-label="Fechar" data-close><span aria-hidden="true"></span></button>
@@ -281,7 +250,7 @@
     </div>
   </div>
 
-  <div class="modal" id="detalhe" role="dialog" aria-modal="true" aria-labelledby="detalhe-titulo" aria-hidden="true">
+  <div class="modal" id="detalhe" role="dialog" inert aria-modal="true" aria-labelledby="detalhe-titulo" aria-hidden="true">
     <div class="modal__backdrop" data-close></div>
     <div class="modal__panel modal__panel--wide" tabindex="-1">
       <button class="modal__close" type="button" aria-label="Fechar" data-close><span aria-hidden="true"></span></button>
@@ -289,7 +258,7 @@
     </div>
   </div>
 
-  <div class="modal" id="admin" role="dialog" aria-modal="true" aria-labelledby="admin-titulo" aria-hidden="true">
+  <div class="modal" id="admin" role="dialog" inert aria-modal="true" aria-labelledby="admin-titulo" aria-hidden="true">
     <div class="modal__backdrop" data-close></div>
     <div class="modal__panel modal__panel--admin" tabindex="-1">
       <button class="modal__close" type="button" aria-label="Fechar" data-close><span aria-hidden="true"></span></button>

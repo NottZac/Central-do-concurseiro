@@ -14,12 +14,12 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-/** Concursos, matérias e capas publicados pelo modo admin. */
+/** Concursos, matérias, capas e ajustes do site publicados pelo modo admin. */
 export async function lerCatalogo() {
-  const [concursos, apostilas, capas] = await Promise.all(
-    ["concursos", "apostilas", "capas"].map(async (no) => (await get(ref(db, no))).val())
+  const [concursos, apostilas, capas, site] = await Promise.all(
+    ["concursos", "apostilas", "capas", "site"].map(async (no) => (await get(ref(db, no))).val())
   );
-  return { concursos, apostilas, capas };
+  return { concursos, apostilas, capas, site };
 }
 
 export const gravar = (caminho, valor) => set(ref(db, caminho), valor);

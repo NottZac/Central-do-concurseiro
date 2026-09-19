@@ -1,8 +1,7 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 import { app, gravar, apagar } from "./firebase.js";
-import { concursos, apostilas, apostila, mesclar, removerCapa, temCapaEnviada, gerarId } from "./catalogo.js";
-import { PRECOS } from "./config.js";
-import { abrirModal } from "./modal.js";
+import { ajuste, ajustes, concursos, apostilas, apostila, mesclar, removerCapa, temCapaEnviada, gerarId } from "./catalogo.js";
+import { abrirModal, fecharModal } from "./modal.js";
 import { esc, capaHtml } from "./util.js";
 
 /* Painel do dono do site. Quem escreve no banco é decidido pelas regras do Firebase
@@ -14,6 +13,7 @@ const auth = getAuth(app);
 
 let usuario; // undefined = ainda verificando, null = deslogado
 let iniciado = false;
+let pilula = null;
 const ui = { aba: "concursos", concurso: null, filtro: "", materia: null, capa: null, tirarCapa: false };
 
 /* ---------- Auxiliares ---------- */
@@ -97,8 +97,8 @@ const abaConcursos = () => {
       ${campo("Link do grupo de WhatsApp (materiais gratuitos e novidades)", "grupo", c?.grupo, 'type="url" inputmode="url" maxlength="300" placeholder="https://chat.whatsapp.com/..."')}
       ${campo("Link do edital (opcional)", "edital", c?.edital, 'type="url" inputmode="url" maxlength="300" placeholder="https://..."')}
       <div class="admin__duplo">
-        ${campo("Preço da avulsa (R$)", "precoAvulsa", c?.precoAvulsa ?? "", `type="number" step="0.01" min="0.01" placeholder="${PRECOS.avulsa}"`)}
-        ${campo("Preço do kit (R$)", "precoKit", c?.precoKit ?? "", `type="number" step="0.01" min="0.01" placeholder="${PRECOS.kit}"`)}
+        ${campo("Preço da avulsa (R$)", "precoAvulsa", c?.precoAvulsa ?? "", `type="number" step="0.01" min="0.01" placeholder="${ajuste("precoAvulsa")}"`)}
+        ${campo("Preço do kit (R$)", "precoKit", c?.precoKit ?? "", `type="number" step="0.01" min="0.01" placeholder="${ajuste("precoKit")}"`)}
       </div>
       ${marca("Ocultar este concurso do site", "oculto", c?.oculto)}
       <button class="btn btn--block" type="submit">SALVAR CONCURSO</button>
@@ -157,16 +157,52 @@ const abaMaterias = () => {
     </form>`;
 };
 
+const TIPOS_PIX = ["Telefone", "CPF", "CNPJ", "E-mail", "Chave aleatória"];
+
+const abaSite = () => {
+  const a = ajustes();
+  const formatado = a.whatsapp.replace(/^55/, "");
+  return `
+    <form class="admin__form" id="form-site" novalidate>
+      <h3>Página inicial</h3>
+      ${campo("Título", "homeTitulo", a.homeTitulo, 'maxlength="140"')}
+      ${area("Texto de apoio", "homeTexto", a.homeTexto, 'maxlength="400" rows="3"')}
+
+      <h3 class="admin__sep">Contato e Pix</h3>
+      ${campo("WhatsApp de atendimento (com DDD)", "whatsapp", formatado, 'type="tel" inputmode="tel" maxlength="20" placeholder="92 98474-5492"')}
+      ${campo("Chave Pix", "pixChave", a.pixChave, 'maxlength="80"')}
+      <label class="field"><span>Tipo da chave</span>
+        <select name="pixTipo">${TIPOS_PIX.map((t) => `<option${t === a.pixTipo ? " selected" : ""}>${t}</option>`).join("")}</select>
+      </label>
+      ${campo("Favorecido (nome que aparece no banco)", "pixFavorecido", a.pixFavorecido, 'maxlength="80"')}
+
+      <h3 class="admin__sep">Preços padrão</h3>
+      <div class="admin__duplo">
+        ${campo("Apostila avulsa (R$)", "precoAvulsa", a.precoAvulsa, 'type="number" step="0.01" min="0.01"')}
+        ${campo("Kit completo (R$)", "precoKit", a.precoKit, 'type="number" step="0.01" min="0.01"')}
+      </div>
+      <p class="pane__hint">Cada concurso pode ter preço próprio, na aba Concursos.</p>
+
+      <h3 class="admin__sep">Perguntas frequentes</h3>
+      ${area("Uma pergunta por bloco: 1ª linha é a pergunta, as seguintes são a resposta. Separe os blocos com uma linha em branco.", "faq", a.faq, 'maxlength="8000" rows="14"')}
+
+      <h3 class="admin__sep">Rodapé</h3>
+      ${area("Aviso do rodapé", "rodape", a.rodape, 'maxlength="400" rows="3"')}
+      <button class="btn btn--block" type="submit">SALVAR SITE</button>
+    </form>`;
+};
+
 const telaPainel = () => `
   <div class="admin__topo">
     <div><h2 id="admin-titulo">Modo admin</h2><p class="admin__user">${esc(usuario.email)}</p></div>
-    <button class="link" type="button" data-sair>Sair</button>
+    <button class="link" type="button" data-sair>Sair do modo admin</button>
   </div>
   <div class="admin__abas" role="tablist">
     <button type="button" role="tab" aria-selected="${ui.aba === "concursos"}" class="${ui.aba === "concursos" ? "is-ativa" : ""}" data-aba="concursos">Concursos</button>
     <button type="button" role="tab" aria-selected="${ui.aba === "materias"}" class="${ui.aba === "materias" ? "is-ativa" : ""}" data-aba="materias">Matérias</button>
+    <button type="button" role="tab" aria-selected="${ui.aba === "site"}" class="${ui.aba === "site" ? "is-ativa" : ""}" data-aba="site">Site</button>
   </div>
-  ${ui.aba === "concursos" ? abaConcursos() : abaMaterias()}
+  ${{ concursos: abaConcursos, materias: abaMaterias, site: abaSite }[ui.aba]()}
   <p class="admin__msg" id="admin-msg" role="status"></p>`;
 
 const desenhar = () => {
@@ -243,6 +279,61 @@ const salvarMateria = async (form) => {
   mensagem("Matéria salva. O site já foi atualizado.", true);
 };
 
+const salvarSite = async (form) => {
+  const dados = Object.fromEntries(new FormData(form));
+  let telefone = dados.whatsapp.replace(/\D/g, "");
+  if (telefone.length <= 11) telefone = `55${telefone}`;
+  if (telefone.length < 12 || telefone.length > 13) return mensagem("Informe o WhatsApp com DDD, por exemplo 92 98474-5492.");
+  if (dados.pixChave.trim().length < 3) return mensagem("Informe a chave Pix.");
+  if (dados.pixFavorecido.trim().length < 2) return mensagem("Informe o favorecido do Pix.");
+  const precoAvulsa = Number(dados.precoAvulsa);
+  const precoKit = Number(dados.precoKit);
+  if (!(precoAvulsa > 0) || !(precoKit > 0)) return mensagem("Informe os dois preços.");
+
+  const registro = {
+    whatsapp: telefone,
+    pixChave: dados.pixChave.trim(),
+    pixTipo: dados.pixTipo,
+    pixFavorecido: dados.pixFavorecido.trim(),
+    precoAvulsa,
+    precoKit,
+    homeTitulo: dados.homeTitulo.trim(),
+    homeTexto: dados.homeTexto.trim(),
+    rodape: dados.rodape.trim(),
+    faq: dados.faq.trim(),
+  };
+  try {
+    await gravar("site", registro);
+  } catch (err) {
+    return mensagem(erroDoBanco(err));
+  }
+  mesclar({ site: registro });
+  desenhar();
+  mensagem("Site salvo. As mudanças já estão no ar.", true);
+};
+
+const sair = async () => {
+  fecharModal();
+  await signOut(auth);
+};
+
+const atualizarPilula = () => {
+  if (!usuario) {
+    pilula?.remove();
+    pilula = null;
+    return;
+  }
+  if (pilula) return;
+  pilula = Object.assign(document.createElement("div"), { className: "admin-pilula" });
+  pilula.innerHTML = `<span>Modo admin</span><button type="button" data-abrir>Editar</button><button type="button" data-sair>Sair</button>`;
+  pilula.addEventListener("click", (e) => {
+    const botao = e.target.closest("button");
+    if (botao && "abrir" in botao.dataset) abrirModal(modal);
+    if (botao && "sair" in botao.dataset) sair();
+  });
+  document.body.append(pilula);
+};
+
 const entrar = async () => {
   try {
     await signInWithPopup(auth, new GoogleAuthProvider());
@@ -255,7 +346,7 @@ const aoClicar = (e) => {
   const alvo = e.target.closest("button");
   if (!alvo) return;
   if ("entrar" in alvo.dataset) return entrar();
-  if ("sair" in alvo.dataset) return signOut(auth);
+  if ("sair" in alvo.dataset) return sair();
   if (alvo.dataset.aba) {
     ui.aba = alvo.dataset.aba;
   } else if ("editarConcurso" in alvo.dataset) {
@@ -295,20 +386,32 @@ const aoEnviar = (e) => {
   e.preventDefault();
   if (e.target.id === "form-concurso") salvarConcurso(e.target);
   if (e.target.id === "form-materia") salvarMateria(e.target);
+  if (e.target.id === "form-site") salvarSite(e.target);
+};
+
+/* Liga o painel e a pílula "Modo admin". Só roda para quem já entrou antes (localStorage) ou abriu pelos 5 toques. */
+export const iniciarAdmin = () => {
+  if (iniciado) return;
+  iniciado = true;
+  ui.concurso = concursos({ todos: true })[0]?.id ?? null;
+  corpo.addEventListener("click", aoClicar);
+  corpo.addEventListener("change", aoAlterar);
+  corpo.addEventListener("submit", aoEnviar);
+  onAuthStateChanged(auth, (u) => {
+    usuario = u;
+    try {
+      if (u) localStorage.setItem("adminAtivo", "1");
+      else localStorage.removeItem("adminAtivo");
+    } catch {
+      /* sem localStorage: a pílula só aparece nesta visita */
+    }
+    atualizarPilula();
+    desenhar();
+  });
 };
 
 export const abrirAdmin = () => {
-  if (!iniciado) {
-    iniciado = true;
-    ui.concurso = concursos({ todos: true })[0]?.id ?? null;
-    corpo.addEventListener("click", aoClicar);
-    corpo.addEventListener("change", aoAlterar);
-    corpo.addEventListener("submit", aoEnviar);
-    onAuthStateChanged(auth, (u) => {
-      usuario = u;
-      desenhar();
-    });
-  }
+  iniciarAdmin();
   desenhar();
   abrirModal(modal);
 };

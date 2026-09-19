@@ -1,10 +1,11 @@
-import { SEED, PRECOS } from "./config.js";
+import { SEED, AJUSTES } from "./config.js";
 
 /* Catálogo = catálogo inicial (config.js) com o que vem do banco por cima, id a id. */
 const estado = {
   concursos: structuredClone(SEED.concursos),
   apostilas: structuredClone(SEED.apostilas),
   capas: {},
+  site: { ...AJUSTES },
 };
 const ouvintes = [];
 
@@ -17,11 +18,12 @@ const sobrepor = (destino, novos = {}) => {
 
 export const aoMudar = (fn) => ouvintes.push(fn);
 
-export const mesclar = ({ concursos, apostilas, capas } = {}) => {
+export const mesclar = ({ concursos, apostilas, capas, site } = {}) => {
   const antes = JSON.stringify(estado);
   sobrepor(estado.concursos, concursos);
   sobrepor(estado.apostilas, apostilas);
   Object.assign(estado.capas, capas);
+  Object.assign(estado.site, site);
   if (JSON.stringify(estado) !== antes) avisar();
 };
 
@@ -31,6 +33,9 @@ export const removerCapa = (id) => {
 };
 
 /* ---------- Consultas ---------- */
+export const ajuste = (chave) => estado.site[chave];
+export const ajustes = () => ({ ...estado.site });
+
 export const concursos = ({ todos = false } = {}) =>
   Object.entries(estado.concursos).map(comId).filter((c) => todos || !c.oculto).sort(porOrdem);
 
@@ -76,7 +81,7 @@ export const comKit = (a) => kitDe(a.id).length > 1;
 /* ---------- Preços e planos de compra ---------- */
 export const preco = (concursoId, tipo) => {
   const c = estado.concursos[concursoId] ?? {};
-  return (tipo === "kit" ? c.precoKit : c.precoAvulsa) ?? PRECOS[tipo];
+  return (tipo === "kit" ? c.precoKit : c.precoAvulsa) ?? ajuste(tipo === "kit" ? "precoKit" : "precoAvulsa");
 };
 
 const nomeConcurso = (concursoId) => estado.concursos[concursoId]?.nome ?? "";

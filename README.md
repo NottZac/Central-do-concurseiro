@@ -24,9 +24,12 @@ firebase.json      Hosting (com rewrite de /c/**) e banco
 Toque 5 vezes rápido na logo (topo ou rodapé). Entre com a conta Google autorizada e edite:
 
 - concursos: nome, cargo, descrição, edital, preços, situação e o link do grupo de WhatsApp de cada um;
-- matérias: título, emoji, capa (envio de imagem), sumário, o que acompanha no kit, à venda ou só acompanhante.
+- matérias: título, emoji, capa (envio de imagem), sumário, o que acompanha no kit, à venda ou só acompanhante;
+- site: título e texto da página inicial, WhatsApp de atendimento, chave/tipo/favorecido do Pix, preços padrão, perguntas frequentes e nota do rodapé.
 
-O que o admin salva fica no banco (`concursos`, `apostilas`, `capas`) e se sobrepõe ao catálogo inicial do `config.js`.
+Enquanto o modo admin está ligado aparece uma pílula flutuante (Editar / Sair). Para sair: botão "Sair do modo admin" no painel ou "Sair" na pílula. Concurso sem link de grupo usa o WhatsApp de atendimento como grupo provisório.
+
+O que o admin salva fica no banco (`concursos`, `apostilas`, `capas`, `site`) e se sobrepõe ao catálogo inicial do `config.js`.
 
 Configuração única no Firebase Console: Authentication > Método de login > Google > Ativar. Os e-mails autorizados a escrever ficam em `database.rules.json` (procure `auth.token.email`) e valem depois de `firebase deploy --only database`.
 

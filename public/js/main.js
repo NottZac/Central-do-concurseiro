@@ -1,5 +1,4 @@
-import { SITE, PIX } from "./config.js";
-import { aoMudar, mesclar, concursos, concurso, principais, apostila, kitDe, comKit, preco, planoAvulso, planoKit } from "./catalogo.js";
+import { aoMudar, mesclar, ajuste, concursos, concurso, principais, apostila, kitDe, comKit, preco, planoAvulso, planoKit } from "./catalogo.js";
 import { abrirModal } from "./modal.js";
 import { moeda, esc, capaHtml } from "./util.js";
 
@@ -9,13 +8,35 @@ const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const atraso = (ms) => new Promise((resolver) => setTimeout(resolver, ms));
 const comTimeout = (promessa, ms) =>
   Promise.race([promessa, new Promise((_, rejeitar) => setTimeout(() => rejeitar(new Error("tempo esgotado")), ms))]);
-const linkWhatsapp = (texto) => `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(texto)}`;
+const linkWhatsapp = (texto) => `https://wa.me/${ajuste("whatsapp")}?text=${encodeURIComponent(texto)}`;
 
-/* ---------- Conteúdo fixo ---------- */
-$$("[data-pix-chave]").forEach((el) => (el.textContent = PIX.chave));
-$$("[data-pix-tipo]").forEach((el) => (el.textContent = PIX.tipo));
-$$("[data-pix-favorecido]").forEach((el) => (el.textContent = PIX.favorecido));
-$$("[data-whatsapp]").forEach((el) => (el.href = linkWhatsapp(el.dataset.whatsapp)));
+/* ---------- Textos e contatos editáveis pelo admin ---------- */
+const blocosFaq = (texto) =>
+  texto
+    .split(/\n\s*\n/)
+    .map((bloco) => bloco.trim().split("\n"))
+    .filter(([pergunta]) => pergunta)
+    .map(([pergunta, ...resposta]) => ({ pergunta: pergunta.trim(), resposta: resposta.join(" ").trim() }));
+
+const preencherAjustes = () => {
+  $$("[data-pix-chave]").forEach((el) => (el.textContent = ajuste("pixChave")));
+  $$("[data-pix-tipo]").forEach((el) => (el.textContent = ajuste("pixTipo")));
+  $$("[data-pix-favorecido]").forEach((el) => (el.textContent = ajuste("pixFavorecido")));
+  $$("[data-whatsapp]").forEach((el) => (el.href = linkWhatsapp(el.dataset.whatsapp)));
+  $("#home-titulo").textContent = ajuste("homeTitulo");
+  $("#home-texto").textContent = ajuste("homeTexto");
+  $("#rodape-nota").textContent = ajuste("rodape");
+  $("#faq-lista").innerHTML = blocosFaq(ajuste("faq"))
+    .map(
+      ({ pergunta, resposta }, i) => `
+      <div class="acc acc--faq">
+        <button class="acc__btn" type="button" aria-expanded="false" aria-controls="faq-${i}"><span class="acc__icon" aria-hidden="true"></span>${esc(pergunta)}</button>
+        <div class="acc__panel" id="faq-${i}"><div class="acc__inner"><p>${esc(resposta)}</p></div></div>
+      </div>`
+    )
+    .join("");
+};
+preencherAjustes();
 
 /* ---------- Header ---------- */
 const header = $(".header");
@@ -53,7 +74,7 @@ const renderHome = ({ imediato = false } = {}) => {
     .map((c, i) => {
       const lista = principais(c.id);
       const capas = lista.length ? lista.slice(0, 3).map((a) => capaHtml(a)).join("") : capaHtml({ id: "", titulo: c.nome, emoji: "📚" });
-      const meta = lista.length ? `${lista.length} matérias · a partir de ${moeda(preco(c.id, "avulsa"))}` : "Apostilas em preparo";
+      const meta = lista.length ? `${lista.length} matérias · kit completo por ${moeda(preco(c.id, "kit"))}` : "Apostilas em preparo";
       return `
         <a class="ccard" href="/c/${esc(c.id)}" data-nav data-reveal style="--d: ${(i % 3) * 90}ms">
           <div class="ccard__capas" aria-hidden="true">${capas}</div>
@@ -71,25 +92,25 @@ const renderHome = ({ imediato = false } = {}) => {
 };
 
 /* ---------- Página do concurso ---------- */
-const seletor = $("#materia");
+const chips = $("#materia");
 const kitCapas = $("#kit-capas");
+let materiaKit = "";
 let timerKit;
 
-const cardMateria = (a, i) => `
-  <article class="card" data-reveal style="--d: ${(i % 3) * 90}ms">
+const cardAvulsa = (a, i) => `
+  <article class="card" data-reveal style="--d: ${(i % 4) * 70}ms">
     <button class="card__cover" type="button" data-detalhe="${esc(a.id)}" aria-label="Ver sumário: ${esc(a.titulo)}">${capaHtml(a)}</button>
     <h3><span aria-hidden="true">${esc(a.emoji)}</span> ${esc(a.titulo)}</h3>
-    <p class="card__price">${moeda(preco(a.concurso, "avulsa"))} <small>avulsa</small></p>
-    <div class="card__actions">
-      <button class="btn btn--sm" type="button" data-comprar="avulsa" data-id="${esc(a.id)}">Comprar</button>
-      <button class="btn btn--sm btn--ghost" type="button" data-detalhe="${esc(a.id)}">Sumário</button>
-    </div>
+    <p class="card__price">${moeda(preco(a.concurso, "avulsa"))}</p>
+    <button class="btn btn--sm btn--ghost btn--block" type="button" data-comprar="avulsa" data-id="${esc(a.id)}">Comprar avulsa</button>
   </article>`;
 
 const atualizarKit = async () => {
-  if (!seletor.value) return;
-  const itens = kitDe(seletor.value);
+  if (!materiaKit) return;
+  const itens = kitDe(materiaKit);
   const cid = itens[0].concurso;
+  const total = preco(cid, "kit");
+  const separado = itens.length * preco(cid, "avulsa");
   kitCapas.style.setProperty("--n", itens.length);
   kitCapas.innerHTML = itens
     .map(
@@ -100,53 +121,75 @@ const atualizarKit = async () => {
       </figure>`
     )
     .join("");
-  $("#kit-preco").textContent = moeda(preco(cid, "kit"));
-  $("#kit-resumo").textContent = `${itens.length} apostilas em PDF: ${itens.map((a) => a.titulo).join(" + ")}.`;
-  $("#kit-avulsa").textContent = `Prefere só a matéria? ${itens[0].titulo} avulsa por ${moeda(preco(cid, "avulsa"))}`;
+  $("#kit-nome").textContent = `Kit ${itens[0].titulo}`;
+  $("#kit-preco").textContent = moeda(total);
+  $("#kit-de").textContent = separado > total ? moeda(separado) : "";
+  $("#kit-economia").textContent = separado > total ? `Economize ${moeda(separado - total)} em relação às apostilas avulsas` : "";
+  $("#kit-lista").innerHTML =
+    itens.map((a, i) => `<li><b>${esc(a.titulo)}</b> <span>${i === 0 ? "apostila principal" : "acompanha o kit"}</span></li>`).join("") +
+    `<li><b>Mapas mentais</b> <span>bônus para revisar rápido</span></li>` +
+    `<li><b>Tudo em PDF</b> <span>celular, tablet ou computador</span></li>`;
   await Promise.all($$("img", kitCapas).map((img) => img.decode().catch(() => {})));
 };
 
-seletor.addEventListener("change", () => {
+const escolherMateria = (id) => {
+  materiaKit = id;
+  $$("[data-materia]", chips).forEach((el) => el.setAttribute("aria-checked", el.dataset.materia === id));
   kitCapas.classList.add("is-swapping");
   clearTimeout(timerKit);
   timerKit = setTimeout(async () => {
     await atualizarKit();
     kitCapas.classList.remove("is-swapping");
   }, 280);
+};
+
+chips.addEventListener("click", (e) => {
+  const chip = e.target.closest("[data-materia]");
+  if (chip && chip.dataset.materia !== materiaKit) escolherMateria(chip.dataset.materia);
 });
+
+const linkGrupo = (c) => c.grupo || linkWhatsapp(`Olá! Quero entrar no grupo do concurso ${c.nome}.`);
 
 const renderConcurso = (id, { imediato = false } = {}) => {
   const c = concurso(id);
   const lista = principais(id);
   const comKits = lista.filter(comKit);
-  const grupo = c.grupo ? esc(c.grupo) : "";
+  const grupo = esc(linkGrupo(c));
 
   $("#c-tag").textContent = `Concurso ${c.nome}${c.cargo ? ` · ${c.cargo}` : ""}`;
   $("#c-titulo").innerHTML = `Apostilas para o concurso <span class="nowrap">${esc(c.nome)}</span>`;
   $("#c-desc").textContent = c.descricao ?? "";
   $("#c-acoes").innerHTML =
-    (lista.length ? `<a class="btn" href="#catalogo">ESCOLHER MINHA MATÉRIA</a>` : "") +
-    (grupo ? `<a class="btn${lista.length ? " btn--ghost" : ""}" href="${grupo}" target="_blank" rel="noopener">Entrar no grupo do WhatsApp</a>` : "");
+    (comKits.length ? `<a class="btn" href="#kit">MONTAR MEU KIT</a>` : "") +
+    `<a class="btn${comKits.length ? " btn--ghost" : ""}" href="${grupo}" target="_blank" rel="noopener">Entrar no grupo do WhatsApp</a>`;
   $("#c-meta").innerHTML =
     "<li>PDF digital</li><li>Pagamento via Pix</li>" +
     (c.edital ? `<li><a class="meta-link" href="${esc(c.edital)}" target="_blank" rel="noopener">Ver edital</a></li>` : "");
-  $("#c-visual").innerHTML = lista.length ? `<div class="hero__cover">${capaHtml(lista[0], { eager: true })}</div>` : "";
 
-  $("#catalogo").hidden = !lista.length;
-  $("#catalogo-sub").innerHTML =
-    `Apostila avulsa em PDF por <b>${moeda(preco(id, "avulsa"))}</b>.` +
-    (comKits.length ? ` Quer mais? O kit completo sai por <b>${moeda(preco(id, "kit"))}</b>.` : "");
-  $("#catalogo-grid").innerHTML = lista.map(cardMateria).join("");
+  const trio = comKits.length ? kitDe(comKits[0].id) : [];
+  const [principal, ...extras] = trio;
+  $("#c-visual").innerHTML = principal
+    ? `<div class="hero__stack">${[extras[0], principal, ...extras.slice(1)].filter(Boolean).map((a) => capaHtml(a, { eager: true })).join("")}</div>`
+    : lista.length
+      ? `<div class="hero__cover">${capaHtml(lista[0], { eager: true })}</div>`
+      : "";
 
   $("#kit").hidden = !comKits.length;
-  const anterior = seletor.value;
-  seletor.innerHTML = comKits.map((a) => `<option value="${esc(a.id)}">${esc(a.titulo)}</option>`).join("");
-  if (comKits.some((a) => a.id === anterior)) seletor.value = anterior;
+  chips.innerHTML = comKits
+    .map((a) => `<button class="chip" type="button" role="radio" aria-checked="false" data-materia="${esc(a.id)}"><span aria-hidden="true">${esc(a.emoji)}</span> ${esc(a.titulo)}</button>`)
+    .join("");
+  materiaKit = comKits.some((a) => a.id === materiaKit) ? materiaKit : (comKits[0]?.id ?? "");
+  $$("[data-materia]", chips).forEach((el) => el.setAttribute("aria-checked", el.dataset.materia === materiaKit));
   atualizarKit();
 
-  $("#c-grupo").hidden = !grupo;
+  $("#avulsas").hidden = !lista.length;
+  $("#avulsas-sub").textContent = comKits.length
+    ? `Cada apostila sai por ${moeda(preco(id, "avulsa"))}. O kit completo leva as ${kitDe(comKits[0].id).length} apostilas por ${moeda(preco(id, "kit"))}.`
+    : `Cada apostila sai por ${moeda(preco(id, "avulsa"))}.`;
+  $("#avulsas-grid").innerHTML = lista.map(cardAvulsa).join("");
+
   $("#c-grupo-texto").textContent = `Entre no grupo do WhatsApp do concurso ${c.nome} para receber materiais gratuitos e novidades.`;
-  $("#c-grupo-link").href = c.grupo || "#";
+  $("#c-grupo-link").href = linkGrupo(c);
 
   observar($("#view-concurso"), imediato);
 };
@@ -249,6 +292,7 @@ const carregarBanco = async () => {
 };
 
 const renderTudo = () => {
+  preencherAjustes();
   renderHome({ imediato: true });
   if (idAtual && concurso(idAtual)) renderConcurso(idAtual, { imediato: true });
 };
@@ -259,6 +303,13 @@ const bancoPronto = carregarBanco();
 rotear();
 
 /* ---------- Modo admin: 5 toques rápidos na logo ---------- */
+const carregarAdmin = () => import("./admin.js");
+try {
+  if (localStorage.getItem("adminAtivo")) carregarAdmin().then(({ iniciarAdmin }) => iniciarAdmin());
+} catch {
+  /* sem acesso ao localStorage: só abre pelos 5 toques */
+}
+
 let toques = 0;
 let timerToques;
 document.addEventListener(
@@ -271,7 +322,7 @@ document.addEventListener(
     if (toques < 5) return;
     toques = 0;
     e.preventDefault();
-    const { abrirAdmin } = await import("./admin.js");
+    const { abrirAdmin } = await carregarAdmin();
     abrirAdmin();
   },
   true
@@ -310,7 +361,7 @@ const abrirCheckout = (novoPlano) => {
 document.addEventListener("click", (e) => {
   const comprar = e.target.closest("[data-comprar]");
   if (comprar) {
-    const id = comprar.dataset.id ?? seletor.value;
+    const id = comprar.dataset.id ?? materiaKit;
     return abrirCheckout(comprar.dataset.comprar === "kit" ? planoKit(id) : planoAvulso(id));
   }
   const detalhe = e.target.closest("[data-detalhe]");
@@ -325,7 +376,7 @@ const botaoCopiar = $("#copy-pix");
 let timerCopiar;
 botaoCopiar.addEventListener("click", async () => {
   try {
-    await navigator.clipboard.writeText(PIX.chave);
+    await navigator.clipboard.writeText(ajuste("pixChave"));
   } catch {
     const range = document.createRange();
     range.selectNodeContents($("[data-pix-chave]"));

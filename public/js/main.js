@@ -1,4 +1,4 @@
-import { SITE, PIX, PLANOS } from "./config.js";
+import { SITE, PIX, PRECOS, APOSTILAS, PRINCIPAIS, kitDe, planoAvulso, planoKit } from "./config.js";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -7,13 +7,68 @@ const moeda = (valor) => valor.toLocaleString("pt-BR", { style: "currency", curr
 const comTimeout = (promessa, ms) =>
   Promise.race([promessa, new Promise((_, rejeitar) => setTimeout(() => rejeitar(new Error("tempo esgotado")), ms))]);
 const linkWhatsapp = (texto) => `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(texto)}`;
+const capa = (id) => `/assets/capas/${id}.webp`;
 
 /* ---------- Conteúdo vindo do config.js ---------- */
-$$("[data-preco]").forEach((el) => (el.textContent = moeda(PLANOS[el.dataset.preco].preco)));
+$$("[data-preco]").forEach((el) => (el.textContent = moeda(PRECOS[el.dataset.preco])));
 $$("[data-pix-chave]").forEach((el) => (el.textContent = PIX.chave));
 $$("[data-pix-tipo]").forEach((el) => (el.textContent = PIX.tipo));
 $$("[data-pix-favorecido]").forEach((el) => (el.textContent = PIX.favorecido));
 $$("[data-whatsapp]").forEach((el) => (el.href = linkWhatsapp(el.dataset.whatsapp)));
+
+/* ---------- Vitrine ---------- */
+$("#catalogo-grid").innerHTML = PRINCIPAIS.map(
+  (id, i) => `
+    <article class="card" data-reveal style="--d: ${(i % 3) * 90}ms">
+      <div class="card__cover"><img src="${capa(id)}" alt="Capa da apostila de ${APOSTILAS[id]}" width="1070" height="1470" loading="lazy"></div>
+      <h3>${APOSTILAS[id]}</h3>
+      <p class="card__price">${moeda(PRECOS.avulsa)} <small>avulsa</small></p>
+      <div class="card__actions">
+        <button class="btn btn--sm" type="button" data-comprar="avulsa" data-id="${id}">Comprar</button>
+        <button class="btn btn--sm btn--ghost" type="button" data-ver-kit="${id}">Ver kit</button>
+      </div>
+    </article>`
+).join("");
+
+/* ---------- Montador de kit ---------- */
+const seletor = $("#materia");
+const kitCapas = $("#kit-capas");
+const kitFiguras = $$(".kit__cover", kitCapas);
+let timerKit;
+
+seletor.innerHTML = PRINCIPAIS.map((id) => `<option value="${id}">${APOSTILAS[id]}</option>`).join("");
+
+const pintarKit = async () => {
+  const ids = kitDe(seletor.value);
+  kitFiguras.forEach((figura, i) => {
+    const img = $("img", figura);
+    img.src = capa(ids[i]);
+    img.alt = `Capa da apostila de ${APOSTILAS[ids[i]]}`;
+    $("small", figura).textContent = i === 0 ? "Apostila principal" : "Acompanha o kit";
+    $("strong", figura).textContent = APOSTILAS[ids[i]];
+  });
+  $("#kit-resumo").textContent = `3 apostilas em PDF: ${ids.map((id) => APOSTILAS[id]).join(" + ")}.`;
+  $("#kit-avulsa").textContent = `${APOSTILAS[seletor.value]} avulsa por ${moeda(PRECOS.avulsa)}`;
+  await Promise.all($$("img", kitCapas).map((img) => img.decode().catch(() => {})));
+};
+
+seletor.addEventListener("change", () => {
+  kitCapas.classList.add("is-swapping");
+  clearTimeout(timerKit);
+  timerKit = setTimeout(async () => {
+    await pintarKit();
+    kitCapas.classList.remove("is-swapping");
+  }, 280);
+});
+pintarKit();
+
+$("#catalogo-grid").addEventListener("click", (e) => {
+  const botao = e.target.closest("[data-ver-kit]");
+  if (!botao) return;
+  seletor.value = botao.dataset.verKit;
+  seletor.dispatchEvent(new Event("change"));
+  $("#kit").scrollIntoView({ behavior: "smooth" });
+});
 
 /* ---------- Header ---------- */
 const header = $(".header");
@@ -71,8 +126,8 @@ const focaveis = () =>
     (el) => el.offsetParent !== null && !el.closest(".pane:not(.is-active)")
   );
 
-const abrirCheckout = (e) => {
-  plano = PLANOS[e.currentTarget.dataset.openCheckout];
+const abrirCheckout = (novoPlano) => {
+  plano = novoPlano;
   $("#plano-nome").textContent = plano.nome;
   $("#plano-preco").textContent = moeda(plano.preco);
   ultimoFoco = document.activeElement;
@@ -91,7 +146,12 @@ const fecharCheckout = () => {
   ultimoFoco?.focus({ preventScroll: true });
 };
 
-$$("[data-open-checkout]").forEach((el) => el.addEventListener("click", abrirCheckout));
+document.addEventListener("click", (e) => {
+  const botao = e.target.closest("[data-comprar]");
+  if (!botao) return;
+  const id = botao.dataset.id ?? seletor.value;
+  abrirCheckout(botao.dataset.comprar === "kit" ? planoKit(id) : planoAvulso(id));
+});
 $$("[data-close-checkout]").forEach((el) => el.addEventListener("click", fecharCheckout));
 $$("[data-go]").forEach((el) => el.addEventListener("click", () => irParaEtapa(Number(el.dataset.go))));
 window.addEventListener("resize", () => modal.classList.contains("is-open") && ajustarAltura());
@@ -177,9 +237,8 @@ form.addEventListener("submit", async (e) => {
   }
 
   const referencia = codigo ? ` Pedido: ${codigo.slice(-6).toUpperCase()}.` : "";
-  const aviso = plano.aviso ? ` ${plano.aviso}` : "";
   $("#whatsapp-comprovante").href = linkWhatsapp(
-    `Olá! Acabei de pagar via Pix: ${plano.nome} (${moeda(plano.preco)}). Meu nome é ${nome.value.trim()}.${referencia}${aviso}`
+    `Olá! Acabei de pagar via Pix: ${plano.nome} (${moeda(plano.preco)}). Meu nome é ${nome.value.trim()}.${referencia}`
   );
   $("#done-text").textContent = codigo
     ? "Pedido registrado. Envie o comprovante do Pix pelo WhatsApp para liberarmos sua apostila."

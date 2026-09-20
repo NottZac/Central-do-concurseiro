@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-import { getDatabase, ref, get, set, remove, push, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js";
+import { getDatabase, ref, get, set, remove } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC6ZQ1Lnym8-1pI9RqAcWjBo3rLMOrZlVc",
@@ -24,10 +24,3 @@ export async function lerCatalogo() {
 
 export const gravar = (caminho, valor) => set(ref(db, caminho), valor);
 export const apagar = (caminho) => remove(ref(db, caminho));
-
-/** Registra o pedido em "pedidos" e devolve o id gerado. */
-export async function salvarPedido(pedido) {
-  const novoPedido = push(ref(db, "pedidos"));
-  await set(novoPedido, { ...pedido, status: "aguardando", criadoEm: serverTimestamp() });
-  return novoPedido.key;
-}

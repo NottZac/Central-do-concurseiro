@@ -393,13 +393,43 @@ document.addEventListener(
   true
 );
 
-/* ---------- Compra ---------- */
+/* ---------- Compra: copiar a chave Pix, pagar no banco e avisar no WhatsApp ---------- */
 const checkout = $("#checkout");
 const view = $("#steps-view");
 const progresso = $(".modal__progress", checkout);
 const panes = $$(".pane", view);
 let etapaAtual = 1;
 let plano;
+let copiou = false;
+
+const CHAVE_COMPRA = "compraEmAndamento";
+const VALIDADE_COMPRA = 3 * 60 * 60 * 1000;
+
+const guardarCompra = () => {
+  if (!plano) return;
+  try {
+    localStorage.setItem(CHAVE_COMPRA, JSON.stringify({ plano: plano.id, etapa: etapaAtual, copiou, quando: Date.now() }));
+  } catch {
+    /* sem localStorage: o progresso só dura enquanto a aba ficar aberta */
+  }
+};
+
+const limparCompra = () => {
+  try {
+    localStorage.removeItem(CHAVE_COMPRA);
+  } catch {
+    /* nada a limpar */
+  }
+};
+
+const lerCompra = () => {
+  try {
+    const compra = JSON.parse(localStorage.getItem(CHAVE_COMPRA));
+    return compra && Date.now() - compra.quando < VALIDADE_COMPRA ? compra : null;
+  } catch {
+    return null;
+  }
+};
 
 const ajustarAltura = () => {
   view.style.height = `${panes[etapaAtual - 1].offsetHeight}px`;
@@ -413,12 +443,21 @@ const irParaEtapa = (etapa) => {
   });
   progresso.dataset.step = etapa;
   ajustarAltura();
+  guardarCompra();
+};
+
+const mostrarPlano = () => {
+  $$("[data-plano-nome]").forEach((el) => (el.textContent = plano.nome));
+  $("#plano-preco").textContent = moeda(plano.preco);
+  $("#whatsapp-comprovante").href = linkWhatsapp(
+    `Olá! Acabei de pagar via Pix: ${plano.nome} (${moeda(plano.preco)}). Vou enviar o comprovante em seguida.`
+  );
 };
 
 const abrirCheckout = (novoPlano) => {
   plano = novoPlano;
-  $("#plano-nome").textContent = plano.nome;
-  $("#plano-preco").textContent = moeda(plano.preco);
+  copiou = false;
+  mostrarPlano();
   abrirModal(checkout);
   irParaEtapa(1);
 };
@@ -451,64 +490,34 @@ botaoCopiar.addEventListener("click", async () => {
   botaoCopiar.classList.add("is-copied");
   clearTimeout(timerCopiar);
   timerCopiar = setTimeout(() => botaoCopiar.classList.remove("is-copied"), 2000);
+  copiou = true;
+  guardarCompra();
 });
 
-/* ---------- Pedido ---------- */
-const form = $("#pedido-form");
-const erro = $("#form-error");
-const botaoEnviar = $("#submit-pedido");
-
-const mostrarErro = (mensagem, campo) => {
-  erro.textContent = mensagem;
-  erro.classList.add("is-shown");
-  $$("input", form).forEach((input) => input.classList.toggle("is-invalid", input === campo));
-  campo.focus();
-};
-
-form.addEventListener("input", (e) => {
-  e.target.classList.remove("is-invalid");
-  erro.classList.remove("is-shown");
+/* Quem copiou a chave e voltou do app do banco já cai no passo de avisar o pagamento. */
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible" && copiou && etapaAtual === 1 && checkout.classList.contains("is-open")) irParaEtapa(2);
 });
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const { nome, whatsapp, email } = form.elements;
-  const telefone = whatsapp.value.replace(/\D/g, "");
+/* Avisar no WhatsApp encerra a compra: o site não guarda mais nada dela. */
+$("#whatsapp-comprovante").addEventListener("click", limparCompra);
 
-  if (nome.value.trim().length < 2) return mostrarErro("Informe seu nome completo.", nome);
-  if (telefone.length < 10 || telefone.length > 13) return mostrarErro("Informe o WhatsApp com DDD.", whatsapp);
-  if (email.value && !email.checkValidity()) return mostrarErro("Esse e-mail parece inválido.", email);
+/* ---------- Voltar de onde parou ---------- */
+const compraSalva = lerCompra();
+const idSalvo = compraSalva?.plano ?? "";
+const [tipoSalvo, ...restoSalvo] = idSalvo.split("-");
+const materiaSalva = restoSalvo.join("-");
+const planoSalvo = apostila(materiaSalva) && { kit: planoKit, avulsa: planoAvulso }[tipoSalvo]?.(materiaSalva);
+if (planoSalvo) {
+  plano = planoSalvo;
+  copiou = Boolean(compraSalva.copiou);
+  mostrarPlano();
+  abrirModal(checkout);
+  irParaEtapa(copiou && compraSalva.etapa === 1 ? 2 : compraSalva.etapa);
+  document.fonts?.ready.then(ajustarAltura);
+} else {
+  limparCompra();
+}
 
-  botaoEnviar.classList.add("is-loading");
-  botaoEnviar.disabled = true;
-
-  let codigo = null;
-  try {
-    const { salvarPedido } = await comTimeout(import("./firebase.js"), 8000);
-    codigo = await comTimeout(
-      salvarPedido({
-        nome: nome.value.trim(),
-        whatsapp: telefone,
-        email: email.value.trim(),
-        produtoId: plano.id.slice(0, 60),
-        produto: plano.nome.slice(0, 120),
-        valor: plano.preco,
-      }),
-      8000
-    );
-  } catch (err) {
-    console.error("Não foi possível registrar o pedido:", err);
-  }
-
-  const referencia = codigo ? ` Pedido: ${codigo.slice(-6).toUpperCase()}.` : "";
-  $("#whatsapp-comprovante").href = linkWhatsapp(
-    `Olá! Acabei de pagar via Pix: ${plano.nome} (${moeda(plano.preco)}). Meu nome é ${nome.value.trim()}.${referencia}`
-  );
-  $("#done-text").textContent = codigo
-    ? `Pedido registrado. Envie o comprovante do Pix pelo WhatsApp: sua apostila chega em até ${ajuste("prazoEntrega")}.`
-    : `Envie o comprovante do Pix pelo WhatsApp: sua apostila chega em até ${ajuste("prazoEntrega")}.`;
-
-  botaoEnviar.classList.remove("is-loading");
-  botaoEnviar.disabled = false;
-  irParaEtapa(3);
-});
+/* Fechar o pagamento é desistir: só então o progresso é apagado. */
+new MutationObserver(() => checkout.classList.contains("is-open") || limparCompra()).observe(checkout, { attributeFilter: ["class"] });

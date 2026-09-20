@@ -146,7 +146,7 @@
           <article class="step" data-reveal style="--d: 100ms">
             <span class="step__num">2</span>
             <h3>Envie o <span>comprovante</span></h3>
-            <p>Informe seus dados e mande o comprovante pelo WhatsApp.</p>
+            <p>Volte ao site, toque em “Fiz o pagamento” e mande o comprovante pelo WhatsApp.</p>
           </article>
           <article class="step" data-reveal style="--d: 200ms">
             <span class="step__num">3</span>
@@ -210,12 +210,12 @@
     <div class="modal__backdrop" data-close></div>
     <div class="modal__panel" tabindex="-1">
       <button class="modal__close" type="button" aria-label="Fechar" data-close><span aria-hidden="true"></span></button>
-      <div class="modal__progress" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="modal__progress" aria-hidden="true"><i></i><i></i></div>
 
       <div class="steps-view" id="steps-view">
         <section class="pane is-active" data-step="1">
           <h2 id="checkout-title">Pague via Pix</h2>
-          <p class="pane__lead" id="plano-nome"></p>
+          <p class="pane__lead" data-plano-nome></p>
           <div class="pix">
             <span class="pix__label">Valor</span>
             <strong class="pix__value" id="plano-preco"></strong>
@@ -230,41 +230,16 @@
             <span class="pix__label">Favorecido</span>
             <span class="pix__name" data-pix-favorecido></span>
           </div>
-          <p class="pane__hint">Abra o app do seu banco, escolha <b>Pix &gt; Pagar com chave</b>, cole a chave e confirme o valor. Depois volte aqui e envie o comprovante: a entrega é feita em até <b data-prazo></b>.</p>
-          <button class="btn btn--block" type="button" data-go="2">JÁ FIZ O PAGAMENTO</button>
+          <p class="pane__hint">Abra o app do seu banco, escolha <b>Pix &gt; Pagar com chave</b>, cole a chave e confirme o valor. Quando terminar, volte aqui.</p>
+          <button class="btn btn--block" type="button" data-go="2">CONTINUAR</button>
         </section>
 
         <section class="pane" data-step="2">
-          <h2>Seus dados</h2>
-          <p class="pane__lead">Para conferir o pagamento e enviar a apostila.</p>
-          <form id="pedido-form" novalidate>
-            <label class="field">
-              <span>Nome completo</span>
-              <input name="nome" type="text" autocomplete="name" required minlength="2" maxlength="80">
-            </label>
-            <label class="field">
-              <span>WhatsApp (com DDD)</span>
-              <input name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" required placeholder="(92) 90000-0000">
-            </label>
-            <label class="field">
-              <span>E-mail <em>(opcional)</em></span>
-              <input name="email" type="email" autocomplete="email" maxlength="120">
-            </label>
-            <p class="form__error" id="form-error" role="alert"></p>
-            <p class="pane__hint">Usamos seus dados apenas para confirmar o pagamento e entregar a apostila.</p>
-            <div class="pane__actions">
-              <button class="btn btn--ghost" type="button" data-go="1">Voltar</button>
-              <button class="btn" type="submit" id="submit-pedido"><span class="btn__label">CONFIRMAR</span><span class="btn__spinner" aria-hidden="true"></span></button>
-            </div>
-          </form>
-        </section>
-
-        <section class="pane" data-step="3">
-          <div class="done__icon" aria-hidden="true"></div>
-          <h2>Quase lá!</h2>
-          <p class="pane__lead" id="done-text"></p>
-          <a class="btn btn--block" id="whatsapp-comprovante" href="#" target="_blank" rel="noopener">ENVIAR COMPROVANTE NO WHATSAPP</a>
-          <button class="link" type="button" data-close>Fechar</button>
+          <h2>Pagamento feito?</h2>
+          <p class="pane__lead" data-plano-nome></p>
+          <p class="pane__hint">Toque no botão para avisar no WhatsApp qual apostila você comprou e enviar o comprovante. A entrega é feita em até <b data-prazo></b>.</p>
+          <a class="btn btn--block" id="whatsapp-comprovante" href="#" target="_blank" rel="noopener">FIZ O PAGAMENTO</a>
+          <button class="link" type="button" data-go="1">Voltar e ver a chave Pix</button>
         </section>
       </div>
     </div>

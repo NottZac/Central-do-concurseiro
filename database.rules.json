@@ -59,21 +59,6 @@
       "prazoEntrega": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 40" },
       "quemFaz": { ".validate": "newData.isString() && newData.val().length <= 600" },
       "$outro": { ".validate": false }
-    },
-    "pedidos": {
-      "$pedido": {
-        ".write": "!data.exists()",
-        ".validate": "newData.hasChildren(['nome', 'whatsapp', 'email', 'produtoId', 'produto', 'valor', 'status', 'criadoEm'])",
-        "nome": { ".validate": "newData.isString() && newData.val().length >= 2 && newData.val().length <= 80" },
-        "whatsapp": { ".validate": "newData.isString() && newData.val().length >= 10 && newData.val().length <= 13" },
-        "email": { ".validate": "newData.isString() && newData.val().length <= 120" },
-        "produtoId": { ".validate": "newData.isString() && newData.val().length <= 60" },
-        "produto": { ".validate": "newData.isString() && newData.val().length <= 120" },
-        "valor": { ".validate": "newData.isNumber()" },
-        "status": { ".validate": "newData.val() === 'aguardando'" },
-        "criadoEm": { ".validate": "newData.val() === now" },
-        "$outro": { ".validate": false }
-      }
     }
   }
 }

@@ -27,7 +27,7 @@ export const AJUSTES = {
     "Como vejo o que vem em cada apostila?\nNa página de cada concurso, toque na capa da apostila para abrir o sumário com os capítulos e o número de páginas.",
     "Como entro no grupo do meu concurso?\nCada concurso tem um grupo de WhatsApp com materiais gratuitos e novidades. O botão de entrada fica na página do concurso.",
     "Quem faz as apostilas?\nSomos a equipe da Central do Concurseiro. Preparamos o material, respondemos as dúvidas e fazemos a entrega pelo WhatsApp. Se algo não chegar, é só chamar o atendimento.",
-    "Como recebo a apostila?\nDepois que o pagamento for confirmado, enviamos o PDF pelo WhatsApp ou pelo e-mail que você informar.",
+    "Como recebo a apostila?\nDepois que o pagamento for confirmado, enviamos o PDF pelo WhatsApp que você usou para nos avisar.",
     "Quanto tempo leva para receber?\nA entrega é feita em até 15 minutos depois que o comprovante chega. Por isso é importante enviá-lo logo após o pagamento.",
     "Posso estudar pelo celular ou imprimir?\nPode. A apostila é um PDF, então funciona no celular, no tablet e no computador, e você pode imprimir se preferir.",
     "O pagamento é seguro?\nO Pix vai direto para a chave exibida no site. Antes de confirmar no app do banco, confira se o nome do favorecido é o mesmo que aparece na tela de pagamento.",

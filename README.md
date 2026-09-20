@@ -16,7 +16,7 @@ public/            site (é a pasta publicada)
   js/modal.js      abrir/fechar modais
   js/firebase.js   conexão com o Realtime Database
   assets/capas/    capas das apostilas: <id>.webp (portugues, matematica, ...)
-database.rules.json  regras do banco (leitura pública do catálogo, escrita só do admin, clientes só criam pedidos)
+database.rules.json  regras do banco (leitura pública do catálogo, escrita só do admin)
 firebase.json      Hosting (com rewrite de /c/**) e banco
 ```
 
@@ -84,7 +84,3 @@ git push
 ```
 
 As regras do banco (`database.rules.json`) não sobem pelo GitHub. Quando mudar esse arquivo, rode `firebase deploy --only database`.
-
-## Ver os pedidos
-
-Console do Firebase > Realtime Database > nó `pedidos`. Cada pedido chega com status `aguardando`.

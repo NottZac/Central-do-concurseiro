@@ -23,6 +23,8 @@ const preencherAjustes = () => {
   $$("[data-pix-tipo]").forEach((el) => (el.textContent = ajuste("pixTipo")));
   $$("[data-pix-favorecido]").forEach((el) => (el.textContent = ajuste("pixFavorecido")));
   $$("[data-whatsapp]").forEach((el) => (el.href = linkWhatsapp(el.dataset.whatsapp)));
+  $$("[data-prazo]").forEach((el) => (el.textContent = ajuste("prazoEntrega")));
+  $("#quem-faz-texto").textContent = ajuste("quemFaz");
   $("#home-titulo").textContent = ajuste("homeTitulo");
   $("#home-texto").textContent = ajuste("homeTexto");
   $("#rodape-nota").textContent = ajuste("rodape");
@@ -73,8 +75,13 @@ const renderHome = ({ imediato = false } = {}) => {
   $("#concursos-grid").innerHTML = concursos()
     .map((c, i) => {
       const lista = principais(c.id);
+      const comKits = lista.filter(comKit);
       const capas = lista.length ? lista.slice(0, 3).map((a) => capaHtml(a)).join("") : capaHtml({ id: "", titulo: c.nome, emoji: "📚" });
-      const meta = lista.length ? `${lista.length} matérias · kit completo por ${moeda(preco(c.id, "kit"))}` : "Apostilas em preparo";
+      const meta = comKits.length
+        ? `Escolha entre ${comKits.length} matérias · kit de ${kitDe(comKits[0].id).length} apostilas por ${moeda(preco(c.id, "kit"))}`
+        : lista.length
+          ? `${lista.length} apostilas · ${moeda(preco(c.id, "avulsa"))} cada`
+          : "Apostilas em preparo";
       return `
         <a class="ccard" href="/c/${esc(c.id)}" data-nav data-reveal style="--d: ${(i % 3) * 90}ms">
           <div class="ccard__capas" aria-hidden="true">${capas}</div>
@@ -122,6 +129,9 @@ const atualizarKit = async () => {
     )
     .join("");
   $("#kit-nome").textContent = `Kit ${itens[0].titulo}`;
+  $("#kit-comprar").textContent = `Comprar kit de ${itens[0].titulo} · ${moeda(total)}`;
+  $("#buybar-nome").textContent = `Kit ${itens[0].titulo}`;
+  $("#buybar-preco").textContent = moeda(total);
   $("#kit-preco").textContent = moeda(total);
   $("#kit-de").textContent = separado > total ? moeda(separado) : "";
   $("#kit-economia").textContent = separado > total ? `Economize ${moeda(separado - total)} em relação às apostilas avulsas` : "";
@@ -148,6 +158,7 @@ chips.addEventListener("click", (e) => {
   if (chip && chip.dataset.materia !== materiaKit) escolherMateria(chip.dataset.materia);
 });
 
+/* Sem link de grupo cadastrado, o botão abre o WhatsApp de atendimento pedindo o convite. */
 const linkGrupo = (c) => c.grupo || linkWhatsapp(`Olá! Quero entrar no grupo do concurso ${c.nome}.`);
 
 const renderConcurso = (id, { imediato = false } = {}) => {
@@ -161,7 +172,7 @@ const renderConcurso = (id, { imediato = false } = {}) => {
   $("#c-desc").textContent = c.descricao ?? "";
   $("#c-acoes").innerHTML =
     (comKits.length ? `<a class="btn" href="#kit">MONTAR MEU KIT</a>` : "") +
-    `<a class="btn${comKits.length ? " btn--ghost" : ""}" href="${grupo}" target="_blank" rel="noopener">Entrar no grupo do WhatsApp</a>`;
+    `<a class="btn${comKits.length ? " btn--ghost" : ""}" href="${grupo}" target="_blank" rel="noopener">${c.grupo ? "Entrar no grupo do WhatsApp" : "Solicitar entrada no grupo"}</a>`;
   $("#c-meta").innerHTML =
     "<li>PDF digital</li><li>Pagamento via Pix</li>" +
     (c.edital ? `<li><a class="meta-link" href="${esc(c.edital)}" target="_blank" rel="noopener">Ver edital</a></li>` : "");
@@ -188,11 +199,30 @@ const renderConcurso = (id, { imediato = false } = {}) => {
     : `Cada apostila sai por ${moeda(preco(id, "avulsa"))}.`;
   $("#avulsas-grid").innerHTML = lista.map(cardAvulsa).join("");
 
-  $("#c-grupo-texto").textContent = `Entre no grupo do WhatsApp do concurso ${c.nome} para receber materiais gratuitos e novidades.`;
+  $("#c-grupo-texto").textContent = c.grupo
+    ? `Entre no grupo do WhatsApp do concurso ${c.nome} para receber materiais gratuitos e novidades.`
+    : `Peça o convite do grupo do concurso ${c.nome} pelo WhatsApp e receba materiais gratuitos e novidades.`;
   $("#c-grupo-link").href = linkGrupo(c);
+  $("#c-grupo-link").textContent = c.grupo ? "ENTRAR NO GRUPO" : "SOLICITAR ENTRADA";
 
   observar($("#view-concurso"), imediato);
 };
+
+/* Barra fixa de compra no celular: aparece quando o kit está na tela mas o botão dele não. */
+const buybar = $("#buybar");
+const noPainel = { kit: false, botao: false };
+const mostrarBuybar = () => {
+  const visivel = noPainel.kit && !noPainel.botao;
+  buybar.classList.toggle("is-visible", visivel);
+  buybar.inert = !visivel;
+};
+const vigiar = (alvo, chave) =>
+  new IntersectionObserver(([entrada]) => {
+    noPainel[chave] = entrada.isIntersecting;
+    mostrarBuybar();
+  }).observe(alvo);
+vigiar($("#kit"), "kit");
+vigiar($("#kit-comprar"), "botao");
 
 /* ---------- Detalhe da apostila (sumário) ---------- */
 const abrirDetalhe = (id) => {
@@ -213,6 +243,7 @@ const abrirDetalhe = (id) => {
     <div class="detalhe__info">
       <span class="tag"><span aria-hidden="true">${esc(a.emoji)}</span> ${esc(c?.nome ?? "")}</span>
       <h2 id="detalhe-titulo">${esc(a.titulo)}</h2>
+      ${a.paginas ? `<p class="detalhe__meta">${a.paginas} páginas em PDF</p>` : ""}
       <h3>O que vem na apostila</h3>
       ${sumario}
       <div class="detalhe__acoes">${acoes}</div>
@@ -243,6 +274,39 @@ const trocarView = async (proxima, preparar) => {
   viewAtual = proxima;
 };
 
+const navComprar = $("#nav-comprar");
+const metaHome = { titulo: document.title, descricao: $('meta[name="description"]').content };
+
+const definirMeta = (titulo, descricao, caminho) => {
+  const url = `${location.origin}${caminho}`;
+  document.title = titulo;
+  $('meta[name="description"]').content = descricao;
+  $('meta[property="og:title"]').content = titulo;
+  $('meta[property="og:description"]').content = descricao;
+  $('meta[property="og:url"]').content = url;
+  $('link[rel="canonical"]').href = url;
+};
+
+/* Título, descrição e "Comprar" do topo acompanham a página aberta. */
+const atualizarPagina = () => {
+  const c = idAtual && concurso(idAtual);
+  if (!c) {
+    definirMeta(metaHome.titulo, metaHome.descricao, "/");
+    navComprar.href = "/#concursos";
+    navComprar.toggleAttribute("data-nav", true);
+    return;
+  }
+  const comKits = principais(c.id).filter(comKit);
+  const kit = comKits.length ? `kit com ${kitDe(comKits[0].id).length} apostilas por ${moeda(preco(c.id, "kit"))}, ` : "";
+  definirMeta(
+    `Apostilas ${c.nome} | Central do Concurseiro`,
+    `Apostilas em PDF para o concurso ${c.nome}${c.cargo ? ` (${c.cargo})` : ""}: ${kit}sumário de cada apostila e entrega em até ${ajuste("prazoEntrega")} via Pix.`,
+    `/c/${c.id}`
+  );
+  navComprar.href = $("#kit").hidden ? "#avulsas" : "#kit";
+  navComprar.toggleAttribute("data-nav", false);
+};
+
 const rotear = async () => {
   const achou = location.pathname.match(/^\/c\/([^/]+)\/?$/);
   let id = achou ? decodeURIComponent(achou[1]) : null;
@@ -259,7 +323,7 @@ const rotear = async () => {
     idAtual = id;
     await trocarView(id ? views.concurso : views.home, () => (id ? renderConcurso(id) : renderHome()));
     caminhoAtual = caminho;
-    document.title = id ? `Apostilas ${concurso(id).nome} | Central do Concurseiro` : "Central do Concurseiro | Apostilas para concursos";
+    atualizarPagina();
     if (location.hash) requestAnimationFrame(() => $(location.hash)?.scrollIntoView({ behavior: "smooth" }));
   } else if (location.hash) {
     $(location.hash)?.scrollIntoView({ behavior: "smooth" });
@@ -295,6 +359,7 @@ const renderTudo = () => {
   preencherAjustes();
   renderHome({ imediato: true });
   if (idAtual && concurso(idAtual)) renderConcurso(idAtual, { imediato: true });
+  atualizarPagina();
 };
 
 aoMudar(renderTudo);
@@ -440,8 +505,8 @@ form.addEventListener("submit", async (e) => {
     `Olá! Acabei de pagar via Pix: ${plano.nome} (${moeda(plano.preco)}). Meu nome é ${nome.value.trim()}.${referencia}`
   );
   $("#done-text").textContent = codigo
-    ? "Pedido registrado. Envie o comprovante do Pix pelo WhatsApp para liberarmos sua apostila."
-    : "Envie o comprovante do Pix pelo WhatsApp para liberarmos sua apostila.";
+    ? `Pedido registrado. Envie o comprovante do Pix pelo WhatsApp: sua apostila chega em até ${ajuste("prazoEntrega")}.`
+    : `Envie o comprovante do Pix pelo WhatsApp: sua apostila chega em até ${ajuste("prazoEntrega")}.`;
 
   botaoEnviar.classList.remove("is-loading");
   botaoEnviar.disabled = false;

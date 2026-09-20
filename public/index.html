@@ -9,7 +9,9 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Central do Concurseiro | Apostilas para concursos">
   <meta property="og:description" content="Apostilas em PDF por concurso e disciplina, com pagamento via Pix e entrega digital.">
-  <meta property="og:image" content="/assets/og.png">
+  <meta property="og:url" content="https://central-do-concurso.web.app/">
+  <meta property="og:image" content="https://central-do-concurso.web.app/assets/og.png">
+  <link rel="canonical" href="https://central-do-concurso.web.app/">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
   <link rel="apple-touch-icon" href="/assets/favicon-192.png">
   <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -28,7 +30,7 @@
         <a href="#como-funciona">Como funciona</a>
         <a href="#duvidas">Dúvidas</a>
       </nav>
-      <a class="btn btn--sm" href="/#concursos" data-nav>Comprar</a>
+      <a class="btn btn--sm" id="nav-comprar" href="/#concursos" data-nav>Comprar</a>
     </div>
   </header>
 
@@ -105,7 +107,8 @@
               </div>
               <p class="kit__economia" id="kit-economia"></p>
               <ul class="kit__lista" id="kit-lista"></ul>
-              <button class="btn btn--lg btn--block" type="button" data-comprar="kit">QUERO O KIT COMPLETO</button>
+              <button class="btn btn--lg btn--block" type="button" id="kit-comprar" data-comprar="kit">COMPRAR KIT</button>
+              <p class="kit__prazo">Entrega em até <b data-prazo></b> depois que o comprovante chegar.</p>
             </div>
           </div>
         </div>
@@ -148,9 +151,21 @@
           <article class="step" data-reveal style="--d: 200ms">
             <span class="step__num">3</span>
             <h3>Receba sua <span>apostila</span></h3>
-            <p>Assim que o pagamento for confirmado, o PDF é enviado para você.</p>
+            <p>O PDF é enviado em até <b data-prazo></b> depois que o comprovante chegar.</p>
           </article>
         </div>
+      </div>
+    </section>
+
+    <section class="about" id="quem-faz">
+      <div class="container" data-reveal>
+        <h2 class="section-title">Quem faz as apostilas</h2>
+        <p id="quem-faz-texto"></p>
+        <ul class="about__lista">
+          <li>Material próprio da equipe da Central do Concurseiro</li>
+          <li>Conteúdo organizado por disciplina e pelo que a banca cobra</li>
+          <li>Atendimento e entrega direto pelo WhatsApp</li>
+        </ul>
       </div>
     </section>
 
@@ -186,6 +201,11 @@
     </div>
   </footer>
 
+  <div class="buybar" id="buybar" inert>
+    <div class="buybar__info"><strong id="buybar-nome"></strong><span id="buybar-preco"></span></div>
+    <button class="btn btn--sm" type="button" data-comprar="kit">COMPRAR KIT</button>
+  </div>
+
   <div class="modal" id="checkout" role="dialog" inert aria-modal="true" aria-labelledby="checkout-title" aria-hidden="true">
     <div class="modal__backdrop" data-close></div>
     <div class="modal__panel" tabindex="-1">
@@ -210,7 +230,7 @@
             <span class="pix__label">Favorecido</span>
             <span class="pix__name" data-pix-favorecido></span>
           </div>
-          <p class="pane__hint">Abra o app do seu banco, escolha <b>Pix &gt; Pagar com chave</b>, cole a chave e confirme o valor. Depois volte aqui.</p>
+          <p class="pane__hint">Abra o app do seu banco, escolha <b>Pix &gt; Pagar com chave</b>, cole a chave e confirme o valor. Depois volte aqui e envie o comprovante: a entrega é feita em até <b data-prazo></b>.</p>
           <button class="btn btn--block" type="button" data-go="2">JÁ FIZ O PAGAMENTO</button>
         </section>
 

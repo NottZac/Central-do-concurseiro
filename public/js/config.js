@@ -1,3 +1,5 @@
+import { CONTEUDO } from "./conteudo.js";
+
 /* Dados fixos do site. O que você muda pelo modo admin (concursos, matérias, capas,
    grupos de WhatsApp) fica no banco e se sobrepõe ao catálogo inicial abaixo. */
 
@@ -12,16 +14,21 @@ export const AJUSTES = {
   // preço padrão; cada concurso pode ter o seu
   precoAvulsa: 19.9,
   precoKit: 29.9,
+  // prazo combinado para enviar o PDF depois do comprovante
+  prazoEntrega: "15 minutos",
+  quemFaz:
+    "Somos a equipe da Central do Concurseiro. Preparamos as apostilas com foco no que cada banca realmente cobra, organizamos o conteúdo por disciplina e cuidamos pessoalmente do atendimento e da entrega pelo WhatsApp.",
   homeTitulo: "Apostilas para você passar no seu concurso",
   homeTexto: "Escolha o concurso, monte o kit da sua matéria e receba os PDFs depois de pagar via Pix.",
   rodape: "Material independente de estudo. A Central do Concurseiro não possui vínculo com órgãos públicos nem com bancas organizadoras.",
   // perguntas separadas por linha em branco: 1ª linha = pergunta, o resto = resposta
   faq: [
     "Qual a diferença entre o kit e a apostila avulsa?\nO kit traz a apostila específica do seu cargo junto com as que acompanham o kit do concurso (como Conhecimentos Pedagógicos e Legislação) e ainda uma apostila de mapas mentais, por um valor menor. A avulsa é só a apostila da matéria escolhida.",
-    "Como vejo o que vem em cada apostila?\nNa página de cada concurso, toque na capa da apostila para abrir o sumário com os conteúdos.",
+    "Como vejo o que vem em cada apostila?\nNa página de cada concurso, toque na capa da apostila para abrir o sumário com os capítulos e o número de páginas.",
     "Como entro no grupo do meu concurso?\nCada concurso tem um grupo de WhatsApp com materiais gratuitos e novidades. O botão de entrada fica na página do concurso.",
+    "Quem faz as apostilas?\nSomos a equipe da Central do Concurseiro. Preparamos o material, respondemos as dúvidas e fazemos a entrega pelo WhatsApp. Se algo não chegar, é só chamar o atendimento.",
     "Como recebo a apostila?\nDepois que o pagamento for confirmado, enviamos o PDF pelo WhatsApp ou pelo e-mail que você informar.",
-    "Quanto tempo leva para liberar?\nAssim que conferirmos o comprovante. Por isso é importante enviá-lo logo após o pagamento.",
+    "Quanto tempo leva para receber?\nA entrega é feita em até 15 minutos depois que o comprovante chega. Por isso é importante enviá-lo logo após o pagamento.",
     "Posso estudar pelo celular ou imprimir?\nPode. A apostila é um PDF, então funciona no celular, no tablet e no computador, e você pode imprimir se preferir.",
     "O pagamento é seguro?\nO Pix vai direto para a chave exibida no site. Antes de confirmar no app do banco, confira se o nome do favorecido é o mesmo que aparece na tela de pagamento.",
   ].join("\n\n"),
@@ -50,7 +57,7 @@ export const SEED = {
       descricao:
         "Apostilas para os cargos de professor da SEDUC-AM, organizadas por disciplina. Escolha a matéria do seu cargo e monte o kit com Conhecimentos Pedagógicos e Legislação. Sempre confira o edital vigente.",
       status: "aberto",
-      grupo: "",
+      grupo: "https://chat.whatsapp.com/JU0IwI8Yr8YBKqytTyMGR0",
       edital: "",
       ordem: 10,
     },
@@ -63,7 +70,7 @@ export const SEED = {
     biologia: materia(50, "Biologia", "🧬", "biologia"),
     fisica: materia(60, "Física", "⚛️", "fisica"),
     quimica: materia(70, "Química", "🧪", "quimica"),
-    ingles: materia(80, "Inglês", "🇺🇸", ""),
+    ingles: materia(80, "Inglês", "🗽", ""),
     "educacao-fisica": materia(90, "Educação Física", "🏃", ""),
     artes: materia(100, "Artes", "🎨", "artes"),
     filosofia: materia(110, "Filosofia", "💭", "filosofia"),
@@ -72,3 +79,5 @@ export const SEED = {
     legislacao: { ...materia(140, "Legislação Completa", "⚖️", "legislacao", ""), principal: false },
   },
 };
+
+Object.entries(CONTEUDO).forEach(([id, dados]) => Object.assign(SEED.apostilas[id], dados));

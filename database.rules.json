@@ -56,6 +56,8 @@
       "homeTexto": { ".validate": "newData.isString() && newData.val().length <= 400" },
       "rodape": { ".validate": "newData.isString() && newData.val().length <= 400" },
       "faq": { ".validate": "newData.isString() && newData.val().length <= 8000" },
+      "prazoEntrega": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 40" },
+      "quemFaz": { ".validate": "newData.isString() && newData.val().length <= 600" },
       "$outro": { ".validate": false }
     },
     "pedidos": {

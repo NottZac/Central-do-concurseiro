@@ -66,7 +66,7 @@ const prepararCapa = async (arquivo) => {
 /* ---------- Telas ---------- */
 const telaLogin = () => `
   <h2 id="admin-titulo">Área do administrador</h2>
-  <p class="pane__lead">Entre com a conta Google do dono do site para editar concursos, matérias e capas.</p>
+  <p class="pane__lead">Entre com a conta Google do dono do site para editar o site.</p>
   <button class="btn btn--block admin__entrar" type="button" data-entrar>ENTRAR COM GOOGLE</button>
   <p class="admin__msg" id="admin-msg" role="status"></p>`;
 
@@ -183,6 +183,10 @@ const abaSite = () => {
       </div>
       <p class="pane__hint">Cada concurso pode ter preço próprio, na aba Concursos.</p>
 
+      <h3 class="admin__sep">Entrega e equipe</h3>
+      ${campo("Prazo de entrega depois do comprovante", "prazoEntrega", a.prazoEntrega, 'maxlength="40" placeholder="15 minutos"')}
+      ${area("Texto “Quem faz as apostilas”", "quemFaz", a.quemFaz, 'maxlength="600" rows="4"')}
+
       <h3 class="admin__sep">Perguntas frequentes</h3>
       ${area("Uma pergunta por bloco: 1ª linha é a pergunta, as seguintes são a resposta. Separe os blocos com uma linha em branco.", "faq", a.faq, 'maxlength="8000" rows="14"')}
 
@@ -289,6 +293,7 @@ const salvarSite = async (form) => {
   const precoAvulsa = Number(dados.precoAvulsa);
   const precoKit = Number(dados.precoKit);
   if (!(precoAvulsa > 0) || !(precoKit > 0)) return mensagem("Informe os dois preços.");
+  if (!dados.prazoEntrega.trim()) return mensagem("Informe o prazo de entrega.");
 
   const registro = {
     whatsapp: telefone,
@@ -301,6 +306,8 @@ const salvarSite = async (form) => {
     homeTexto: dados.homeTexto.trim(),
     rodape: dados.rodape.trim(),
     faq: dados.faq.trim(),
+    prazoEntrega: dados.prazoEntrega.trim(),
+    quemFaz: dados.quemFaz.trim(),
   };
   try {
     await gravar("site", registro);

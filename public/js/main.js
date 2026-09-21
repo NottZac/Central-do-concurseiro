@@ -164,7 +164,6 @@ const atualizarKit = async () => {
   $("#kit-economia").textContent = separado > total ? `Economize ${moeda(separado - total)} em relação às apostilas avulsas` : "";
   $("#kit-lista").innerHTML =
     itens.map((a, i) => `<li><b>${esc(a.titulo)}</b> <span>${i === 0 ? "apostila principal" : "acompanha o kit"}</span></li>`).join("") +
-    `<li><b>Mapas mentais</b> <span>bônus para revisar rápido</span></li>` +
     `<li><b>Tudo em PDF</b> <span>celular, tablet ou computador</span></li>`;
   await Promise.all($$("img", kitCapas).map((img) => img.decode().catch(() => {})));
 };

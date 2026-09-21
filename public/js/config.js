@@ -25,7 +25,7 @@ export const AJUSTES = {
   rodape: "Material independente de estudo. A Central do Concurseiro não possui vínculo com órgãos públicos nem com bancas organizadoras.",
   // perguntas separadas por linha em branco: 1ª linha = pergunta, o resto = resposta
   faq: [
-    "Qual a diferença entre o kit e a apostila avulsa?\nO kit traz a apostila específica do seu cargo junto com as que acompanham o kit do concurso (como Conhecimentos Pedagógicos e Legislação) e ainda uma apostila de mapas mentais, por um valor menor. A avulsa é só a apostila da matéria escolhida.",
+    "Qual a diferença entre o kit e a apostila avulsa?\nO kit traz a apostila específica do seu cargo junto com as que acompanham o kit do concurso (como Conhecimentos Pedagógicos e Legislação), por um valor menor. A avulsa é só a apostila da matéria escolhida.",
     "Como vejo o que vem em cada apostila?\nNa página de cada concurso, toque na capa da apostila para abrir o sumário com os capítulos e o número de páginas.",
     "Como entro no grupo do meu concurso?\nCada concurso tem um grupo de WhatsApp com materiais gratuitos e novidades. O botão de entrada fica na página do concurso.",
     "Quem faz as apostilas?\nSomos a equipe da Central do Concurseiro. Preparamos o material, respondemos as dúvidas e fazemos a entrega pelo WhatsApp. Se algo não chegar, é só chamar o atendimento.",

@@ -104,7 +104,7 @@ export const planoKit = (id) => {
   const titulos = kitDe(id).map((item) => item.titulo).join(" + ");
   return {
     id: `kit-${id}`,
-    nome: `Kit completo: ${titulos} + Mapas Mentais (${nomeConcurso(a.concurso)})`,
+    nome: `Kit completo: ${titulos} (${nomeConcurso(a.concurso)})`,
     preco: preco(a.concurso, "kit"),
   };
 };

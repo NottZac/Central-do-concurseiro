@@ -21,7 +21,8 @@
   --radius-lg: 32px;
   --radius-md: 24px;
   --container: 1080px;
-  --header-h: 76px;
+  --topbar-h: 34px;
+  --header-h: calc(76px + var(--topbar-h));
   --space: 56px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -54,6 +55,8 @@ ul { list-style: none; }
   letter-spacing: -0.035em;
   line-height: 1.12;
 }
+.kit__intro { display: flex; justify-content: center; margin-bottom: 14px; }
+.section-sub--kit { max-width: 620px; margin-inline: auto; font-size: 1.05rem; }
 .section-sub { margin-top: 10px; text-align: center; color: var(--muted); }
 
 /* ---------- Animações de entrada ---------- */
@@ -113,6 +116,8 @@ ul { list-style: none; }
   inset: 0 0 auto 0;
   z-index: 50;
   height: var(--header-h);
+  display: flex;
+  flex-direction: column;
   transition: background-color 0.4s var(--ease), box-shadow 0.4s var(--ease), backdrop-filter 0.4s;
 }
 .header.is-scrolled {
@@ -121,7 +126,13 @@ ul { list-style: none; }
   -webkit-backdrop-filter: blur(14px);
   box-shadow: 0 1px 0 rgba(10, 18, 32, 0.08);
 }
-.header__inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.header__inner { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.topbar { height: var(--topbar-h); font-size: 0.8rem; font-weight: 600; color: var(--navy); }
+.topbar__inner { height: 100%; display: flex; align-items: center; justify-content: center; gap: 20px; }
+.topbar__link { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; transition: color 0.3s; }
+.topbar__link[hidden] { display: none; }
+.topbar__link:hover { color: var(--blue); }
+.topbar__link svg { width: 16px; height: 16px; }
 .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: -0.03em; font-size: 1.05rem; }
 .brand img { width: 44px; height: 44px; border-radius: 50%; }
 .nav { display: none; gap: 32px; margin-left: auto; font-weight: 500; font-size: 0.95rem; }
@@ -273,7 +284,8 @@ ul { list-style: none; }
 .kit__price span { font-size: clamp(2.6rem, 5vw, 3.4rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
 .kit__price small { font-size: 0.9rem; color: #c6d1e6; }
 .kit__economia { margin-top: 8px; font-weight: 700; color: #5fd398; }
-.kit__lista { display: grid; gap: 10px; margin: 22px 0 26px; font-size: 0.95rem; color: #dbe3f2; }
+.kit__inclui { margin-top: 20px; font-weight: 700; color: #fff; }
+.kit__lista { display: grid; gap: 10px; margin: 12px 0 26px; font-size: 0.95rem; color: #dbe3f2; }
 .kit__lista li { position: relative; padding-left: 26px; }
 .kit__lista li::before { content: ""; position: absolute; left: 4px; top: 0.3em; width: 6px; height: 11px; border: solid var(--sky); border-width: 0 2px 2px 0; transform: rotate(45deg); }
 .kit__lista b { color: #fff; }
@@ -367,6 +379,10 @@ ul { list-style: none; }
 .footer__nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 24px; margin-bottom: 18px; font-weight: 700; color: var(--navy); }
 .footer__nav a { transition: color 0.3s; }
 .footer__nav a:hover { color: var(--blue); }
+.footer__insta { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; margin-bottom: 18px; font-weight: 700; color: var(--navy); }
+.footer__insta[hidden] { display: none; }
+.footer__insta span { font-weight: 500; color: var(--muted); }
+.footer__insta a:hover { color: var(--blue); }
 .footer__note { max-width: 520px; margin: 8px auto 0; font-size: 0.8rem; }
 
 /* ---------- Modal de compra ---------- */
@@ -447,6 +463,7 @@ ul { list-style: none; }
 .pane.is-active { opacity: 1; visibility: visible; transform: none; transition-delay: 0s, 0s, 0s; }
 .pane h2 { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; }
 .pane__lead { margin-top: 6px; color: var(--muted); line-height: 1.45; }
+.pane__lead + .pane__hint { margin-top: 12px; }
 .pane__hint { margin: 0 0 20px; font-size: 0.88rem; line-height: 1.5; color: var(--muted); }
 
 .pix { display: grid; gap: 4px; margin: 20px 0 16px; padding: 20px; border-radius: 20px; background: #f3f5f9; }
@@ -518,7 +535,6 @@ ul { list-style: none; }
 .admin__topo h2 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.03em; }
 .admin__topo .link { margin: 0; }
 .admin__user { font-size: 0.85rem; color: var(--muted); overflow-wrap: anywhere; }
-.admin__entrar { margin-top: 22px; }
 .admin__abas { display: flex; gap: 6px; margin: 16px 0 20px; padding: 4px; border-radius: 14px; background: var(--soft); }
 .admin__abas button { flex: 1; padding: 10px; border-radius: 10px; font-weight: 700; transition: background-color 0.3s var(--ease), box-shadow 0.3s var(--ease); }
 .admin__abas .is-ativa { background: #fff; box-shadow: 0 2px 8px -2px rgba(10, 18, 32, 0.25); }
@@ -579,6 +595,7 @@ ul { list-style: none; }
   .nav { display: flex; }
   .buybar { display: none; }
   .header__inner { justify-content: flex-start; }
+  .topbar__inner { justify-content: flex-end; }
   .hero__inner { grid-template-columns: 1.15fr 0.85fr; }
   .hero__cover { width: 340px; }
   .hero__stack .capa { width: 140px; }

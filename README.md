@@ -22,17 +22,22 @@ firebase.json      Hosting (com rewrite de /c/**) e banco
 
 ## Modo admin
 
-Toque 5 vezes rápido na logo (topo ou rodapé). Entre com a conta Google autorizada e edite:
+Toque 5 vezes rápido na logo (topo ou rodapé). Entre com o e-mail e a senha cadastrados e edite:
 
 - concursos: nome, cargo, descrição, edital, preços, situação e o link do grupo de WhatsApp de cada um;
 - matérias: título, emoji, capa (envio de imagem), sumário, o que acompanha no kit, à venda ou só acompanhante;
-- site: título e texto da página inicial, WhatsApp de atendimento, chave/tipo/favorecido do Pix, preços padrão, perguntas frequentes e nota do rodapé.
+- site: título e texto da página inicial, WhatsApp de atendimento, Instagram (o primeiro perfil vai no ícone do topo e todos no rodapé), chave/tipo/favorecido do Pix, preços padrão, perguntas frequentes e nota do rodapé.
 
 Enquanto o modo admin está ligado aparece uma pílula flutuante (Editar / Sair). Para sair: botão "Sair do modo admin" no painel ou "Sair" na pílula. Concurso sem link de grupo usa o WhatsApp de atendimento (o botão vira "Solicitar entrada").
 
 O que o admin salva fica no banco (`concursos`, `apostilas`, `capas`, `site`) e se sobrepõe ao catálogo inicial do `config.js`.
 
-Configuração única no Firebase Console: Authentication > Método de login > Google > Ativar. Os e-mails autorizados a escrever ficam em `database.rules.json` (procure `auth.token.email`) e valem depois de `firebase deploy --only database`.
+Configuração única no Firebase Console (a segunda parte é obrigatória):
+
+1. Authentication > Método de login > E-mail/senha > Ativar.
+2. Authentication > Configurações > Ações do usuário > desmarque "Ativar criação (cadastro)". Sem isso qualquer pessoa consegue criar uma conta e editar o site.
+
+Quem pode editar: só quem tem usuário em Authentication > Usuários (botão Adicionar usuário: e-mail e senha). Para tirar alguém, apague o usuário. As regras em `database.rules.json` só aceitam gravação de quem entrou com e-mail e senha; contas Google não gravam.
 
 ## Antes de publicar
 

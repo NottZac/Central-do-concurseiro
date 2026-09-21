@@ -1,11 +1,11 @@
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 import { app, gravar, apagar } from "./firebase.js";
 import { ajuste, ajustes, concursos, apostilas, apostila, mesclar, removerCapa, temCapaEnviada, gerarId } from "./catalogo.js";
 import { abrirModal, fecharModal } from "./modal.js";
 import { esc, capaHtml } from "./util.js";
 
-/* Painel do dono do site. Quem escreve no banco é decidido pelas regras do Firebase
-   (conta Google autorizada), não por este arquivo. */
+/* Painel do dono do site. Só entra quem tem login criado no Firebase (Authentication > Usuários);
+   quem escreve no banco é decidido pelas regras do Firebase, não por este arquivo. */
 
 const modal = document.querySelector("#admin");
 const corpo = document.querySelector("#admin-corpo");
@@ -34,7 +34,7 @@ const mensagem = (texto, ok = false) => {
 
 const erroDoBanco = (err) =>
   /permission_denied/i.test(`${err.code} ${err.message}`)
-    ? "Sem permissão para salvar. Entre com a conta Google autorizada do dono do site."
+    ? "Sem permissão para salvar. Entre com uma conta liberada para editar o site."
     : `Não foi possível salvar: ${err.message}`;
 
 const idLivre = (base, existe) => {
@@ -66,8 +66,12 @@ const prepararCapa = async (arquivo) => {
 /* ---------- Telas ---------- */
 const telaLogin = () => `
   <h2 id="admin-titulo">Área do administrador</h2>
-  <p class="pane__lead">Entre com a conta Google do dono do site para editar o site.</p>
-  <button class="btn btn--block admin__entrar" type="button" data-entrar>ENTRAR COM GOOGLE</button>
+  <p class="pane__lead">Entre com o e-mail e a senha cadastrados para editar o site.</p>
+  <form class="admin__form" id="form-login" novalidate>
+    ${campo("E-mail", "email", "", 'type="email" inputmode="email" autocomplete="username"')}
+    ${campo("Senha", "senha", "", 'type="password" autocomplete="current-password"')}
+    <button class="btn btn--block" type="submit">ENTRAR</button>
+  </form>
   <p class="admin__msg" id="admin-msg" role="status"></p>`;
 
 const abaConcursos = () => {
@@ -147,7 +151,7 @@ const abaMaterias = () => {
           </div>
         </div>
       </div>
-      ${area("Sumário (um item por linha; use “# ” no começo para um título de seção)", "sumario", atual.sumario, 'maxlength="6000" rows="7"')}
+      ${area("Sumário (um item por linha; use “# ” no começo para um título de seção)", "sumario", atual.sumario, 'maxlength="12000" rows="7"')}
       <fieldset class="field admin__kit"><span>Acompanha no kit</span>
         ${outras.length ? outras.map((x) => marca(`${esc(x.emoji)} ${esc(x.titulo)}`, "acompanha", escolhidas.includes(x.id), x.id)).join("") : `<p class="pane__hint">Cadastre outras matérias deste concurso para montar o kit.</p>`}
       </fieldset>
@@ -170,6 +174,7 @@ const abaSite = () => {
 
       <h3 class="admin__sep">Contato e Pix</h3>
       ${campo("WhatsApp de atendimento (com DDD)", "whatsapp", formatado, 'type="tel" inputmode="tel" maxlength="20" placeholder="92 98474-5492"')}
+      ${campo("Instagram (usuários separados por vírgula; o primeiro vai no ícone do topo)", "instagram", a.instagram, 'maxlength="200" placeholder="meu_perfil, outro_perfil"')}
       ${campo("Chave Pix", "pixChave", a.pixChave, 'maxlength="80"')}
       <label class="field"><span>Tipo da chave</span>
         <select name="pixTipo">${TIPOS_PIX.map((t) => `<option${t === a.pixTipo ? " selected" : ""}>${t}</option>`).join("")}</select>
@@ -288,6 +293,8 @@ const salvarSite = async (form) => {
   let telefone = dados.whatsapp.replace(/\D/g, "");
   if (telefone.length <= 11) telefone = `55${telefone}`;
   if (telefone.length < 12 || telefone.length > 13) return mensagem("Informe o WhatsApp com DDD, por exemplo 92 98474-5492.");
+  const perfis = dados.instagram.split(",").map((p) => p.trim().replace(/^@/, "")).filter(Boolean);
+  if (perfis.some((p) => !/^[\w.]{1,30}$/.test(p))) return mensagem("Instagram: use só o nome de usuário, sem link, por exemplo meu_perfil.");
   if (dados.pixChave.trim().length < 3) return mensagem("Informe a chave Pix.");
   if (dados.pixFavorecido.trim().length < 2) return mensagem("Informe o favorecido do Pix.");
   const precoAvulsa = Number(dados.precoAvulsa);
@@ -297,6 +304,7 @@ const salvarSite = async (form) => {
 
   const registro = {
     whatsapp: telefone,
+    instagram: perfis.join(","),
     pixChave: dados.pixChave.trim(),
     pixTipo: dados.pixTipo,
     pixFavorecido: dados.pixFavorecido.trim(),
@@ -341,18 +349,29 @@ const atualizarPilula = () => {
   document.body.append(pilula);
 };
 
-const entrar = async () => {
+const ERROS_LOGIN = {
+  "auth/invalid-credential": "E-mail ou senha incorretos.",
+  "auth/wrong-password": "E-mail ou senha incorretos.",
+  "auth/user-not-found": "E-mail ou senha incorretos.",
+  "auth/invalid-email": "E-mail inválido.",
+  "auth/too-many-requests": "Muitas tentativas. Aguarde um pouco e tente de novo.",
+  "auth/network-request-failed": "Sem conexão. Tente de novo.",
+  "auth/operation-not-allowed": "Ative o login por E-mail/senha no Firebase (Authentication > Método de login).",
+};
+
+const entrar = async (form) => {
+  const { email, senha } = Object.fromEntries(new FormData(form));
+  if (!email.trim() || !senha) return mensagem("Informe o e-mail e a senha.");
   try {
-    await signInWithPopup(auth, new GoogleAuthProvider());
+    await signInWithEmailAndPassword(auth, email.trim(), senha);
   } catch (err) {
-    mensagem(err.code === "auth/popup-closed-by-user" ? "Login cancelado." : `Não foi possível entrar: ${err.message}`);
+    mensagem(ERROS_LOGIN[err.code] ?? `Não foi possível entrar: ${err.message}`);
   }
 };
 
 const aoClicar = (e) => {
   const alvo = e.target.closest("button");
   if (!alvo) return;
-  if ("entrar" in alvo.dataset) return entrar();
   if ("sair" in alvo.dataset) return sair();
   if (alvo.dataset.aba) {
     ui.aba = alvo.dataset.aba;
@@ -391,6 +410,7 @@ const aoAlterar = async (e) => {
 
 const aoEnviar = (e) => {
   e.preventDefault();
+  if (e.target.id === "form-login") entrar(e.target);
   if (e.target.id === "form-concurso") salvarConcurso(e.target);
   if (e.target.id === "form-materia") salvarMateria(e.target);
   if (e.target.id === "form-site") salvarSite(e.target);

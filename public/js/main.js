@@ -18,6 +18,12 @@ const blocosFaq = (texto) =>
     .filter(([pergunta]) => pergunta)
     .map(([pergunta, ...resposta]) => ({ pergunta: pergunta.trim(), resposta: resposta.join(" ").trim() }));
 
+/* 5592984478798 -> (92) 98447-8798 */
+const telefoneBonito = (numero) => {
+  const local = numero.replace(/^55/, "");
+  return local.length < 10 ? local : `(${local.slice(0, 2)}) ${local.slice(2, -4)}-${local.slice(-4)}`;
+};
+
 const preencherAjustes = () => {
   $$("[data-pix-chave]").forEach((el) => (el.textContent = ajuste("pixChave")));
   $$("[data-pix-tipo]").forEach((el) => (el.textContent = ajuste("pixTipo")));
@@ -25,6 +31,18 @@ const preencherAjustes = () => {
   $$("[data-whatsapp]").forEach((el) => (el.href = linkWhatsapp(el.dataset.whatsapp)));
   $$("[data-prazo]").forEach((el) => (el.textContent = ajuste("prazoEntrega")));
   $("#quem-faz-texto").textContent = ajuste("quemFaz");
+  const perfis = ajuste("instagram").split(",").map((p) => p.trim()).filter(Boolean);
+  const linkInstagram = (perfil) => `https://www.instagram.com/${encodeURIComponent(perfil)}/`;
+  $("#topo-insta").hidden = !perfis.length;
+  if (perfis.length) {
+    $("#topo-insta").href = linkInstagram(perfis[0]);
+    $("#topo-insta-nome").textContent = `@${perfis[0]}`;
+  }
+  $("#topo-whats-num").textContent = telefoneBonito(ajuste("whatsapp"));
+  $("#rodape-insta").hidden = !perfis.length;
+  $("#rodape-insta").innerHTML =
+    "<span>Siga no Instagram</span>" +
+    perfis.map((p) => `<a href="${esc(linkInstagram(p))}" target="_blank" rel="noopener">@${esc(p)}</a>`).join("");
   $("#home-titulo").textContent = ajuste("homeTitulo");
   $("#home-texto").textContent = ajuste("homeTexto");
   $("#rodape-nota").textContent = ajuste("rodape");
@@ -70,13 +88,22 @@ document.addEventListener("click", (e) => {
   botao.setAttribute("aria-expanded", aberto);
 });
 
+/* Vitrine do concurso: a matéria principal no meio, cercada pelas que acompanham o kit. */
+const capasDoKit = (comKits) => {
+  const [principal, ...extras] = comKits.length ? kitDe(comKits[0].id) : [];
+  return principal ? [extras[0], principal, ...extras.slice(1)].filter(Boolean) : [];
+};
+
 /* ---------- Início: lista de concursos ---------- */
 const renderHome = ({ imediato = false } = {}) => {
   $("#concursos-grid").innerHTML = concursos()
     .map((c, i) => {
       const lista = principais(c.id);
       const comKits = lista.filter(comKit);
-      const capas = lista.length ? lista.slice(0, 3).map((a) => capaHtml(a)).join("") : capaHtml({ id: "", titulo: c.nome, emoji: "📚" });
+      const destaque = capasDoKit(comKits);
+      const capas =
+        (destaque.length ? destaque : lista.slice(0, 3)).map((a) => capaHtml(a)).join("") ||
+        capaHtml({ id: "", titulo: c.nome, emoji: "📚" });
       const meta = comKits.length
         ? `Escolha entre ${comKits.length} matérias · kit de ${kitDe(comKits[0].id).length} apostilas por ${moeda(preco(c.id, "kit"))}`
         : lista.length
@@ -128,7 +155,7 @@ const atualizarKit = async () => {
       </figure>`
     )
     .join("");
-  $("#kit-nome").textContent = `Kit ${itens[0].titulo}`;
+  $("#kit-nome").textContent = `Kit de ${itens[0].titulo}`;
   $("#kit-comprar").textContent = `Comprar kit de ${itens[0].titulo} · ${moeda(total)}`;
   $("#buybar-nome").textContent = `Kit ${itens[0].titulo}`;
   $("#buybar-preco").textContent = moeda(total);
@@ -171,16 +198,15 @@ const renderConcurso = (id, { imediato = false } = {}) => {
   $("#c-titulo").innerHTML = `Apostilas para o concurso <span class="nowrap">${esc(c.nome)}</span>`;
   $("#c-desc").textContent = c.descricao ?? "";
   $("#c-acoes").innerHTML =
-    (comKits.length ? `<a class="btn" href="#kit">MONTAR MEU KIT</a>` : "") +
+    (comKits.length ? `<a class="btn" href="#kit">ESCOLHER MEU KIT</a>` : "") +
     `<a class="btn${comKits.length ? " btn--ghost" : ""}" href="${grupo}" target="_blank" rel="noopener">${c.grupo ? "Entrar no grupo do WhatsApp" : "Solicitar entrada no grupo"}</a>`;
   $("#c-meta").innerHTML =
     "<li>PDF digital</li><li>Pagamento via Pix</li>" +
     (c.edital ? `<li><a class="meta-link" href="${esc(c.edital)}" target="_blank" rel="noopener">Ver edital</a></li>` : "");
 
-  const trio = comKits.length ? kitDe(comKits[0].id) : [];
-  const [principal, ...extras] = trio;
-  $("#c-visual").innerHTML = principal
-    ? `<div class="hero__stack">${[extras[0], principal, ...extras.slice(1)].filter(Boolean).map((a) => capaHtml(a, { eager: true })).join("")}</div>`
+  const vitrine = capasDoKit(comKits);
+  $("#c-visual").innerHTML = vitrine.length
+    ? `<div class="hero__stack">${vitrine.map((a) => capaHtml(a, { eager: true })).join("")}</div>`
     : lista.length
       ? `<div class="hero__cover">${capaHtml(lista[0], { eager: true })}</div>`
       : "";

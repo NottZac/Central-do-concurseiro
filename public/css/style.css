@@ -248,11 +248,7 @@ ul { list-style: none; }
 
 /* ---------- Kit ---------- */
 .kit { padding: var(--space) 0 0; }
-.chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 860px; margin: 28px auto 32px; }
-.chip { padding: 10px 16px; border-radius: 999px; background: var(--soft); font-size: 0.92rem; font-weight: 700; transition: background-color 0.3s var(--ease), color 0.3s var(--ease), transform 0.3s var(--ease); }
-.chip:hover { background: #dbe1ec; }
-.chip:active { transform: scale(0.97); }
-.chip[aria-checked="true"] { background: var(--navy); color: #fff; }
+.kit-grid { display: grid; gap: 24px; margin-top: 28px; }
 
 .kit__panel {
   display: grid;
@@ -264,10 +260,7 @@ ul { list-style: none; }
   box-shadow: 0 40px 70px -44px rgba(10, 18, 32, 0.9), inset 0 0 0 2px rgba(123, 165, 234, 0.25);
 }
 .kit__covers { display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); gap: 8px; }
-.kit__cover { display: flex; flex-direction: column; gap: 10px; transition: opacity 0.3s var(--ease), transform 0.4s var(--ease); }
-.kit__cover:nth-child(2) { transition-delay: 0.05s; }
-.kit__cover:nth-child(3) { transition-delay: 0.1s; }
-.kit__covers.is-swapping .kit__cover { opacity: 0; transform: translateY(10px); }
+.kit__cover { display: flex; flex-direction: column; gap: 10px; }
 .kit__capa { display: block; width: 100%; cursor: pointer; }
 .kit__capa .capa { border-radius: 4px; box-shadow: 0 18px 28px -16px rgba(0, 0, 0, 0.7); transition: transform 0.4s var(--ease); }
 .kit__capa:hover .capa { transform: translateY(-4px); }
@@ -569,14 +562,7 @@ ul { list-style: none; }
 .about__lista li { padding: 10px 16px; border-radius: 999px; background: var(--soft); }
 .detalhe__meta { margin-top: 6px; font-size: 0.85rem; font-weight: 700; color: var(--muted); }
 
-.buybar { position: fixed; inset: auto 0 0; z-index: 40; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: rgba(10, 18, 32, 0.97); color: #fff; box-shadow: 0 -14px 30px -18px rgba(0, 0, 0, 0.6); transform: translateY(110%); transition: transform 0.35s var(--ease); }
-.buybar.is-visible { transform: none; }
-.buybar .btn { flex: none; white-space: nowrap; }
-.buybar__info { display: flex; flex-direction: column; min-width: 0; }
-.buybar__info strong { overflow: hidden; font-size: 0.8rem; text-overflow: ellipsis; white-space: nowrap; color: #c6d1e6; }
-.buybar__info span { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; }
 
-@media (max-width: 819px) { .buybar.is-visible ~ .admin-pilula { bottom: 84px; } }
 .admin-pilula button:hover { background: rgba(255, 255, 255, 0.24); }
 
 /* ---------- Responsivo ---------- */
@@ -593,7 +579,6 @@ ul { list-style: none; }
 @media (min-width: 820px) {
   :root { --space: 80px; }
   .nav { display: flex; }
-  .buybar { display: none; }
   .header__inner { justify-content: flex-start; }
   .topbar__inner { justify-content: flex-end; }
   .hero__inner { grid-template-columns: 1.15fr 0.85fr; }

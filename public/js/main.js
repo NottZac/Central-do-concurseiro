@@ -167,7 +167,7 @@ const kitCardHtml = (materia, i) => {
         <p class="kit__economia">${separado > total ? `Economize ${moeda(separado - total)} em relação às apostilas avulsas` : ""}</p>
         <p class="kit__inclui">Neste kit você recebe:</p>
         <ul class="kit__lista">${lista}</ul>
-        <button class="btn btn--lg btn--block" type="button" data-comprar="kit" data-id="${esc(itens[0].id)}">COMPRAR KIT DE ${esc(itens[0].titulo).toUpperCase()} · ${moeda(total)}</button>
+        <button class="btn btn--lg btn--block" type="button" data-comprar="kit" data-id="${esc(itens[0].id)}">COMPRAR KIT · ${moeda(total)}</button>
         <p class="kit__prazo">Entrega em até <b data-prazo></b> depois que o comprovante chegar.</p>
       </div>
     </article>`;

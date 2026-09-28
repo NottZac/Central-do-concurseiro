@@ -289,7 +289,7 @@ ul { list-style: none; }
 .kit__aviso { margin-top: 6px; font-size: 0.84rem; font-weight: 700; color: #ffd166; }
 
 /* ---------- Detalhe do kit ---------- */
-.detalhe-kit { display: grid; gap: 4px; }
+.detalhe-kit { display: grid; gap: 4px; grid-column: 1 / -1; }
 .detalhe-kit__lead { margin-top: 4px; font-weight: 700; color: var(--muted); }
 .detalhe-kit__itens { display: grid; gap: 10px; margin: 18px 0 4px; }
 

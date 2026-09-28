@@ -1,4 +1,4 @@
-import { aoMudar, mesclar, ajuste, concursos, concurso, principais, apostila, kitDe, comKit, preco, planoAvulso, planoKit } from "./catalogo.js";
+import { aoMudar, mesclar, ajuste, concursos, concurso, principais, apostila, kitDe, comKit, preco, planoAvulso } from "./catalogo.js";
 import { abrirModal } from "./modal.js";
 import { moeda, esc, capaHtml } from "./util.js";
 
@@ -9,6 +9,15 @@ const atraso = (ms) => new Promise((resolver) => setTimeout(resolver, ms));
 const comTimeout = (promessa, ms) =>
   Promise.race([promessa, new Promise((_, rejeitar) => setTimeout(() => rejeitar(new Error("tempo esgotado")), ms))]);
 const linkWhatsapp = (texto) => `https://wa.me/${ajuste("whatsapp")}?text=${encodeURIComponent(texto)}`;
+
+/* Kit não tem Pix automático no site: o botão leva direto pro WhatsApp com o kit escolhido e o valor. */
+const mensagemKit = (id) => {
+  const itens = kitDe(id);
+  const c = concurso(itens[0].concurso);
+  const titulos = itens.map((a) => a.titulo).join(", ");
+  return `Olá! Quero comprar o Kit de ${itens[0].titulo}${c ? ` (concurso ${c.nome})` : ""} · ${moeda(preco(itens[0].concurso, "kit"))}. O kit inclui: ${titulos}.`;
+};
+const linkComprarKit = (id) => linkWhatsapp(mensagemKit(id));
 
 /* ---------- Textos e contatos editáveis pelo admin ---------- */
 const blocosFaq = (texto) =>
@@ -139,6 +148,7 @@ const cardAvulsa = (a, i) => `
 const kitCardHtml = (materia, i) => {
   const itens = kitDe(materia.id);
   const cid = itens[0].concurso;
+  const c = concurso(cid);
   const total = preco(cid, "kit");
   const separado = itens.length * preco(cid, "avulsa");
   const covers = itens
@@ -162,12 +172,13 @@ const kitCardHtml = (materia, i) => {
         <div class="kit__price">
           <s>${separado > total ? moeda(separado) : ""}</s>
           <span>${moeda(total)}</span>
-          <small>pagamento único via Pix</small>
+          <small>a combinar no WhatsApp</small>
         </div>
         <p class="kit__economia">${separado > total ? `Economize ${moeda(separado - total)} em relação às apostilas avulsas` : ""}</p>
+        ${c?.editalAguardando ? `<p class="kit__aviso">📌 Edital ainda não saiu — este kit é atualizado automaticamente assim que ele for divulgado.</p>` : ""}
         <p class="kit__inclui">Neste kit você recebe:</p>
         <ul class="kit__lista">${lista}</ul>
-        <button class="btn btn--lg btn--block" type="button" data-comprar="kit" data-id="${esc(itens[0].id)}">COMPRAR KIT · ${moeda(total)}</button>
+        <button class="btn btn--lg btn--block" type="button" data-detalhe-kit="${esc(itens[0].id)}">VER DETALHES DO KIT</button>
         <p class="kit__prazo">Entrega em até <b data-prazo></b> depois que o comprovante chegar.</p>
       </div>
     </article>`;
@@ -234,7 +245,7 @@ const abrirDetalhe = (id) => {
   const acoes =
     a.principal === false
       ? `<p class="detalhe__vazio">Esta apostila acompanha os kits do concurso.</p>`
-      : (comKit(a) ? `<button class="btn btn--block" type="button" data-comprar="kit" data-id="${esc(a.id)}">KIT COMPLETO · ${moeda(preco(a.concurso, "kit"))}</button>` : "") +
+      : (comKit(a) ? `<button class="btn btn--block" type="button" data-detalhe-kit="${esc(a.id)}">VER O KIT COMPLETO · ${moeda(preco(a.concurso, "kit"))}</button>` : "") +
         `<button class="btn btn--ghost btn--block" type="button" data-comprar="avulsa" data-id="${esc(a.id)}">APOSTILA AVULSA · ${moeda(preco(a.concurso, "avulsa"))}</button>`;
 
   $("#detalhe-corpo").innerHTML = `
@@ -242,10 +253,48 @@ const abrirDetalhe = (id) => {
     <div class="detalhe__info">
       <span class="tag"><span aria-hidden="true">${esc(a.emoji)}</span> ${esc(c?.nome ?? "")}</span>
       <h2 id="detalhe-titulo">${esc(a.titulo)}</h2>
-      ${a.paginas ? `<p class="detalhe__meta">${a.paginas} páginas em PDF</p>` : ""}
+      ${a.paginas || a.amostraUrl ? `<p class="detalhe__meta">${a.paginas ? `${a.paginas} páginas em PDF` : ""}${a.paginas && a.amostraUrl ? " · " : ""}${a.amostraUrl ? `<a class="meta-link" href="${esc(a.amostraUrl)}" target="_blank" rel="noopener">Ver amostra em PDF</a>` : ""}</p>` : ""}
       <h3>O que vem na apostila</h3>
       ${sumario}
       <div class="detalhe__acoes">${acoes}</div>
+    </div>`;
+  $("#detalhe .modal__panel").scrollTop = 0;
+  abrirModal($("#detalhe"));
+};
+
+/* ---------- Detalhe do kit: cada apostila do kit + amostra, e o botão que leva pro WhatsApp ---------- */
+const abrirDetalheKit = (id) => {
+  const itens = kitDe(id);
+  const cid = itens[0].concurso;
+  const c = concurso(cid);
+  const total = preco(cid, "kit");
+  const itensHtml = itens
+    .map((a, j) => {
+      const linhas = (a.sumario ?? "").split("\n").map((l) => l.trim()).filter(Boolean);
+      const sumario = linhas.length
+        ? `<ul class="sumario">${linhas.map((l) => (l.startsWith("# ") ? `<li class="sumario__titulo">${esc(l.slice(2))}</li>` : `<li>${esc(l)}</li>`)).join("")}</ul>`
+        : `<p class="detalhe__vazio">O sumário desta apostila será publicado em breve.</p>`;
+      const meta =
+        a.paginas || a.amostraUrl
+          ? `<p>${a.paginas ? `${a.paginas} páginas em PDF` : ""}${a.paginas && a.amostraUrl ? " · " : ""}${a.amostraUrl ? `<a class="meta-link" href="${esc(a.amostraUrl)}" target="_blank" rel="noopener">Ver amostra em PDF</a>` : ""}</p>`
+          : "";
+      return `
+        <div class="acc acc--kititem${j === 0 ? " is-open" : ""}">
+          <button class="acc__btn" type="button" aria-expanded="${j === 0}"><span class="acc__icon" aria-hidden="true"></span><span aria-hidden="true">${esc(a.emoji)}</span> ${esc(a.titulo)}${j === 0 ? " · apostila principal" : ""}</button>
+          <div class="acc__panel"><div class="acc__inner">${meta}${sumario}</div></div>
+        </div>`;
+    })
+    .join("");
+
+  $("#detalhe-corpo").innerHTML = `
+    <div class="detalhe-kit">
+      <span class="tag">${esc(c?.nome ?? "")}</span>
+      <h2 id="detalhe-titulo">Kit de ${esc(itens[0].titulo)}</h2>
+      <p class="detalhe-kit__lead">${itens.length} apostilas · ${moeda(total)}${c?.editalAguardando ? " · edital em breve, kit atualizado automaticamente" : ""}</p>
+      <div class="detalhe-kit__itens">${itensHtml}</div>
+      <div class="detalhe__acoes">
+        <a class="btn btn--block" href="${esc(linkComprarKit(id))}" target="_blank" rel="noopener">COMPRAR ESTE KIT PELO WHATSAPP</a>
+      </div>
     </div>`;
   $("#detalhe .modal__panel").scrollTop = 0;
   abrirModal($("#detalhe"));
@@ -463,10 +512,9 @@ const abrirCheckout = (novoPlano) => {
 
 document.addEventListener("click", (e) => {
   const comprar = e.target.closest("[data-comprar]");
-  if (comprar) {
-    const id = comprar.dataset.id;
-    return abrirCheckout(comprar.dataset.comprar === "kit" ? planoKit(id) : planoAvulso(id));
-  }
+  if (comprar) return abrirCheckout(planoAvulso(comprar.dataset.id));
+  const detalheKit = e.target.closest("[data-detalhe-kit]");
+  if (detalheKit) return abrirDetalheKit(detalheKit.dataset.detalheKit);
   const detalhe = e.target.closest("[data-detalhe]");
   if (detalhe) abrirDetalhe(detalhe.dataset.detalhe);
 });
@@ -506,7 +554,7 @@ const compraSalva = lerCompra();
 const idSalvo = compraSalva?.plano ?? "";
 const [tipoSalvo, ...restoSalvo] = idSalvo.split("-");
 const materiaSalva = restoSalvo.join("-");
-const planoSalvo = apostila(materiaSalva) && { kit: planoKit, avulsa: planoAvulso }[tipoSalvo]?.(materiaSalva);
+const planoSalvo = apostila(materiaSalva) && { avulsa: planoAvulso }[tipoSalvo]?.(materiaSalva);
 if (planoSalvo) {
   plano = planoSalvo;
   copiou = Boolean(compraSalva.copiou);

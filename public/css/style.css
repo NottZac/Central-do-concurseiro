@@ -286,6 +286,12 @@ ul { list-style: none; }
 .kit__prazo { margin-top: 4px; font-size: 0.8rem; text-align: center; color: #c6d1e6; }
 .kit__prazo b { color: #fff; }
 .kit__lista span { color: #9fb0cd; display: block; }
+.kit__aviso { margin-top: 6px; font-size: 0.84rem; font-weight: 700; color: #ffd166; }
+
+/* ---------- Detalhe do kit ---------- */
+.detalhe-kit { display: grid; gap: 4px; }
+.detalhe-kit__lead { margin-top: 4px; font-weight: 700; color: var(--muted); }
+.detalhe-kit__itens { display: grid; gap: 10px; margin: 18px 0 4px; }
 
 /* ---------- Accordion ---------- */
 .acc { border-radius: 20px; background: var(--navy-2); color: #fff; overflow: hidden; transition: background-color 0.35s var(--ease); }
@@ -548,6 +554,9 @@ ul { list-style: none; }
 .admin__arquivo { cursor: pointer; }
 .admin__capa .link { margin: 10px 0 0; padding: 0; text-align: left; }
 .admin__capa .pane__hint { margin: 8px 0 0; }
+#amostra-status { display: grid; gap: 8px; justify-content: start; }
+#amostra-status .link { margin: 0; padding: 0; text-align: left; }
+#amostra-status .pane__hint { margin: 0; }
 .admin__kit { display: grid; gap: 4px; border: 0; }
 .check { display: flex; align-items: center; gap: 10px; margin-top: 12px; font-size: 0.92rem; font-weight: 600; cursor: pointer; }
 .check input { flex: none; width: 18px; height: 18px; accent-color: var(--blue); }

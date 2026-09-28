@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
 import { getDatabase, ref, get, set, remove } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js";
+import { getStorage, ref as refStorage, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC6ZQ1Lnym8-1pI9RqAcWjBo3rLMOrZlVc",
@@ -13,6 +14,7 @@ const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
+const storage = getStorage(app);
 
 /** Concursos, matérias, capas e ajustes do site publicados pelo modo admin. */
 export async function lerCatalogo() {
@@ -24,3 +26,17 @@ export async function lerCatalogo() {
 
 export const gravar = (caminho, valor) => set(ref(db, caminho), valor);
 export const apagar = (caminho) => remove(ref(db, caminho));
+
+/** Amostra em PDF de uma apostila, guardada no Firebase Storage. */
+export const enviarAmostra = async (id, arquivo) => {
+  const alvo = refStorage(storage, `amostras/${id}.pdf`);
+  await uploadBytes(alvo, arquivo, { contentType: "application/pdf" });
+  return getDownloadURL(alvo);
+};
+export const apagarAmostra = async (id) => {
+  try {
+    await deleteObject(refStorage(storage, `amostras/${id}.pdf`));
+  } catch {
+    /* já não existia */
+  }
+};

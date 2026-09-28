@@ -1,5 +1,5 @@
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
-import { app, gravar, apagar } from "./firebase.js";
+import { app, gravar, apagar, enviarAmostra, apagarAmostra } from "./firebase.js";
 import { ajuste, ajustes, concursos, apostilas, apostila, mesclar, removerCapa, temCapaEnviada, gerarId } from "./catalogo.js";
 import { abrirModal, fecharModal } from "./modal.js";
 import { esc, capaHtml } from "./util.js";
@@ -14,7 +14,7 @@ const auth = getAuth(app);
 let usuario; // undefined = ainda verificando, null = deslogado
 let iniciado = false;
 let pilula = null;
-const ui = { aba: "concursos", concurso: null, filtro: "", materia: null, capa: null, tirarCapa: false };
+const ui = { aba: "concursos", concurso: null, filtro: "", materia: null, capa: null, tirarCapa: false, amostraArquivo: null, tirarAmostra: false };
 
 /* ---------- Auxiliares ---------- */
 const campo = (rotulo, nome, valor = "", extra = "") =>
@@ -36,6 +36,17 @@ const erroDoBanco = (err) =>
   /permission_denied/i.test(`${err.code} ${err.message}`)
     ? "Sem permissão para salvar. Entre com uma conta liberada para editar o site."
     : `Não foi possível salvar: ${err.message}`;
+
+const erroDoStorage = (err) =>
+  /unauthorized|unauthenticated/i.test(`${err.code}`)
+    ? "Sem permissão para enviar arquivos. Entre com uma conta liberada para editar o site."
+    : `Não foi possível enviar a amostra: ${err.message}`;
+
+const amostraStatusHtml = (a) => `
+  ${a?.amostraUrl && !ui.tirarAmostra ? `<a class="link" href="${esc(a.amostraUrl)}" target="_blank" rel="noopener">Ver amostra atual</a>` : ""}
+  <label class="btn btn--sm btn--ghost admin__arquivo">${a?.amostraUrl && !ui.tirarAmostra ? "Trocar amostra" : "Enviar amostra"} (PDF)<input type="file" name="amostra" accept="application/pdf" hidden></label>
+  ${a?.amostraUrl && !ui.tirarAmostra ? `<button class="link" type="button" data-tirar-amostra>Remover amostra enviada</button>` : ""}
+  ${ui.amostraArquivo ? `<p class="pane__hint">Pronto pra enviar: ${esc(ui.amostraArquivo.name)}</p>` : `<p class="pane__hint">PDF de até 20 MB. É enviado quando você salvar a matéria.</p>`}`;
 
 const idLivre = (base, existe) => {
   let id = base;
@@ -100,6 +111,7 @@ const abaConcursos = () => {
       </label>
       ${campo("Link do grupo de WhatsApp (materiais gratuitos e novidades)", "grupo", c?.grupo, 'type="url" inputmode="url" maxlength="300" placeholder="https://chat.whatsapp.com/..."')}
       ${campo("Link do edital (opcional)", "edital", c?.edital, 'type="url" inputmode="url" maxlength="300" placeholder="https://..."')}
+      ${marca("Edital ainda não foi lançado (aguardando divulgação)", "editalAguardando", c?.editalAguardando)}
       <div class="admin__duplo">
         ${campo("Preço da avulsa (R$)", "precoAvulsa", c?.precoAvulsa ?? "", `type="number" step="0.01" min="0.01" placeholder="${ajuste("precoAvulsa")}"`)}
         ${campo("Preço do kit (R$)", "precoKit", c?.precoKit ?? "", `type="number" step="0.01" min="0.01" placeholder="${ajuste("precoKit")}"`)}
@@ -150,6 +162,9 @@ const abaMaterias = () => {
             <p class="pane__hint">A imagem é reduzida automaticamente. Proporção ideal: 1070 × 1470.</p>
           </div>
         </div>
+      </div>
+      <div class="field"><span>Amostra em PDF</span>
+        <div id="amostra-status">${amostraStatusHtml(a)}</div>
       </div>
       ${area("Sumário (um item por linha; use “# ” no começo para um título de seção)", "sumario", atual.sumario, 'maxlength="12000" rows="7"')}
       <fieldset class="field admin__kit"><span>Acompanha no kit</span>
@@ -236,6 +251,7 @@ const salvarConcurso = async (form) => {
     status: dados.status,
     grupo: dados.grupo.trim(),
     edital: dados.edital.trim(),
+    editalAguardando: form.elements.editalAguardando.checked,
     oculto: form.elements.oculto.checked,
     ordem: existente?.ordem ?? proximaOrdem(concursos({ todos: true })),
   };
@@ -261,12 +277,30 @@ const salvarMateria = async (form) => {
 
   const cid = existente?.concurso ?? ui.filtro;
   const id = existente?.id ?? idLivre(gerarId(titulo), apostila);
+
+  let amostraUrl = existente?.amostraUrl ?? "";
+  if (ui.amostraArquivo) {
+    try {
+      amostraUrl = await enviarAmostra(id, ui.amostraArquivo);
+    } catch (err) {
+      return mensagem(erroDoStorage(err));
+    }
+  } else if (ui.tirarAmostra) {
+    try {
+      await apagarAmostra(id);
+    } catch (err) {
+      return mensagem(erroDoStorage(err));
+    }
+    amostraUrl = "";
+  }
+
   const registro = {
     concurso: cid,
     titulo,
     emoji: dados.get("emoji").trim() || "📘",
     sumario: dados.get("sumario").trim(),
     acompanha: dados.getAll("acompanha").join(","),
+    amostraUrl,
     principal: form.elements.principal.checked,
     oculto: form.elements.oculto.checked,
     ordem: existente?.ordem ?? proximaOrdem(apostilas(cid, { todas: true })),
@@ -284,6 +318,8 @@ const salvarMateria = async (form) => {
   ui.materia = id;
   ui.capa = null;
   ui.tirarCapa = false;
+  ui.amostraArquivo = null;
+  ui.tirarAmostra = false;
   desenhar();
   mensagem("Matéria salva. O site já foi atualizado.", true);
 };
@@ -381,11 +417,18 @@ const aoClicar = (e) => {
     ui.materia = alvo.dataset.editarMateria || null;
     ui.capa = null;
     ui.tirarCapa = false;
+    ui.amostraArquivo = null;
+    ui.tirarAmostra = false;
   } else if ("tirarCapa" in alvo.dataset) {
     ui.tirarCapa = true;
     ui.capa = null;
     corpo.querySelector("#capa-previa").innerHTML = previaCapa(ui.materia ? apostila(ui.materia) : { titulo: "", emoji: "📘" });
     return alvo.remove();
+  } else if ("tirarAmostra" in alvo.dataset) {
+    ui.tirarAmostra = true;
+    ui.amostraArquivo = null;
+    corpo.querySelector("#amostra-status").innerHTML = amostraStatusHtml(ui.materia ? apostila(ui.materia) : null);
+    return;
   } else {
     return;
   }
@@ -398,13 +441,23 @@ const aoAlterar = async (e) => {
     ui.materia = null;
     return desenhar();
   }
-  if (e.target.name !== "arquivo" || !e.target.files[0]) return;
-  try {
-    ui.capa = await prepararCapa(e.target.files[0]);
-    ui.tirarCapa = false;
-    corpo.querySelector("#capa-previa").innerHTML = capaHtml({ titulo: "Nova capa", emoji: "" }, { src: ui.capa });
-  } catch (err) {
-    mensagem(`Capa não aceita: ${err.message}`);
+  if (e.target.name === "arquivo" && e.target.files[0]) {
+    try {
+      ui.capa = await prepararCapa(e.target.files[0]);
+      ui.tirarCapa = false;
+      corpo.querySelector("#capa-previa").innerHTML = capaHtml({ titulo: "Nova capa", emoji: "" }, { src: ui.capa });
+    } catch (err) {
+      mensagem(`Capa não aceita: ${err.message}`);
+    }
+    return;
+  }
+  if (e.target.name === "amostra" && e.target.files[0]) {
+    const arquivo = e.target.files[0];
+    if (arquivo.type !== "application/pdf") return mensagem("Envie a amostra em PDF.");
+    if (arquivo.size > 20 * 1024 * 1024) return mensagem("A amostra em PDF precisa ter até 20 MB.");
+    ui.amostraArquivo = arquivo;
+    ui.tirarAmostra = false;
+    corpo.querySelector("#amostra-status").innerHTML = amostraStatusHtml(ui.materia ? apostila(ui.materia) : null);
   }
 };
 

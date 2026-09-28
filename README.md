@@ -25,7 +25,7 @@ firebase.json      Hosting (com rewrite de /c/**) e banco
 Toque 5 vezes rápido na logo (topo ou rodapé). Entre com o e-mail e a senha cadastrados e edite:
 
 - concursos: nome, cargo, descrição, edital, preços, situação e o link do grupo de WhatsApp de cada um;
-- matérias: título, emoji, capa (envio de imagem), sumário, o que acompanha no kit, à venda ou só acompanhante;
+- matérias: título, emoji, capa (envio de imagem), amostra em PDF (até 20 MB), sumário, o que acompanha no kit, à venda ou só acompanhante;
 - site: título e texto da página inicial, WhatsApp de atendimento, Instagram (o primeiro perfil vai no ícone do topo e todos no rodapé), chave/tipo/favorecido do Pix, preços padrão, perguntas frequentes e nota do rodapé.
 
 Enquanto o modo admin está ligado aparece uma pílula flutuante (Editar / Sair). Para sair: botão "Sair do modo admin" no painel ou "Sair" na pílula. Concurso sem link de grupo usa o WhatsApp de atendimento (o botão vira "Solicitar entrada").
@@ -36,8 +36,9 @@ Configuração única no Firebase Console (a segunda parte é obrigatória):
 
 1. Authentication > Método de login > E-mail/senha > Ativar.
 2. Authentication > Configurações > Ações do usuário > desmarque "Ativar criação (cadastro)". Sem isso qualquer pessoa consegue criar uma conta e editar o site.
+3. Para o upload da amostra em PDF funcionar: Storage > Vamos começar, e ativar o Cloud Storage. Isso pede o plano Blaze (pré-pago), mesmo que o uso real fique nos limites gratuitos (5 GB guardados, 1 GB de download por dia) e o custo fique em R$ 0. As regras de acesso já estão prontas em `storage.rules` e sobem junto com o `publicar.bat`.
 
-Quem pode editar: só quem tem usuário em Authentication > Usuários (botão Adicionar usuário: e-mail e senha). Para tirar alguém, apague o usuário. As regras em `database.rules.json` só aceitam gravação de quem entrou com e-mail e senha; contas Google não gravam.
+Quem pode editar: só quem tem usuário em Authentication > Usuários (botão Adicionar usuário: e-mail e senha). Para tirar alguém, apague o usuário. As regras em `database.rules.json` e `storage.rules` só aceitam gravação de quem entrou com e-mail e senha; contas Google não gravam.
 
 ## Antes de publicar
 

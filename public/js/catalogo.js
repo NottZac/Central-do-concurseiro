@@ -98,13 +98,3 @@ export const planoAvulso = (id) => {
     preco: preco(a.concurso, "avulsa"),
   };
 };
-
-export const planoKit = (id) => {
-  const a = apostila(id);
-  const titulos = kitDe(id).map((item) => item.titulo).join(" + ");
-  return {
-    id: `kit-${id}`,
-    nome: `Kit completo: ${titulos} (${nomeConcurso(a.concurso)})`,
-    preco: preco(a.concurso, "kit"),
-  };
-};

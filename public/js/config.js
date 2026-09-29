@@ -79,6 +79,21 @@ export const SEED = {
     sociologia: materia(120, "Sociologia", "👥", ""),
     pedagogia: materia(130, "Conhecimentos Pedagógicos", "🧑‍🏫", "pedagogia", "portugues,legislacao"),
     legislacao: { ...materia(140, "Legislação Completa", "⚖️", "legislacao", ""), principal: false },
+
+    // SEDUC-CE — específicas (cada uma acompanhada pelas 4 gerais)
+    "biologia-ce": { concurso: "seduc-ce", titulo: "Biologia", emoji: "🧬", capa: "", sumario: "", acompanha: "educacao-brasileira-geral-ce,administracao-publica-geral-ce,leitura-interpretacao-dados-geral-ce,portugues-geral-ce", principal: true, ordem: 10 },
+    "educacao-fisica-ce": { concurso: "seduc-ce", titulo: "Educação Física", emoji: "🏃", capa: "", sumario: "", acompanha: "educacao-brasileira-geral-ce,administracao-publica-geral-ce,leitura-interpretacao-dados-geral-ce,portugues-geral-ce", principal: true, ordem: 20 },
+    "fisica-ce": { concurso: "seduc-ce", titulo: "Física", emoji: "⚛️", capa: "", sumario: "", acompanha: "educacao-brasileira-geral-ce,administracao-publica-geral-ce,leitura-interpretacao-dados-geral-ce,portugues-geral-ce", principal: true, ordem: 30 },
+    "geografia-ce": { concurso: "seduc-ce", titulo: "Geografia", emoji: "🌎", capa: "", sumario: "", acompanha: "educacao-brasileira-geral-ce,administracao-publica-geral-ce,leitura-interpretacao-dados-geral-ce,portugues-geral-ce", principal: true, ordem: 40 },
+    "historia-ce": { concurso: "seduc-ce", titulo: "História", emoji: "📜", capa: "", sumario: "", acompanha: "educacao-brasileira-geral-ce,administracao-publica-geral-ce,leitura-interpretacao-dados-geral-ce,portugues-geral-ce", principal: true, ordem: 50 },
+    "matematica-ce": { concurso: "seduc-ce", titulo: "Matemática", emoji: "➗", capa: "", sumario: "", acompanha: "educacao-brasileira-geral-ce,administracao-publica-geral-ce,leitura-interpretacao-dados-geral-ce,portugues-geral-ce", principal: true, ordem: 60 },
+    "portugues-ce": { concurso: "seduc-ce", titulo: "Língua Portuguesa", emoji: "📖", capa: "", sumario: "", acompanha: "educacao-brasileira-geral-ce,administracao-publica-geral-ce,leitura-interpretacao-dados-geral-ce,portugues-geral-ce", principal: true, ordem: 70 },
+    "quimica-ce": { concurso: "seduc-ce", titulo: "Química", emoji: "🧪", capa: "", sumario: "", acompanha: "educacao-brasileira-geral-ce,administracao-publica-geral-ce,leitura-interpretacao-dados-geral-ce,portugues-geral-ce", principal: true, ordem: 80 },
+    // SEDUC-CE — gerais (só entram dentro do kit das específicas acima, não têm kit próprio)
+    "educacao-brasileira-geral-ce": { concurso: "seduc-ce", titulo: "Educação Brasileira Geral", emoji: "🇧🇷", capa: "", sumario: "", acompanha: "", principal: false, ordem: 90 },
+    "administracao-publica-geral-ce": { concurso: "seduc-ce", titulo: "Administração Pública Geral", emoji: "🏛️", capa: "", sumario: "", acompanha: "", principal: false, ordem: 100 },
+    "leitura-interpretacao-dados-geral-ce": { concurso: "seduc-ce", titulo: "Leitura e Interpretação de Dados Geral", emoji: "📊", capa: "", sumario: "", acompanha: "", principal: false, ordem: 110 },
+    "portugues-geral-ce": { concurso: "seduc-ce", titulo: "Português Geral", emoji: "📝", capa: "", sumario: "", acompanha: "", principal: false, ordem: 120 },
   },
 };
 

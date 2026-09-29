@@ -1273,4 +1273,1096 @@ Anexo IX — Como a banca formula as questões
 Anexo X — Plano de estudo de 60 dias
 Anexo XI — Referências`,
   },
+
+  "biologia-ce": {
+    paginas: 587,
+    sumario: `# Origem da Vida e Organização dos Seres Vivos
+Capítulo 1 — Origem da vida: abiogênese, biogênese e evolução química
+Capítulo 2 — Características e níveis de organização dos seres vivos
+Capítulo 3 — Método científico e produção do conhecimento biológico
+Capítulo 4 — Revisão estratégica e questões — Parte I
+# Biologia Celular
+Capítulo 5 — Teoria celular: procariontes × eucariontes, célula animal × vegetal
+Capítulo 6 — Organelas citoplasmáticas: sistema de endomembranas
+Capítulo 7 — Mitocôndrias, cloroplastos, citoesqueleto e centríolos
+Capítulo 8 — Membrana plasmática e transporte celular
+Capítulo 9 — Núcleo, ciclo celular, mitose e meiose
+Capítulo 10 — Microscopia óptica e eletrônica
+Capítulo 11 — Revisão estratégica e questões — Parte II
+# Reprodução e Desenvolvimento dos Seres Vivos
+Capítulo 12 — Reprodução assexuada, sexuada e gametogênese
+Capítulo 13 — Fecundação e desenvolvimento embrionário
+Capítulo 14 — Reprodução humana, animal e vegetal: uma visão comparativa
+Capítulo 15 — Revisão estratégica e questões — Parte III
+# Bioquímica e Metabolismo Celular
+Capítulo 16 — Água, sais minerais e carboidratos
+Capítulo 17 — Lipídios, proteínas, ácidos nucleicos e vitaminas
+Capítulo 18 — Enzimas e catálise biológica
+Capítulo 19 — ATP e metabolismo energético
+Capítulo 20 — Respiração celular e fermentação
+Capítulo 21 — Fotossíntese e quimiossíntese
+Capítulo 22 — Revisão estratégica e questões — Parte IV
+# Biologia Molecular e Biotecnologia
+Capítulo 23 — Estrutura do DNA, RNA e replicação
+Capítulo 24 — Transcrição, tradução e código genético
+Capítulo 25 — Regulação gênica e engenharia genética
+Capítulo 26 — Biotecnologia: organismos geneticamente modificados, clonagem e terapia gênica
+Capítulo 27 — Revisão estratégica e questões — Parte V
+# Genética
+Capítulo 28 — Primeira Lei de Mendel
+Capítulo 29 — Segunda Lei de Mendel e heredogramas
+Capítulo 30 — Interações gênicas
+Capítulo 31 — Herança dos grupos sanguíneos: sistema ABO e fator Rh
+Capítulo 32 — Bases cromossômicas da herança
+Capítulo 33 — Revisão estratégica e questões — Parte VI
+# Evolução Biológica
+Capítulo 34 — Lamarck, Darwin e a Teoria Sintética da Evolução
+Capítulo 35 — Seleção natural, adaptação e especiação
+Capítulo 36 — Evidências da evolução biológica
+Capítulo 37 — Evolução humana
+Capítulo 38 — Revisão estratégica e questões — Parte VII
+# Sistemática e Diversidade dos Seres Vivos
+Capítulo 39 — Taxonomia, nomenclatura e cladogramas
+Capítulo 40 — Vírus, Reino Monera e Reino Protista
+Capítulo 41 — Reino Fungi
+Capítulo 42 — Reino Animalia I: poríferos, cnidários e vermes
+Capítulo 43 — Reino Animalia II: moluscos, anelídeos e artrópodes
+Capítulo 44 — Reino Animalia III: equinodermos e cordados
+Capítulo 45 — Revisão estratégica e questões — Parte VIII
+# Anatomia e Fisiologia Humana
+Capítulo 46 — Histologia humana: tecido epitelial, conjuntivo, muscular e nervoso
+Capítulo 47 — Sistema digestório e sistema respiratório
+Capítulo 48 — Sistema cardiovascular
+Capítulo 49 — Sistema urinário
+Capítulo 50 — Sistema nervoso
+Capítulo 51 — Sistema endócrino
+Capítulo 52 — Sistema imunológico
+Capítulo 53 — Sistema reprodutor e sistema locomotor
+Capítulo 54 — Revisão estratégica e questões — Parte IX
+# Botânica e Fisiologia Vegetal
+Capítulo 55 — Tecidos, morfologia e anatomia vegetal
+Capítulo 56 — Classificação e reprodução das plantas
+Capítulo 57 — Transporte vegetal: xilema e floema
+Capítulo 58 — Hormônios vegetais e desenvolvimento
+Capítulo 59 — Revisão estratégica e questões — Parte X
+# Ecologia, Conservação da Biodiversidade e Sustentabilidade
+Capítulo 60 — Ecossistemas, habitat e nicho ecológico
+Capítulo 61 — Fluxo de energia, cadeias e teias alimentares, e pirâmides ecológicas
+Capítulo 62 — Ciclos biogeoquímicos
+Capítulo 63 — Relações ecológicas
+Capítulo 64 — Dinâmica de populações e sucessão ecológica
+Capítulo 65 — Biodiversidade, conservação biológica e impactos ambientais
+Capítulo 66 — Revisão estratégica e questões — Parte XI
+# Biologia e Saúde
+Capítulo 67 — Programa Saúde na Escola (PSE) e Saúde Única (One Health)
+Capítulo 68 — Doenças causadas por vírus, bactérias e fungos
+Capítulo 69 — Parasitoses humanas
+Capítulo 70 — Imunologia, vacinação e prevenção de doenças
+Capítulo 71 — Gravidez e métodos anticoncepcionais
+Capítulo 72 — Revisão estratégica e questões — Parte XII
+# Biomas Brasileiros e Questões Socioambientais do Ceará
+Capítulo 73 — Biomas brasileiros: Amazônia, Cerrado, Mata Atlântica, Pantanal e Pampa
+Capítulo 74 — Caatinga e biodiversidade do Ceará
+Capítulo 75 — Semiárido cearense, recursos hídricos e desertificação
+Capítulo 76 — Mudanças climáticas, poluição e degradação ambiental
+Capítulo 77 — Desenvolvimento sustentável e justiça socioambiental
+Capítulo 78 — Revisão estratégica e questões — Parte XIII
+# Ensino de Biologia, Alfabetização Científica e BNCC/DCRC
+Capítulo 79 — Abordagens metodológicas e experimentação no ensino de Biologia
+Capítulo 80 — Laboratório escolar: materiais, técnicas e normas de segurança
+Capítulo 81 — Alfabetização científica, letramento científico e natureza da ciência
+Capítulo 82 — Currículo, avaliação da aprendizagem e tecnologias educacionais
+Capítulo 83 — Inclusão no ensino de Biologia
+Capítulo 84 — A BNCC: Ciências da Natureza e suas Tecnologias no Ensino Médio
+Capítulo 85 — O DCRC e a articulação BNCC × DCRC
+Capítulo 86 — Revisão estratégica e questões — Parte XIV
+# Revisão Geral
+Capítulo 87 — Revisão consolidada — Origem da Vida, Célula e Reprodução
+Capítulo 88 — Revisão consolidada — Bioquímica, Biologia Molecular e Genética
+Capítulo 89 — Revisão consolidada — Evolução, Sistemática e Diversidade
+Capítulo 90 — Revisão consolidada — Anatomia, Fisiologia Humana e Botânica
+Capítulo 91 — Revisão consolidada — Ecologia, Saúde e Biomas/Ceará
+Capítulo 92 — Revisão consolidada — Ensino de Biologia e BNCC/DCRC
+Capítulo 93 — 200 conceitos e relações essenciais para revisar antes da prova
+Capítulo 94 — Mapas mentais consolidados
+Capítulo 95 — Quadros comparativos consolidados
+Capítulo 96 — Simulado — Bloco Origem da Vida, Célula, Reprodução, Bioquímica e Biologia Molecular
+Capítulo 97 — Simulado — Bloco Genética, Evolução, Sistemática, Diversidade, Fisiologia e Botânica
+Capítulo 98 — Simulado — Bloco Ecologia, Saúde, Biomas/Ceará e Ensino de Biologia
+Capítulo 99 — Simulado Final — Conhecimentos Específicos de Biologia`,
+  },
+  "educacao-fisica-ce": {
+    paginas: 496,
+    sumario: `# Processo Histórico e Legitimação da Educação Física
+Capítulo 1 — Processo histórico e legitimação da Educação Física no currículo
+Capítulo 2 — Questões comentadas
+Capítulo 3 — Mapa mental e revisão
+# Educação Física no Ensino Médio
+Capítulo 4 — Educação Física no Ensino Médio: definições e procedimentos
+Capítulo 5 — Questões comentadas
+Capítulo 6 — Mapa mental e revisão
+# BNCC e DCRC
+Capítulo 7 — BNCC: Educação Física no Ensino Médio
+Capítulo 8 — DCRC do Ceará e quadro comparativo BNCC x DCRC
+Capítulo 9 — Questões e mapa mental
+# Planejamento
+Capítulo 10 — Planejamento: objetivos e intencionalidade
+Capítulo 11 — Questões comentadas
+Capítulo 12 — Mapa mental e revisão
+# Avaliação da Aprendizagem e Aptidão Física
+Capítulo 13 — Avaliação da aprendizagem
+Capítulo 14 — Aptidão física para a saúde
+Capítulo 15 — Questões comentadas
+Capítulo 16 — Mapa mental e revisão
+# Crescimento e Desenvolvimento
+Capítulo 17 — Crescimento, maturação e desenvolvimento
+Capítulo 18 — Questões e mapa mental
+# Didática, Metodologia e Modelos de Ensino
+Capítulo 19 — Didática e metodologia no Ensino Médio
+Capítulo 20 — Modelos de ensino em Educação Física
+Capítulo 21 — Questões comentadas
+Capítulo 22 — Mapa mental e revisão
+# Habilidades Motoras Especializadas e Desenvolvimento Motor
+Capítulo 23 — Habilidades motoras: fundamentais e especializadas
+Capítulo 24 — Desenvolvimento motor
+Capítulo 25 — Questões comentadas
+Capítulo 26 — Mapa mental e revisão
+# Letramento Físico
+Capítulo 27 — Letramento físico integrado às práticas pedagógicas
+Capítulo 28 — Questões e mapa mental
+# Estilo de Vida Ativo e Promoção da Saúde
+Capítulo 29 — Estilo de vida ativo e saúde
+Capítulo 30 — Promoção da saúde na escola
+Capítulo 31 — Questões comentadas
+Capítulo 32 — Mapa mental e revisão
+# Atividade Física ao Longo da Vida
+Capítulo 33 — Cultura da prática de atividade física ao longo da vida
+Capítulo 34 — Questões e mapa mental
+# Ensino Baseado em Competências
+Capítulo 35 — Ensino baseado em competências
+Capítulo 36 — Questões e mapa mental
+# Inclusão de Pessoas com Deficiência e Neurodivergentes
+Capítulo 37 — Fundamentos da educação inclusiva em Educação Física
+Capítulo 38 — Adaptações nas aulas
+Capítulo 39 — Neurodiversidade nas aulas de Educação Física
+Capítulo 40 — Questões comentadas
+Capítulo 41 — Mapa mental e revisão
+# Atividade Física e Saúde Mental
+Capítulo 42 — Atividade física e saúde mental
+Capítulo 43 — Questões e mapa mental
+# Pedagogia do Esporte
+Capítulo 44 — Pedagogia do esporte: fundamentos
+Capítulo 45 — Ensino dos esportes: possibilidades metodológicas
+Capítulo 46 — Questões comentadas
+Capítulo 47 — Mapa mental e revisão
+# Competência Motora Percebida e Sedentarismo
+Capítulo 48 — Percepção de competência motora e comportamento sedentário
+Capítulo 49 — Questões e mapa mental
+# Educação Física em Escolas de Tempo Integral
+Capítulo 50 — Potencial e realidade nas Escolas de Tempo Integral
+Capítulo 51 — Questões e mapa mental
+# Carta Internacional da Educação Física, da Atividade Física e do Esporte
+Capítulo 52 — A Carta Internacional da Educação Física, da Atividade Física e do Esporte
+Capítulo 53 — Questões e mapa mental
+# Cultura de Paz e Fair Play
+Capítulo 54 — Cultura de paz, fair play e esporte e formação humana
+Capítulo 55 — Questões e mapa mental
+# Esporte e Competição no Contexto Escolar
+Capítulo 56 — Ações planejadas para o ensino dos esportes e a competição escolar
+Capítulo 57 — Questões comentadas
+Capítulo 58 — Mapa mental e revisão
+# Revisão Final E Simulado
+Capítulo 59 — Revisão geral — os 20 tópicos do edital
+Capítulo 60 — Quadros comparativos consolidados
+Capítulo 61 — 100 conceitos e relações para revisar antes da prova
+Capítulo 62 — Erros que mais derrubam candidatos
+Capítulo 63 — Simulado final — questões
+Capítulo 64 — Simulado final — gabarito comentado`,
+  },
+  "fisica-ce": {
+    paginas: 461,
+    sumario: `# História e evolução das ideias da Física
+Capítulo 1 — Modelos cosmológicos na Antiguidade e a Física de Aristóteles
+Capítulo 2 — A Revolução Científica: Galileu e Kepler
+Capítulo 3 — Newton e a síntese da mecânica clássica
+Capítulo 4 — A crise da Física clássica: rumo à Relatividade e à Física Quântica
+Capítulo 5 — Questões comentadas — Parte I
+Capítulo 6 — Mapa mental — Parte I
+# Mecânica
+Capítulo 7 — Grandezas escalares e vetoriais
+Capítulo 8 — Cinemática escalar: MRU e MRUV
+Capítulo 9 — Gráficos do movimento
+Capítulo 10 — Cinemática vetorial: lançamentos horizontal e oblíquo
+Capítulo 11 — Movimento circular
+Capítulo 12 — Leis de Newton e diagramas de corpo livre
+Capítulo 13 — Aplicações das Leis de Newton
+Capítulo 14 — Trabalho, energia e potência
+Capítulo 15 — Impulso, quantidade de movimento e colisões
+Capítulo 16 — Gravitação
+Capítulo 17 — Estática e equilíbrio dos corpos rígidos
+Capítulo 18 — Hidrostática
+Capítulo 19 — Questões comentadas — Parte II (Cinemática e Dinâmica)
+Capítulo 20 — Questões comentadas — Parte II (Energia, Gravitação, Estática e Hidrostática)
+Capítulo 21 — Mapa mental — Parte II
+# Termodinâmica
+Capítulo 22 — Temperatura, escalas termométricas e equilíbrio térmico
+Capítulo 23 — Dilatação térmica
+Capítulo 24 — Calorimetria
+Capítulo 25 — Mudanças de fase
+Capítulo 26 — Transferência de calor: condução, convecção e radiação
+Capítulo 27 — Gases: modelo cinético e transformações
+Capítulo 28 — Primeira Lei da Termodinâmica
+Capítulo 29 — Segunda Lei da Termodinâmica e entropia
+Capítulo 30 — Máquinas térmicas e Ciclo de Carnot
+Capítulo 31 — Questões comentadas — Parte III
+Capítulo 32 — Mapa mental — Parte III
+# Eletromagnetismo
+Capítulo 33 — Carga elétrica e eletrização
+Capítulo 34 — Lei de Coulomb
+Capítulo 35 — Campo elétrico
+Capítulo 36 — Potencial elétrico e energia potencial elétrica
+Capítulo 37 — Lei de Gauss
+Capítulo 38 — Corrente elétrica, resistência e Lei de Ohm
+Capítulo 39 — Circuitos elétricos
+Capítulo 40 — Campo magnético e força magnética
+Capítulo 41 — Lei de Ampère
+Capítulo 42 — Indução eletromagnética
+Capítulo 43 — Propriedades elétricas e magnéticas da matéria
+Capítulo 44 — Equações de Maxwell
+Capítulo 45 — Questões comentadas — Parte IV (Eletrostática e Eletrodinâmica)
+Capítulo 46 — Questões comentadas — Parte IV (Magnetismo, Indução e Maxwell)
+Capítulo 47 — Mapa mental — Parte IV
+# Oscilações, Ondulatória e Óptica Geométrica
+Capítulo 48 — Movimento Harmônico Simples
+Capítulo 49 — Oscilações amortecidas, forçadas e ressonância
+Capítulo 50 — Ondas: conceitos gerais e fenômenos ondulatórios
+Capítulo 51 — Ondas sonoras
+Capítulo 52 — Ondas eletromagnéticas e o espectro
+Capítulo 53 — Óptica geométrica: reflexão e espelhos
+Capítulo 54 — Óptica geométrica: refração e lentes
+Capítulo 55 — Instrumentos ópticos
+Capítulo 56 — Questões comentadas — Parte V
+Capítulo 57 — Mapa mental — Parte V
+# Óptica Física
+Capítulo 58 — Natureza ondulatória da luz e interferência
+Capítulo 59 — Difração
+Capítulo 60 — Polarização
+Capítulo 61 — Questões comentadas — Parte VI
+Capítulo 62 — Mapa mental — Parte VI
+# Física Moderna
+Capítulo 63 — Relatividade Especial
+Capítulo 64 — Relatividade Geral
+Capítulo 65 — Origens da Física Quântica: radiação e efeito fotoelétrico
+Capítulo 66 — Dualidade onda-partícula e fundamentos da Mecânica Quântica
+Capítulo 67 — Modelos atômicos
+Capítulo 68 — Física nuclear e radioatividade
+Capítulo 69 — Energia nuclear: fissão e fusão
+Capítulo 70 — Questões comentadas — Parte VII
+Capítulo 71 — Mapa mental — Parte VII
+# Ensino de Física
+Capítulo 72 — Conhecimento científico, conhecimento pedagógico do conteúdo e transposição didática
+Capítulo 73 — Abordagens metodológicas no ensino de Física
+Capítulo 74 — Experimentação e segurança em laboratório
+Capítulo 75 — Questões comentadas — Parte VIII
+Capítulo 76 — Mapa mental — Parte VIII
+# Tecnologias digitais no ensino de Física
+Capítulo 77 — TDIC e mediação pedagógica
+Capítulo 78 — Simulações e laboratórios virtuais
+Capítulo 79 — Aquisição e análise de dados
+Capítulo 80 — Questões comentadas — Parte IX
+Capítulo 81 — Mapa mental — Parte IX
+# Avaliação da aprendizagem no ensino de Física
+Capítulo 82 — Fundamentos e funções da avaliação
+Capítulo 83 — Instrumentos e estratégias avaliativas em Física
+Capítulo 84 — Avaliação diagnóstica, formativa e somativa
+Capítulo 85 — Questões comentadas — Parte X
+Capítulo 86 — Mapa mental — Parte X
+# Currículo, competências e habilidades no ensino de Física
+Capítulo 87 — BNCC e DCRC para o ensino de Física
+Capítulo 88 — Organização curricular das Ciências da Natureza e suas Tecnologias
+Capítulo 89 — Planejamento por competências, investigação e alfabetização científica
+Capítulo 90 — Questões comentadas — Parte XI
+Capítulo 91 — Mapa mental — Parte XI
+# Revisão Geral E Simulado Final
+Capítulo 92 — Revisão geral dos 11 blocos
+Capítulo 93 — Quadros comparativos
+Capítulo 94 — 200 fórmulas, conceitos e relações para revisar
+Capítulo 95 — Formulários por área
+Capítulo 96 — Erros que mais derrubam candidatos
+Capítulo 97 — Simulado final — questões
+Capítulo 98 — Simulado final — gabarito comentado`,
+  },
+  // ESTIMADO — fonte truncada em '58', supus 588
+  "geografia-ce": {
+    paginas: 588,
+    sumario: `# Pensamento Geográfico
+Capítulo 1 — Conceitos fundamentais: espaço, território, paisagem, lugar, região, rede e escala
+Capítulo 2 — Correntes do pensamento geográfico
+Capítulo 3 — Questões comentadas
+Capítulo 4 — Mapa mental e revisão
+# Ensino de Geografia, Raciocínio Geográfico e Cartografia Digital
+Capítulo 5 — Fundamentos do ensino de Geografia
+Capítulo 6 — Raciocínio geográfico: os sete princípios
+Capítulo 7 — Metodologias ativas no ensino de Geografia
+Capítulo 8 — Alfabetização cartográfica e geotecnologias
+Capítulo 9 — Questões comentadas
+Capítulo 10 — Mapa mental e revisão
+# Meio Ambiente e Paisagens Naturais
+Capítulo 11 — Estrutura geológica e relevo
+Capítulo 12 — Clima
+Capítulo 13 — Hidrografia
+Capítulo 14 — Vegetação e solos
+Capítulo 15 — Grandes paisagens naturais no mundo e no Brasil
+Capítulo 16 — Questões comentadas
+Capítulo 17 — Mapa mental e revisão
+# Degradação Ambiental, Desertificação e Recursos Hídricos
+Capítulo 18 — Degradação ambiental e mudanças climáticas
+Capítulo 19 — Desertificação no Nordeste
+Capítulo 20 — Gestão de recursos hídricos e energias renováveis
+Capítulo 21 — Questões comentadas
+Capítulo 22 — Mapa mental e revisão
+# Políticas Ambientais, Acordo de Paris e Agenda 2030
+Capítulo 23 — Políticas ambientais, Acordo de Paris e Agenda 2030 – ODS
+Capítulo 24 — Questões e mapa mental
+# Geopolítica no Século XXI
+Capítulo 25 — Conceitos de geopolítica, corporações e agentes hegemônicos
+Capítulo 26 — Multipolaridade e a ascensão da China
+Capítulo 27 — Conflitos contemporâneos (Rússia-Ucrânia, Oriente Médio) e Indústria
+Capítulo 28 — Questões comentadas
+Capítulo 29 — Mapa mental e revisão
+# Globalização, Mundialização e Fragmentação
+Capítulo 30 — Globalização, mundialização, fragmentação e Sul Global
+Capítulo 31 — América Latina e América Anglo-Saxônica
+Capítulo 32 — Questões e mapa mental
+# Economia, Energia e Transporte
+Capítulo 33 — Economia mundial e do Brasil
+Capítulo 34 — Energia: matriz energética e elétrica
+Capítulo 35 — Transporte e logística territorial
+Capítulo 36 — Questões comentadas
+Capítulo 37 — Mapa mental e revisão
+# Agricultura Familiar, Agroecologia e Reforma Agrária
+Capítulo 38 — Estrutura fundiária, agricultura familiar, agronegócio, agroecologia e reforma agrária
+Capítulo 39 — Questões e mapa mental
+# Trabalho, Renda e Desigualdades
+Capítulo 40 — Trabalho, renda e desigualdades socioespaciais
+Capítulo 41 — Questões e mapa mental
+# População e Formas de Ocupação do Espaço
+Capítulo 42 — População: crescimento, distribuição e indicadores demográficos
+Capítulo 43 — Transição demográfica brasileira atual
+Capítulo 44 — Fluxos migratórios e refugiados
+Capítulo 45 — Contrastes regionais do Brasil
+Capítulo 46 — Questões comentadas
+Capítulo 47 — Mapa mental e revisão
+# Urbanização e Metropolização
+Capítulo 48 — Urbanização, rede urbana e metropolização
+Capítulo 49 — Cidades inteligentes, gentrificação e segregação socioespacial
+Capítulo 50 — A questão urbana: contrastes regionais e a problemática nordestina
+Capítulo 51 — Questões comentadas
+Capítulo 52 — Mapa mental e revisão
+# Geografia Regional: o Ceará em Destaque
+Capítulo 53 — Território, regionalização e população do Ceará
+Capítulo 54 — Economia regional: o Porto do Pecém
+Capítulo 55 — O Distrito Industrial de Maracanaú
+Capítulo 56 — Agronegócio no Vale do Jaguaribe
+Capítulo 57 — Dinâmica territorial cearense e políticas de desenvolvimento regional
+Capítulo 58 — Questões comentadas
+Capítulo 59 — Mapa mental e revisão
+# BNCC e DCRC
+Capítulo 60 — BNCC: Geografia no Ensino Médio
+Capítulo 61 — DCRC do Ceará e quadro comparativo BNCC x DCRC
+Capítulo 62 — Questões e mapa mental
+# Avaliação no Ensino de Geografia
+Capítulo 63 — Avaliação no ensino de Geografia
+Capítulo 64 — Questões e mapa mental
+# Revisão Final E Simulado
+Capítulo 65 — Revisão geral — os 16 eixos do edital
+Capítulo 66 — Quadros comparativos consolidados
+Capítulo 67 — 150 conceitos, relações e fatos geográficos para revisar antes da prova
+Capítulo 68 — Erros que mais derrubam candidatos
+Capítulo 69 — Simulado final — questões
+Capítulo 70 — Simulado final — gabarito comentado`,
+  },
+  "historia-ce": {
+    paginas: 740,
+    sumario: `# O Saber Histórico
+Capítulo 1 — Concepções de História e fontes históricas
+Capítulo 2 — Tempo histórico, memória e patrimônio
+Capítulo 3 — Historiografia, currículo e usos públicos da História
+Capítulo 4 — Questões comentadas
+# Origens e Evolução dos Seres Humanos
+Capítulo 5 — Hominização e Paleolítico
+Capítulo 6 — Neolítico e Revolução Agrícola
+Capítulo 7 — Migrações humanas e povoamento da América
+Capítulo 8 — Questões comentadas
+# Antiguidade: Organização Econômica, Social e Cultural
+Capítulo 9 — Egito e Mesopotâmia
+Capítulo 10 — Kush, Axum, Pérsia, Fenícia e Palestina antiga
+Capítulo 11 — China e Índia antigas
+Capítulo 12 — Grécia: pólis, Atenas e Esparta
+Capítulo 13 — Filosofia grega e expansão helenística
+Capítulo 14 — Roma: Monarquia, República e Império
+Capítulo 15 — Roma: cidadania, escravidão, direito e cristianização
+Capítulo 16 — Questões comentadas
+# Mundo Feudal, Civilização Islâmica e Reinos Africanos
+Capítulo 17 — Formação do Ocidente cristão e feudalismo
+Capítulo 18 — Civilização islâmica
+Capítulo 19 — Reinos africanos (séculos V–XV)
+Capítulo 20 — Questões comentadas
+# Modernidade e Expansão Europeia
+Capítulo 21 — Renascimento cultural
+Capítulo 22 — Reformas religiosas
+Capítulo 23 — Expansão marítima europeia
+Capítulo 24 — Estados nacionais modernos e absolutismo
+Capítulo 25 — Pensamento ilustrado
+Capítulo 26 — Questões comentadas
+# América Pré-Colombiana e Colonização Europeia
+Capítulo 27 — Incas, maias e astecas
+Capítulo 28 — A conquista europeia da América
+Capítulo 29 — Colonização espanhola e colonização inglesa
+Capítulo 30 — Questões comentadas
+# América Colonial Portuguesa
+Capítulo 31 — Povos indígenas e chegada dos europeus
+Capítulo 32 — Administração colonial
+Capítulo 33 — Economia colonial
+Capítulo 34 — Trabalho escravizado e resistência
+Capítulo 35 — Movimentos nativistas e emancipacionistas
+Capítulo 36 — O Ceará nos tempos da colonização
+Capítulo 37 — Questões comentadas
+# Revoluções Burguesas
+Capítulo 38 — Revolução Industrial
+Capítulo 39 — Revolução Francesa
+Capítulo 40 — Questões comentadas
+# Independências nas Américas
+Capítulo 41 — Independência dos EUA e do Caribe
+Capítulo 42 — Independências na América Espanhola
+Capítulo 43 — Independência do Brasil
+Capítulo 44 — Questões comentadas
+# Brasil Império
+Capítulo 45 — Primeiro Reinado
+Capítulo 46 — Período Regencial
+Capítulo 47 — Segundo Reinado: política e economia
+Capítulo 48 — Escravidão e Abolição
+Capítulo 49 — Movimento Republicano
+Capítulo 50 — O Ceará durante o regime monárquico
+Capítulo 51 — Questões comentadas
+# Imperialismo, Nacionalismo e Doutrinas Sociais no Século XIX
+Capítulo 52 — Neocolonialismo na África e na Ásia
+Capítulo 53 — Nacionalismo e unificações
+Capítulo 54 — Doutrinas sociais, Doutrina Monroe e imperialismo dos EUA
+Capítulo 55 — Questões comentadas
+# Primeira Metade do Século XX e Ordem Mundial
+Capítulo 56 — Primeira Guerra Mundial
+Capítulo 57 — Revolução Russa e criação da URSS
+Capítulo 58 — Crise de 1929 e regimes totalitários
+Capítulo 59 — Segunda Guerra Mundial e Holocausto
+Capítulo 60 — Questões comentadas
+# Mundo Contemporâneo
+Capítulo 61 — Guerra Fria e criação do Estado de Israel
+Capítulo 62 — Descolonização afro-asiática
+Capítulo 63 — Revoluções chinesa, cubana, iraniana e Guerra do Vietnã
+Capítulo 64 — Ditaduras na América Latina
+Capítulo 65 — Fim da URSS, globalização e neoliberalismo
+Capítulo 66 — Questões comentadas
+# Brasil e Ceará durante a República
+Capítulo 67 — República Velha
+Capítulo 68 — Era Vargas
+Capítulo 69 — Populismo
+Capítulo 70 — Ditadura civil-militar
+Capítulo 71 — Redemocratização
+Capítulo 72 — Ceará na República Velha e na Era Vargas
+Capítulo 73 — Ceará na Ditadura e na Redemocratização
+Capítulo 74 — Questões comentadas
+# Brasil Atual
+Capítulo 75 — Constituição de 1988
+Capítulo 76 — Movimentos sociais
+Capítulo 77 — Brasil no século XXI
+Capítulo 78 — Ceará no século XXI
+Capítulo 79 — Questões comentadas
+# O Mundo no Século XXI
+Capítulo 80 — Crise do Estado de Bem-Estar Social
+Capítulo 81 — Conflitos no Oriente Médio e a questão palestina
+Capítulo 82 — BRICS
+Capítulo 83 — Questões socioambientais e populações tradicionais
+Capítulo 84 — Novas mídias, fake news e Big Tech
+Capítulo 85 — O avanço da extrema direita: contexto histórico
+Capítulo 86 — Questões comentadas
+# BNCC e DCRC: Ensino de História
+Capítulo 87 — BNCC e o componente curricular de História
+Capítulo 88 — DCRC: Documento Curricular Referencial do Ceará
+Capítulo 89 — Questões comentadas
+# Revisão Final E Simulados
+Capítulo 90 — Cronologia geral — da Pré-História ao século XXI
+Capítulo 91 — Quadros consolidados
+Capítulo 92 — 150 fatos, conceitos e relações que o candidato precisa revisar
+Capítulo 93 — Principais datas que realmente vale a pena memorizar
+Capítulo 94 — Simulado por bloco 1 — Saber histórico ao mundo antigo e medieval — questões
+Capítulo 95 — Simulado por bloco 1 — gabarito comentado
+Capítulo 96 — Simulado por bloco 2 — América colonial ao Brasil Império — questões
+Capítulo 97 — Simulado por bloco 2 — gabarito comentado
+Capítulo 98 — Simulado por bloco 3 — do século XX ao mundo contemporâneo e BNCC/DCRC — questões
+Capítulo 99 — Simulado por bloco 3 — gabarito comentado
+Capítulo 100 — Simulado final — questões
+Capítulo 101 — Simulado final — gabarito comentado`,
+  },
+  "matematica-ce": {
+    paginas: 539,
+    sumario: `# Aritmética e Álgebra
+Capítulo 1 — Conjuntos numéricos: naturais, inteiros, racionais, irracionais e reais
+Capítulo 2 — Divisibilidade, números primos, MDC e MMC
+Capítulo 3 — Potenciação e radiciação: propriedades e expressões numéricas
+Capítulo 4 — Equações do 1º e do 2º grau e sistemas de equações
+Capítulo 5 — Desigualdades, inequações do 1º e do 2º grau e estudo de sinais
+Capítulo 6 — Revisão estratégica e questões — Parte I
+# Funções
+Capítulo 7 — Conceito de função: domínio, imagem e representações
+Capítulo 8 — Função afim (1º grau): gráfico, coeficientes e aplicações
+Capítulo 9 — Função quadrática (2º grau): vértice, concavidade, máximos e mínimos
+Capítulo 10 — Função modular: definição, gráfico e equações/inequações modulares
+Capítulo 11 — Função polinomial: grau, raízes e comportamento gráfico
+Capítulo 12 — Função exponencial: crescimento, decrescimento e aplicações
+Capítulo 13 — Função logarítmica: propriedades, gráfico e relação com a exponencial
+Capítulo 14 — Transformações gráficas e leitura integrada de funções
+Capítulo 15 — Revisão estratégica e questões — Parte II
+# Trigonometria
+Capítulo 16 — Relações trigonométricas no triângulo retângulo
+Capítulo 17 — Círculo trigonométrico e conceitos fundamentais da Trigonometria
+Capítulo 18 — Lei dos Senos e Lei dos Cossenos
+Capítulo 19 — Fenômenos periódicos e as funções seno e cosseno
+Capítulo 20 — Revisão estratégica e questões — Parte III
+# Geometria
+Capítulo 21 — Quadriláteros e polígonos regulares
+Capítulo 22 — Círculo, circunferência e polígonos inscritos/circunscritos
+Capítulo 23 — Geometria espacial I: prismas e cilindros
+Capítulo 24 — Geometria espacial II: pirâmides, cones e esferas
+Capítulo 25 — Geometria analítica I: ponto, distância, ponto médio e alinhamento
+Capítulo 26 — Geometria analítica II: equações da reta
+Capítulo 27 — Geometria analítica III: equações da circunferência e posições relativas
+Capítulo 28 — Aplicações integradas de Geometria na resolução de problemas
+Capítulo 29 — Revisão estratégica e questões — Parte IV
+# Sequências, Matrizes e Sistemas
+Capítulo 30 — Sequências numéricas e a sequência de Fibonacci
+Capítulo 31 — Progressão Aritmética (PA)
+Capítulo 32 — Progressão Geométrica (PG)
+Capítulo 33 — Matrizes: conceito, representação e operações
+Capítulo 34 — Determinantes e suas propriedades
+Capítulo 35 — Sistemas lineares: métodos de resolução e classificação
+Capítulo 36 — Revisão estratégica e questões — Parte V
+# Combinatória, Probabilidade e Estatística
+Capítulo 37 — Princípios de contagem: aditivo e multiplicativo
+Capítulo 38 — Arranjos, permutações e combinações
+Capítulo 39 — Binômio de Newton
+Capítulo 40 — Grandezas proporcionais e regra de três simples e composta
+Capítulo 41 — Espaço amostral, eventos e cálculo de probabilidades
+Capítulo 42 — Probabilidade condicional e eventos independentes
+Capítulo 43 — Estatística: população, amostra e medidas de tendência central
+Capítulo 44 — Estatística: medidas de dispersão e análise crítica de dados
+Capítulo 45 — Revisão estratégica e questões — Parte VI
+# Matemática Financeira
+Capítulo 46 — Proporção e porcentagem
+Capítulo 47 — Juros simples
+Capítulo 48 — Juros compostos e sistemas de capitalização
+Capítulo 49 — Descontos simples, racional e bancário; taxa efetiva
+Capítulo 50 — Equivalência de capitais
+Capítulo 51 — Revisão estratégica e questões — Parte VII
+# Cálculo Diferencial e Integral
+Capítulo 52 — Ideia intuitiva de limite e cálculo de limites
+Capítulo 53 — Continuidade de funções
+Capítulo 54 — Derivada: definição e interpretação geométrica
+Capítulo 55 — Regras de derivação e derivadas das funções usuais
+Capítulo 56 — Aplicações das derivadas: crescimento, máximos, mínimos e otimização
+Capítulo 57 — Integral indefinida e primitivas
+Capítulo 58 — Integral definida, Teorema Fundamental do Cálculo e cálculo de áreas
+Capítulo 59 — Revisão estratégica e questões — Parte VIII
+# Educação Matemática
+Capítulo 60 — A BNCC: a área de Matemática e suas Tecnologias no Ensino Médio
+Capítulo 61 — O DCRC: o componente Matemática no Ensino Médio do Ceará
+Capítulo 62 — BNCC x DCRC: relações, convergências e quadro comparativo
+Capítulo 63 — Observação, planejamento e organização do ensino de Matemática
+Capítulo 64 — Avaliação em Matemática na Educação Básica
+Capítulo 65 — Recursos didáticos para o ensino de Matemática
+Capítulo 66 — Contextos históricos e culturais no/do ensino da Matemática
+Capítulo 67 — Tendências em Educação Matemática
+Capítulo 68 — Educação Matemática Inclusiva
+Capítulo 69 — Revisão estratégica e questões — Parte IX
+# Revisão Geral
+Capítulo 70 — Revisão consolidada — Aritmética, Álgebra e Funções
+Capítulo 71 — Revisão consolidada — Trigonometria e Geometria
+Capítulo 72 — Revisão consolidada — Sequências, Matrizes, Combinatória, Probabilidade e Estatística
+Capítulo 73 — Revisão consolidada — Matemática Financeira e Cálculo
+Capítulo 74 — Revisão consolidada — BNCC, DCRC e Educação Matemática
+Capítulo 75 — 150 fórmulas, conceitos e relações para revisar antes da prova
+Capítulo 76 — Quadros comparativos consolidados
+Capítulo 77 — Simulado — Bloco Álgebra, Funções e Geometria
+Capítulo 78 — Simulado — Bloco Combinatória, Probabilidade, Estatística e Financeira
+Capítulo 79 — Simulado — Bloco Cálculo e Educação Matemática
+Capítulo 80 — Simulado Final — Conhecimentos Específicos de Matemática`,
+  },
+  // ESTIMADO — fonte truncada em '34', supus 334
+  "portugues-ce": {
+    paginas: 334,
+    sumario: `# Ensino
+Capítulo 1 — Fundamentos da BNCC: a área de Linguagens e suas Tecnologias
+Capítulo 2 — A BNCC e o componente Língua Portuguesa no Ensino Médio
+Capítulo 3 — O Documento Curricular Referencial do Ceará (DCRC)
+Capítulo 4 — BNCC x DCRC: relações, convergências e quadro comparativo
+Capítulo 5 — Metodologias de ensino de Língua Portuguesa: fundamentos e concepções
+Capítulo 6 — Práticas de linguagem em sala de aula
+Capítulo 7 — Revisão estratégica e questões — Parte I
+# Literatura
+Capítulo 8 — O que é Literatura: conceitos fundamentais da teoria literária
+Capítulo 9 — Concepções de Literatura ao longo da história
+Capítulo 10 — Relações contextuais e intertextuais na literatura brasileira
+Capítulo 11 — Linguagem literária e linguagem não literária
+Capítulo 12 — Elementos da narrativa: narrador, personagens, tempo, espaço, enredo
+Capítulo 13 — Gêneros literários: lírico, narrativo/épico e dramático
+Capítulo 14 — O Barroco no Brasil: contexto e estética
+Capítulo 15 — Gregório de Matos Guerra: tipos e problemas sociais
+Capítulo 16 — O Arcadismo no Brasil e a Inconfidência Mineira
+Capítulo 17 — A face pré-romântica da poesia árcade brasileira
+Capítulo 18 — O Romantismo no Brasil (I): poesia, 1ª e 2ª gerações
+Capítulo 19 — O Romantismo no Brasil (II): prosa, indianismo, regionalismo, urbanismo
+Capítulo 20 — Realismo e Naturalismo: análise de textos
+Capítulo 21 — O Parnasianismo: estrutura, temas e principais autores
+Capítulo 22 — O Simbolismo: Cruz e Sousa e Alphonsus de Guimaraens
+Capítulo 23 — O Pré-Modernismo e as Vanguardas Europeias
+Capítulo 24 — Modernismo: Semana de Arte Moderna e a primeira geração
+Capítulo 25 — Segundo momento modernista: poesia
+Capítulo 26 — Segundo momento modernista: prosa
+Capítulo 27 — Terceiro momento modernista: diversidade estética
+Capítulo 28 — A problemática do pós-moderno no Brasil
+Capítulo 29 — Literatura Afro-brasileira: temática, autoria, ponto de vista, linguagem, público
+Capítulo 30 — O indígena no imaginário literário do Brasil
+Capítulo 31 — Literatura Indígena brasileira: resistência e interculturalidade
+Capítulo 32 — Letramento literário e mediação de leitura na escola
+Capítulo 33 — Revisão estratégica e questões — Parte II
+# Leitura
+Capítulo 34 — Compreensão e interpretação de textos
+Capítulo 35 — Concepções de linguagem e suas implicações didáticas
+Capítulo 36 — Perspectivas no estudo da leitura
+Capítulo 37 — Estratégias de leitura
+Capítulo 38 — Inferência, pressuposição e implícitos textuais
+Capítulo 39 — Texto e fatores de textualidade
+Capítulo 40 — Relações coesivas: referência, substituição, elipse, repetição
+Capítulo 41 — Relações de sentido entre palavras: semântica lexical
+Capítulo 42 — Análise crítica do discurso e práticas sociais da linguagem
+Capítulo 43 — Letramento e multiletramentos
+Capítulo 44 — Linguagens digitais
+Capítulo 45 — Multimodalidade
+Capítulo 46 — Revisão estratégica e questões — Parte III
+# Análise Linguística/Semiótica
+Capítulo 47 — Recursos estilísticos e estruturais do texto
+Capítulo 48 — Coerência e coesão
+Capítulo 49 — Estrutura da frase e das orações: ordem e sentido
+Capítulo 50 — O vocábulo: valor e significação no texto
+Capítulo 51 — Concordância, regência e colocação como fatores de sentido
+Capítulo 52 — Estruturas verbais e nominais aplicadas ao texto
+Capítulo 53 — Descrição linguística: do morfema ao período
+Capítulo 54 — Variação linguística e preconceito linguístico
+Capítulo 55 — Gêneros discursivos/textuais: identificação e função social
+Capítulo 56 — Tecnologias da comunicação: hipertexto e condições de textualidade
+Capítulo 57 — Linguagem e meios digitais na perspectiva da Semiótica
+Capítulo 58 — Semiótica e produção de sentidos
+Capítulo 59 — Revisão estratégica e questões — Parte IV
+# Revisão Geral
+Capítulo 60 — Revisão consolidada — Parte I: Ensino
+Capítulo 61 — Revisão consolidada — Parte II: Literatura
+Capítulo 62 — Revisão consolidada — Parte III: Leitura
+Capítulo 63 — Revisão consolidada — Parte IV: Análise Linguística/Semiótica
+Capítulo 64 — 150 pontos que o professor de Português precisa revisar antes da prova
+Capítulo 65 — Quadros comparativos consolidados
+Capítulo 66 — Glossário de termos literários, linguísticos e pedagógicos
+Capítulo 67 — Simulado — Parte I: Ensino
+Capítulo 68 — Simulado — Parte II: Literatura
+Capítulo 69 — Simulado — Parte III: Leitura
+Capítulo 70 — Simulado — Parte IV: Análise Linguística/Semiótica
+Capítulo 71 — Simulado Final — Conhecimentos Específicos de Língua Portuguesa`,
+  },
+  "quimica-ce": {
+    paginas: 385,
+    sumario: `# Fundamentos: matéria, leis ponderais e estequiometria
+Capítulo 1 — Evolução histórica da Química
+Capítulo 2 — Matéria, estados físicos e transformações
+Capítulo 3 — Leis ponderais
+Capítulo 4 — Mol, massa molar e grandezas químicas
+Capítulo 5 — Cálculos estequiométricos
+Capítulo 6 — Aprofundamento — estequiometria aplicada
+Capítulo 7 — Questões comentadas — Parte I
+Capítulo 8 — Mapa mental — Parte I
+# Estrutura atômica e Tabela Periódica
+Capítulo 9 — Modelos atômicos
+Capítulo 10 — Partículas subatômicas, isótopos, isóbaros e isótonos
+Capítulo 11 — Configuração eletrônica, orbitais e números quânticos
+Capítulo 12 — Tabela Periódica: histórico e organização
+Capítulo 13 — Propriedades periódicas
+Capítulo 14 — Questões comentadas — Parte II
+Capítulo 15 — Mapa mental — Parte II
+# Ligações químicas
+Capítulo 16 — Ligação iônica, covalente e metálica
+Capítulo 17 — Geometria molecular (TRPEV)
+Capítulo 18 — Polaridade e forças intermoleculares
+Capítulo 19 — Questões comentadas — Parte III
+Capítulo 20 — Mapa mental — Parte III
+# Funções inorgânicas
+Capítulo 21 — Ácidos
+Capítulo 22 — Bases
+Capítulo 23 — Sais
+Capítulo 24 — Óxidos
+Capítulo 25 — Questões comentadas — Parte IV
+Capítulo 26 — Mapa mental — Parte IV
+# Soluções e misturas
+Capítulo 27 — Misturas e processos de separação
+Capítulo 28 — Solubilidade
+Capítulo 29 — Concentração das soluções
+Capítulo 30 — Diluição e mistura de soluções
+Capítulo 31 — Propriedades coligativas
+Capítulo 32 — Titulação
+Capítulo 33 — Aprofundamento — soluções em situações compostas
+Capítulo 34 — Questões comentadas — Parte V
+Capítulo 35 — Mapa mental — Parte V
+# Estudo dos gases
+Capítulo 36 — Transformações e leis físicas dos gases
+Capítulo 37 — Misturas gasosas
+Capítulo 38 — Aprofundamento — misturas gasosas e transformações combinadas
+Capítulo 39 — Questões comentadas — Parte VI
+Capítulo 40 — Mapa mental — Parte VI
+# Reações em solução aquosa
+Capítulo 41 — Reações ácido-base, precipitação e complexação
+Capítulo 42 — Questões comentadas — Parte VII
+Capítulo 43 — Mapa mental — Parte VII
+# Termoquímica
+Capítulo 44 — Entalpia e reações exo/endotérmicas
+Capítulo 45 — Lei de Hess
+Capítulo 46 — Entropia e energia livre
+Capítulo 47 — Aprofundamento — termoquímica em múltiplas etapas
+Capítulo 48 — Questões comentadas — Parte VIII
+Capítulo 49 — Mapa mental — Parte VIII
+# Cinética e equilíbrio químico
+Capítulo 50 — Cinética química e teoria das colisões
+Capítulo 51 — Catálise
+Capítulo 52 — Equilíbrio químico e Le Chatelier
+Capítulo 53 — Equilíbrios em solução aquosa
+Capítulo 54 — Aprofundamento — cinética e equilíbrio em situações compostas
+Capítulo 55 — Questões comentadas — Parte IX
+Capítulo 56 — Mapa mental — Parte IX
+# Eletroquímica
+Capítulo 57 — Número de oxidação e reações redox
+Capítulo 58 — Pilhas
+Capítulo 59 — Eletrólise
+Capítulo 60 — Aprofundamento — eletrólise em situações compostas
+Capítulo 61 — Questões comentadas — Parte X
+Capítulo 62 — Mapa mental — Parte X
+# Radioatividade
+Capítulo 63 — Descoberta da radioatividade e emissões
+Capítulo 64 — Cinética do decaimento, fissão e fusão
+Capítulo 65 — Aprofundamento — radioatividade em situações compostas
+Capítulo 66 — Questões comentadas — Parte XI
+Capítulo 67 — Mapa mental — Parte XI
+# Química orgânica
+Capítulo 68 — Fundamentos do carbono e cadeias carbônicas
+Capítulo 69 — Nomenclatura orgânica (IUPAC)
+Capítulo 70 — Funções orgânicas I — hidrocarbonetos, haletos, álcoois, fenóis e éteres
+Capítulo 71 — Funções orgânicas II — aldeídos, cetonas, ácidos, ésteres, aminas e amidas
+Capítulo 72 — Isomeria plana e espacial
+Capítulo 73 — Reações orgânicas e mecanismos
+Capítulo 74 — Aprofundamento — química orgânica em situações compostas
+Capítulo 75 — Questões comentadas — Parte XII
+Capítulo 76 — Mapa mental — Parte XII
+# Ensino de Química, avaliação e BNCC/DCRC
+Capítulo 77 — Conhecimento científico e habilidade didática
+Capítulo 78 — Abordagens metodológicas no ensino de Química
+Capítulo 79 — Materiais didáticos e tecnologias
+Capítulo 80 — Experimentação no ensino de Química
+Capítulo 81 — Avaliação da aprendizagem em Química
+Capítulo 82 — BNCC e DCRC para o ensino de Química
+Capítulo 83 — Questões comentadas — Parte XIII
+Capítulo 84 — Mapa mental — Parte XIII
+# Revisão Geral E Simulado Final
+Capítulo 85 — Revisão geral dos 17 blocos
+Capítulo 86 — Quadros comparativos
+Capítulo 87 — 150 conceitos, fórmulas e relações para revisar
+Capítulo 88 — Erros que mais derrubam candidatos
+Capítulo 89 — Simulado final — questões
+Capítulo 90 — Simulado final — gabarito comentado`,
+  },
+  "educacao-brasileira-geral-ce": {
+    paginas: 272,
+    sumario: `# História da Educação Brasileira
+Capítulo 1 — Do Movimento dos Pioneiros aos dias atuais
+Capítulo 2 — LDB: princípios, organização e currículo
+Capítulo 3 — LDB: Ensino Médio e Título VI
+Capítulo 4 — Leis 10.639/2003 e 11.645/2008
+Capítulo 5 — Planos Nacionais de Educação
+Capítulo 6 — Questões comentadas
+Capítulo 7 — Mapa mental e revisão
+# Estrutura e Funcionamento da Educação Básica
+Capítulo 8 — Tendências pedagógicas (I): correntes liberais
+Capítulo 9 — Tendências pedagógicas (II): correntes progressistas
+Capítulo 10 — Gestão democrática da escola pública
+Capítulo 11 — Projeto Político-Pedagógico
+Capítulo 12 — Questões comentadas
+Capítulo 13 — Mapa mental e revisão
+# A Didática e o Processo de Ensino e Aprendizagem
+Capítulo 14 — Planejamento, estratégias e metodologias
+Capítulo 15 — Avaliação da aprendizagem
+Capítulo 16 — A sala de aula como espaço de aprendizagem
+Capítulo 17 — A didática como fundamento epistemológico
+Capítulo 18 — Planejamento de curso, unidade e aula
+Capítulo 19 — Questões comentadas
+Capítulo 20 — Mapa mental e revisão
+# Principais Teorias da Aprendizagem
+Capítulo 21 — Inatismo e comportamentalismo
+Capítulo 22 — Interacionismo (I): Piaget
+Capítulo 23 — Interacionismo (II): Vygotsky e Wallon
+Capítulo 24 — Cognitivismo: Ausubel
+Capítulo 25 — Bases epistemológicas comparadas
+Capítulo 26 — Psicologia do desenvolvimento
+Capítulo 27 — Temas contemporâneos: bullying
+Capítulo 28 — Temas contemporâneos: relações étnico-raciais
+Capítulo 29 — Temas contemporâneos: educação especial
+Capítulo 30 — Temas contemporâneos: educação ambiental
+Capítulo 31 — Temas contemporâneos: protagonismo juvenil
+Capítulo 32 — Questões comentadas
+Capítulo 33 — Mapa mental e revisão
+# Base Nacional Comum Curricular (BNCC)
+Capítulo 34 — Fundamentos e princípios da BNCC
+Capítulo 35 — O Ensino Médio no contexto da Educação Básica
+Capítulo 36 — Organização curricular da BNCC
+Capítulo 37 — Questões comentadas
+Capítulo 38 — Mapa mental e revisão
+# O Professor: Formação e Profissão
+Capítulo 39 — Formação inicial e continuada de professores
+Capítulo 40 — Saberes docentes e o professor reflexivo
+Capítulo 41 — Identidade docente, profissionalização e dimensão ética
+Capítulo 42 — Questões comentadas
+Capítulo 43 — Mapa mental e revisão
+# Educação Integral em Tempo Integral no Ensino Médio
+Capítulo 44 — Antecedentes históricos e conceito de educação integral
+Capítulo 45 — Marcos legais do Ensino Médio em Tempo Integral
+Capítulo 46 — Currículo e organização pedagógica do tempo integral
+Capítulo 47 — Questões comentadas
+Capítulo 48 — Mapa mental e revisão
+# Avaliações Externas: SPAECE, SAEB e PISA
+Capítulo 49 — Fundamentos da avaliação educacional em larga escala
+Capítulo 50 — SPAECE: o sistema cearense de avaliação
+Capítulo 51 — SAEB e IDEB: o sistema nacional de avaliação
+Capítulo 52 — PISA e o quadro comparativo entre as três avaliações
+Capítulo 53 — Questões comentadas
+Capítulo 54 — Mapa mental e revisão
+# Políticas de Equidade no Escopo do PNE
+Capítulo 55 — Igualdade, equidade, inclusão: conceitos fundamentais
+Capítulo 56 — As metas de equidade do PNE 2014-2024 e do PNE 2026-2036
+Capítulo 57 — Da política à prática: equidade no cotidiano escolar
+Capítulo 58 — Questões comentadas
+Capítulo 59 — Mapa mental e revisão
+# DCRC: Documento Curricular Referencial do Ceará
+Capítulo 60 — O que é o DCRC: natureza, base legal e homologação
+Capítulo 61 — A Formação Geral Básica no DCRC-CE
+Capítulo 62 — Itinerários Formativos no modelo cearense
+Capítulo 63 — Os quatro eixos estruturantes dos Itinerários Formativos
+Capítulo 64 — Fundamentos, princípios e identidade cearense
+Capítulo 65 — Políticas correlatas e implementação prática
+Capítulo 66 — Questões comentadas
+Capítulo 67 — Mapa mental e revisão
+# Revisão Final E Simulado
+Capítulo 68 — Revisão geral — datas, leis e números essenciais
+Capítulo 69 — Quadros comparativos consolidados
+Capítulo 70 — Pontos de confusão mais frequentes
+Capítulo 71 — Checklist final de revisão
+Capítulo 72 — Simulado final — questões
+Capítulo 73 — Simulado final — gabarito comentado`,
+  },
+  // ESTIMADO — página final do sumário não veio no texto original, supus 198
+  "administracao-publica-geral-ce": {
+    paginas: 198,
+    sumario: `# Fundamentos, Princípios e Evolução Histórica
+Capítulo 1 — Administração Pública: conceitos fundamentais
+Capítulo 2 — Princípios constitucionais expressos (art. 37, caput)
+Capítulo 3 — Princípios reconhecidos e implícitos
+Capítulo 4 — Evolução histórica das reformas administrativas no Brasil
+Capítulo 5 — Questões comentadas
+Capítulo 6 — Mapa mental e revisão
+# Modelos da Administração Pública
+Capítulo 7 — Patrimonialismo
+Capítulo 8 — Modelo burocrático
+Capítulo 9 — Modelo gerencial e quadro comparativo
+Capítulo 10 — Questões comentadas
+Capítulo 11 — Mapa mental e revisão
+# A Administração Pública na Constituição Federal
+Capítulo 12 — Princípios do art. 37 e concurso público
+Capítulo 13 — Cargos em comissão, funções de confiança e acumulação
+Capítulo 14 — Contratação temporária, remuneração e responsabilidade do Estado
+Capítulo 15 — Servidores públicos, estabilidade e regime jurídico
+Capítulo 16 — Questões comentadas
+Capítulo 17 — Mapa mental e revisão
+# Processo Administrativo Federal (Lei nº 9.784/1999)
+Capítulo 18 — Finalidade, âmbito de aplicação e princípios
+Capítulo 19 — Direitos e deveres dos administrados; início do processo; competência
+Capítulo 20 — Impedimento, suspeição, forma dos atos e instrução
+Capítulo 21 — Anulação, revogação, convalidação, recursos e prazos
+Capítulo 22 — Questões comentadas
+Capítulo 23 — Resumo estratégico e mapa mental
+# Organização Administrativa
+Capítulo 24 — Órgãos, entidades e fundos
+Capítulo 25 — Centralização, descentralização, concentração e desconcentração
+Capítulo 26 — Administração Direta e Indireta
+Capítulo 27 — Quadro comparativo amplo Direta x Indireta
+Capítulo 28 — Questões comentadas
+Capítulo 29 — Mapa mental e revisão
+# Controle e Poderes da Administração Pública
+Capítulo 30 — Controle administrativo e autotutela
+Capítulo 31 — Controle legislativo e fiscalização
+Capítulo 32 — Poder vinculado e poder discricionário
+Capítulo 33 — Poder normativo, hierárquico e disciplinar
+Capítulo 34 — Poder de polícia; uso, abuso, excesso e desvio de finalidade
+Capítulo 35 — Questões comentadas
+Capítulo 36 — Mapa mental e revisão
+# Plano Nacional de Educação (Lei nº 15.388/2026)
+Capítulo 37 — Arquitetura do novo PNE: objetivos, metas e estratégias
+Capítulo 38 — Equidade, financiamento e comparação com o PNE 2014-2024
+Capítulo 39 — Questões comentadas
+Capítulo 40 — Mapa mental e revisão
+# Ceará: Estrutura, Ética e Estatuto dos Servidores
+Capítulo 41 — Modelo de Gestão do Poder Executivo do Ceará
+Capítulo 42 — Guia de Modelagem de Estrutura Organizacional
+Capítulo 43 — Código de Ética e Conduta da Administração Pública do Ceará
+Capítulo 44 — Estatuto: provimento, posse, exercício, estágio probatório e estabilidade
+Capítulo 45 — Estatuto: direitos, vantagens, férias, licenças e afastamentos
+Capítulo 46 — Estatuto: deveres, proibições e regime disciplinar
+Capítulo 47 — Questões comentadas
+Capítulo 48 — Mapa mental e revisão
+# Revisão Final E Simulado
+Capítulo 49 — Revisão geral e mapa Estado x Governo x Administração
+Capítulo 50 — Quadros comparativos consolidados
+Capítulo 51 — Resumo estratégico de leis e revisões do bloco Ceará
+Capítulo 52 — 50 pontos essenciais e checklist de véspera
+Capítulo 53 — Simulado final — questões
+Capítulo 54 — Simulado final — gabarito comentado`,
+  },
+  // ESTIMADO — página final do sumário não veio no texto original, supus 118
+  "leitura-interpretacao-dados-geral-ce": {
+    paginas: 118,
+    sumario: `# Indicadores Educacionais
+Capítulo 1 — Dado, informação, indicador e índice
+Capítulo 2 — Indicadores e índices na política educacional
+Capítulo 3 — Indicadores educacionais do INEP
+Capítulo 4 — Indicadores escolares, docentes e discentes
+Capítulo 5 — Questões comentadas
+# Indicadores de Desempenho dos Estudantes
+Capítulo 6 — Avaliação educacional: conceitos gerais
+Capítulo 7 — SPAECE
+Capítulo 8 — SAEB
+Capítulo 9 — ENEM
+Capítulo 10 — PISA
+Capítulo 11 — SPAECE x SAEB x ENEM x PISA
+Capítulo 12 — Questões comentadas
+# Leitura e Interpretação de Dados
+Capítulo 13 — Tabelas simples e de dupla entrada
+Capítulo 14 — Gráficos de barras e colunas
+Capítulo 15 — Gráficos de linhas e séries históricas
+Capítulo 16 — Gráficos de setores e gráficos combinados
+Capítulo 17 — Como ler um gráfico com segurança
+Capítulo 18 — Percentuais, pontos percentuais, razão, proporção e taxas
+Capítulo 19 — Erros de interpretação de dados
+Capítulo 20 — Questões comentadas
+# Resolução de Problemas com Estatística Descritiva
+Capítulo 21 — População, amostra, variável e frequência
+Capítulo 22 — Média aritmética simples e ponderada
+Capítulo 23 — Mediana e moda
+Capítulo 24 — Noções de dispersão
+Capítulo 25 — Questões comentadas
+# Revisão Final E Simulado
+Capítulo 26 — Revisão geral — indicadores, avaliações e estatística
+Capítulo 27 — Quadros consolidados
+Capítulo 28 — 50 pontos que o candidato não pode esquecer
+Capítulo 29 — Principais pegadinhas de leitura de dados
+Capítulo 30 — Simulado final — questões
+Capítulo 31 — Simulado final — gabarito comentado`,
+  },
+  "portugues-geral-ce": {
+    paginas: 209,
+    sumario: `# Compreensão e Interpretação de Textos
+Capítulo 1 — Tema, assunto, ideia principal e finalidade do texto
+Capítulo 2 — Informações implícitas, inferência, pressupostos e subentendidos
+Capítulo 3 — Progressão temática, ponto de vista e efeitos de sentido
+Capítulo 4 — Questões comentadas
+Capítulo 5 — Mapa mental e revisão
+# Fatores de Textualidade
+Capítulo 6 — Textualidade: os sete fatores
+Capítulo 7 — Coesão textual
+Capítulo 8 — Coerência textual
+Capítulo 9 — Questões comentadas
+Capítulo 10 — Mapa mental e revisão
+# Tipologias Textuais
+Capítulo 11 — Narração e descrição
+Capítulo 12 — Dissertação, argumentação e injunção
+Capítulo 13 — Quadro comparativo, questões e mapa mental
+# Gêneros Discursivos/Textuais
+Capítulo 14 — Gênero x tipo textual
+Capítulo 15 — Gêneros mais cobrados em concursos
+Capítulo 16 — Questões e mapa mental
+# Ortografia Oficial
+Capítulo 17 — Sistema ortográfico e grafias que geram dúvida
+Capítulo 18 — Questões e mapa mental
+# Acentuação Gráfica
+Capítulo 19 — Tonicidade, ditongos e hiatos
+Capítulo 20 — Regras de acentuação e casos especiais
+Capítulo 21 — Questões comentadas
+Capítulo 22 — Quadro geral e mapa mental
+# Emprego das Classes Gramaticais
+Capítulo 23 — Substantivo, artigo, adjetivo e numeral
+Capítulo 24 — Pronomes
+Capítulo 25 — Verbo
+Capítulo 26 — Advérbio, preposição, conjunção e interjeição
+Capítulo 27 — Questões comentadas
+Capítulo 28 — Mapa mental e revisão
+# Formação e Estrutura das Palavras
+Capítulo 29 — Estrutura das palavras
+Capítulo 30 — Processos de formação de palavras
+Capítulo 31 — Questões e mapa mental
+# Emprego do Sinal Indicativo de Crase
+Capítulo 32 — Conceito e casos obrigatórios
+Capítulo 33 — Casos proibidos, facultativos e especiais
+Capítulo 34 — Tabelas e questões comentadas
+Capítulo 35 — Mapa mental e revisão
+# Coordenação e Subordinação na Construção dos Sentidos
+Capítulo 36 — Orações coordenadas
+Capítulo 37 — Subordinadas substantivas e adjetivas
+Capítulo 38 — Subordinadas adverbiais e relações de sentido
+Capítulo 39 — Questões comentadas
+Capítulo 40 — Mapa mental e revisão
+# Relações Sintáticas: Termos da Oração e do Período
+Capítulo 41 — Sujeito, predicado e predicação verbal
+Capítulo 42 — Complementos, adjuntos, aposto e vocativo
+Capítulo 43 — Período composto e sintaxe aplicada
+Capítulo 44 — Questões comentadas
+Capítulo 45 — Mapa mental e revisão
+# Pontuação
+Capítulo 46 — A vírgula
+Capítulo 47 — Ponto e vírgula, dois-pontos, travessão e outros sinais
+Capítulo 48 — Questões comentadas
+Capítulo 49 — Mapa mental e revisão
+# Concordância Nominal e Verbal
+Capítulo 50 — Concordância verbal
+Capítulo 51 — Concordância nominal
+Capítulo 52 — Questões comentadas
+Capítulo 53 — Mapa mental e revisão
+# Regência Nominal e Verbal
+Capítulo 54 — Regência verbal
+Capítulo 55 — Regência nominal e relação com a crase
+Capítulo 56 — Questões comentadas
+Capítulo 57 — Mapa mental e revisão
+# Significação das Palavras
+Capítulo 58 — Denotação, conotação e relações de sentido
+Capítulo 59 — Questões e mapa mental
+# Funções da Linguagem
+Capítulo 60 — As seis funções da linguagem
+Capítulo 61 — Questões e mapa mental
+# Revisão Final E Simulado
+Capítulo 62 — Revisão geral — leitura, texto e gramática
+Capítulo 63 — Quadros comparativos consolidados
+Capítulo 64 — 100 pontos de Português para revisar antes da prova
+Capítulo 65 — Erros que mais derrubam candidatos
+Capítulo 66 — Simulado final — questões
+Capítulo 67 — Simulado final — gabarito comentado`,
+  },
 };
